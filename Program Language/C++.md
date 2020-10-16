@@ -705,7 +705,7 @@ class Circle
     void Move(int nx, int ny){x=nx; y=ny;}
     virtual double Area() const = 0;    // pure virtual function
     ...
-} 
+}
 ```
 * 使用纯虚函数将A->B变为了A->B，A->C的关系，即ABC中存储BC公共的数据和纯虚方法，再在BC内定义所需的数据，并覆盖纯虚方法。可以将ABC看作一种必须实施的接口。
 ## 继承和动态内存分配
