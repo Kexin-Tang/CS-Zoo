@@ -766,3 +766,645 @@ hasDMA& hasDMA::hasDMA(const hasDMA &hs)
 
 
 ---
+
+
+
+# **代码复用**
+## valarray类
+* 模板类，在声明时需要指明数据类型，如：valarray<int> a;
+* 使用valarray
+```c++
+double gpa[5] = {3.1, 2.5, 3.9, 3.4, 3.7};
+valarray<double> v1;
+valarray<int> v2(8);  // an array of 8 elements
+valarray<int> v3(10,8);  // an array of 8 elements, which are 10
+valarray<double> v4(gpa, 4);  // an array of 4 elements, init as {gpa[0], ..., gpa[3]}
+valarray<int> v5 = {1,2,3};  // use list init
+```
+## 包含 Vs 私有继承
+- 使用继承时，类可以继承接口，还可能有实现（纯虚函数提供接口没有实现）；包含可以获得实现，而无法获得接口
+- 初始化被包含的对象时，因为初始化的是成员对象而不是继承的对象，所以使用成员名而不是类名
+- *继承->使用父类的构造函数，即使用类名进行初始化，同时使用className::进行访问；包含->使用包含声明中的成员名称进行初始化，同时使用成员名称进行访问*
+
+```c++
+// 包含
+class Student 
+{
+  private:
+    string name;
+    valarray<int> scores;
+    ...
+   public:
+     Student(const char* str, const double* pd, int n) : name(str), scores(pd, n) {...};  // 注意，此处用的是name(str)而不是string(str)
+} 
+// 继承
+Sclass Student : private std::string, private std::valarray<double>
+{
+  private:
+    ...
+  public:
+    Student(const std::string8 & str, const double* pd, int n) : std::string(str), std::valarray(pd, n) {...};  // 注意，此处用的是类名
+} 
+```
+* 在继承中，由于没有父类的对象，所以无法通过对象名字来实现调用，此时使用强制类型转换
+```c++
+const string& Student::Name() const
+{
+  return (const string&) *this;  // this是string的子类，强制类型转换进行子类->父类变化
+}
+```
+* 在私有继承中，子类对象不能赋给父类指针或引用，除非使用强制类型转换
+* 在大多数情况下使用包含；如果需要重构虚函数或者访问原有类的protected成员，则应使用私有继承
+* 私有继承中，如果A->B->C，那么C无法访问A的成员，除非B中有函数访问了A，那么这样就相当于套娃访问，可以摆脱私有继承的束缚
+```c++
+#include <iostream>
+class A
+{
+private:
+    int a_;
+public:
+    A() : a_(10){}
+    void show() {std::cout<<a_<<std::endl;}
+};
+class B : private A
+{
+private:
+    int b_;
+public:
+    B() : A(), b_(20) {}
+    void show_B() {show();}  // 此处访问了A，并为C提供了访问A的渠道
+};
+class C : private B
+{
+private:
+    int c_;
+public:
+    C() : B(), c_(30) {}
+    void show_C() {show_B();}  // B的成员成了private，但是B提供访问A的方法，所以可以C->A
+};
+int main()
+{
+    C c;
+    c.show_C();
+}
+```
+* 如果使用protected继承，则不需要有上述的束缚
+```c++
+#include <iostream>
+class A
+{
+private:
+    int a_;
+public:
+    A() : a_(10){}
+    void show() {std::cout<<a_<<std::endl;}
+};
+class B : protected A
+{
+private:
+    int b_;
+public:
+    B() : A(), b_(20) {}
+};
+class C : protected B
+{
+private:
+    int c_;
+public:
+    C() : B(), c_(30) {}
+    void show_C() {show();}
+};
+int main()
+{
+    C c;
+    c.show_C();
+}
+```
+* 可以使用using摆脱私有继承的束缚(*using只需要成员名，不需要圆括号、特征标和返回类型*)
+```c++
+#include <iostream>
+class A
+{
+private:
+    int a_;
+public:
+    A() : a_(10){}
+    void show() {std::cout<<a_<<std::endl;}
+};
+class B : private A
+{
+private:
+    int b_;
+public:
+    using A::show;      // 相当于提出了一个特例，可以摆脱私有继承 
+    B() : A(), b_(20) {}
+};
+class C : private B
+{
+private:
+    int c_;
+public:
+    C() : B(), c_(30) {}
+    void show_C() {show();}
+};
+int main()
+{
+    C c;
+    c.show_C();
+}
+```
+## 多重继承(MI)
+* 即一个派生类源自多个基类，在声明时要将每个基类的派生类型指明，默认为private
+* 由于同时派生多个基类，而这些基类可能共用基类，即A->B,A->C,B+C->D，那么当使用基类指针A指向D时，会出现歧义，不知道该使用B的基类还是C的基类。最好的方法是使用类型转换
+```c++
+SingingWaiter sw;
+Worker* p = (Singer *) &sw; // 此时使用的是singer的基类
+```
+##### 虚基类
+* 为了避免上述的问题，使用虚基类将使得B,C共用同一个基类
+
+![两个基类.png](https://i.loli.net/2020/10/12/5zdLeci71a2vUEp.png)
+![虚基类.png](https://i.loli.net/2020/10/12/wnWuxpyrQilIS1z.png)
+
+* 在BC中使用virtual public或者public virtual进行派生
+* 虚基类构造时特殊操作——在列表初始化的时候，并不会出现"D调用B的构造函数，B的构造函数里调用A的构造函数"这样的操作，因为会从BC两个不同道路初始化同一个虚基类。此时需要"分别调用A,B,C的构造函数"
+```c++
+SingingWaiter(Worker& wk, int p=0, int v=Singer::other)
+    : Worker(wk), Waiter(wk,p), Singer(wk, v){...}
+```
+* 如果BC中均有Show()函数，则在D中使用Show()的时候要注明是B::Show()还是C::Show()
+* 当同名函数是继承与被继承的两个类中，则不会出现二义性，派生类将覆盖父类；当同名函数不是继承与被继承关系，则将会产生二义性
+## 类模板
+* 使用template<typename T>放在类开头，声明为模板类，同时，类的限定符从className::变为className<T>::
+* 在实例化（具体化）类模板时，要显式提供类型
+##### 表达式参数
+* 如果使用template<class T, int n>形式，则这种指定类型而不是泛型的参数称为非类型或表达式参数。
+    * 表达式参数只能为int，enum，&或*，即double m是非法的
+    * 表达式参数不能修改，也不能取地址，即不能出现n++或者&n操作
+    * 实例化模板时必须是常量表达式，不能等待用户输入等操作
+* 使用表达式参数法相较于使用构造函数法，优点是使用自动变量维护内存，效率高；缺点是每种不同大小的数组都要产生新的实例化
+```c++
+ArrayTP<int, 12> a;
+ArrayTP<int, 13> b;    // 将产生两个不同的模板实例化
+Stack<int> c(12);      // 只会产生一个模板实例化
+Stack<int> d(13);
+```
+##### 模板递归（嵌套）
+* 可以使用ArrayTP< ArrayTP<int, 5>, 10 >，其表示有10个数据，每个数据都是5个int组成，其等价于int [10][5]
+* 模板语法里，维的顺序和二维数组相反
+##### 模板具体化
+* 实例化——可以用模板实现的，只不过是指定一下具体的类型；具体化——模板实现不了的，要针对模板处理不了的特例进行设计
+* 显示具体化：使用如下操作进行显示具体化
+```c++
+template<> class Classname<specialized-type-name> {...};
+```
+* 部分具体化
+```c++
+template<class T1> class Pair<T1, int> {...}
+template<class T1, class T2, class T3> class Trio{...}
+template<class T1, class T2> class Trio<T1, T2, T1>{...}
+template<class T1> class Trio<T1, T1*, T1&>{...}
+```
+* 如果模板定义在类外，而类内使用了不同的模板函数，则需要嵌套定义
+```c++
+template<class T>
+class beta
+{
+    private:
+        template<class V>    // nested class template member
+        class hold
+        {
+        private:
+            ...
+        public:
+           hold(V v=0):val(v){}  //将hold在内部定义
+        }
+    public:
+        beta(T t, int i);
+        template<class U>
+        U blab(U u, T t) {...}
+}
+```
+```c++
+template<class T>
+class beta
+{
+    private:
+        template<class V>    // nested class template member
+        class hold;
+    public:
+        beta(T t, int i);
+        template<class U>
+        U blab(U u, T t);
+}
+template<class T>
+template<class V>    //嵌套调用
+class beta<T>::hold
+{
+    ...
+}
+template<class T>
+template<class U>
+U beta<T>::blab(U u, T t)
+{
+    ...
+}
+```
+##### 将模板作为参数
+```c++
+template< template<typename T> class Thing>
+class Crab
+{
+private:
+    Thing<int> s1;
+    Thing<double> s2;
+public:
+    Crab(){};
+}
+int main()
+{
+   Crab<Stack> ne;  // s1和s2被定义为Stack<int>和Stack<double>类型  
+   ...
+}
+```
+* 上述代码中，Thing是一个模板类，用的T代表各种数据类型，然后Crab也是一个模板类，用的Thing代表各种数据类型
+##### 模板类和友元
+* 非模板友元函数
+    * 友元函数不属于类，所以无法使用className::进行解析，每当调用一种数据类型时，都需要为友元函数进行显示实例化
+```c++
+template <typename T>
+class HasFriend
+{
+    ...
+    friend void cnt(HasFriend<T>& hf);
+}
+// 当使用了T==int的
+void cnt(HasFriend<int>& hf)    {...}
+// 当使用了T==double的
+void cnt(HasFriend<double>& hf)    {...}
+```
+* 约束模板友元函数
+    * 在类定义前声明每个模板函数
+    * 在类中声明为友元
+    * 对友元进行函数定义，实现功能
+    * *避免了换一种数据结构就要显示实例化一次*
+```c++
+template <typename T>
+void cnt(T &);
+template <typename TT>
+class HasFriend
+{
+    ...
+    friend void cnt<>(HasFriend<TT>& hf);  // 显示具体化
+}
+// 适用于所有的T类型
+template <typename T>
+void cnt(T& hf)    {...}
+```
+* 非约束模板友元函数
+    * 在类内声明模板函数，创建非约束友元函数，每个函数具体化都是每个类具体化的友元
+```c++
+template<typename T>
+class ManyFriend
+{
+    ...
+    template <typename C, typename D> friend void show(C&, D&);
+}
+// 是T==int的具体化的友元
+void show<>(ManyFriend<int>& c, ManyFriend<int>& d);
+// 是T==double和T==int的具体化的友元
+void show<>(ManyFriend<double>& c, ManyFriend<int>& d);
+```
+##### 模板别名
+* 使用using命令进行别名设置
+```c++
+template<typename T>
+using month = array<T, 12>;
+// 两者等价
+array<int, 12> a;
+month<int> b;
+```
+
+---
+
+
+# **友元和异常**
+## 友元
+* 类友元
+    * 比如遥控器和TV就是友元类的关系：TV可以被遥控器遥控，即遥控器可以访问TV，反之不行。所以TV的友元类是遥控器。
+```c++
+class TV
+{
+  friend class Remote;  // 由于Remote要访问TV，所以必须先知道TV有什么
+                        // 所以TV定义在Remote前面
+  ...
+}
+class Remote {...}
+```
+* 类成员友元
+    - 仅让特定的函数称为另一个类的友元
+    - 前向声明——因为Remote中只有一个函数访问了TV的private，所以在TV中定义friend Remote::func，但是这又必须知道Remote，那么Remote应该在TV前面定义，如此会产生循环嵌套。只有使用前向声明才能避免
+    - 注意，*在前向声明中，最好不要直接定义函数*，如在Remote中使用TV的函数。只能在上述代码后面进行函数定义
+```c++
+class TV;    // forward declaration
+class Remote
+{
+  void set_channel(TV& t, int c);
+}
+class TV
+{
+  friend void Remote::set_channel(TV& t, int c);
+}
+```
+* 彼此成为友元
+    * 两者可以任意顺序，但是，前一个定义的类中函数不能直接定义，需要在两个类都声明后才能定义函数；而第二个类中的函数可以直接类内定义
+* 共用友元
+```c++
+class Analyzer;
+class Probe
+{
+  friend void sync(Analyzer& , Prob& );
+  friend void sync(Prob& , Analyzer&);
+}
+class Analyzer
+{
+  friend void sync(Analyzer& , Prob& );
+  friend void sync(Prob& , Analyzer& );
+}
+```
+## 嵌套类
+* 包含：在类内实例化某个类；嵌套：在类内定义新的类
+```c++
+class Queue
+{
+  class Node
+  {
+    ...  // 可以定义构造函数实现初始化
+  }
+  ...
+} 
+// 使用Queue::Node::对Node类进行访问，如果Node定义在public则可以在Queue类外访问，如果定义在private则只能在Queue中访问
+```
+* 嵌套类的作用域，访问权限和类内普通的public，private和protected一样
+* 注意：如果Node类内有private或protected，则Queue也无法访问Node内这些内容，所以建议Node类内全定义为public，然后把Node定义在Queue的private或protected中
+## 异常
+##### abort()
+* 调用该函数将直接终止程序，不会返回到main
+##### throw
+* 引发异常，其后的值代表了异常的特征
+* throw语句的执行类似于return，但并不是将控制权返回给调用程序，而是沿函数调用的顺序后退，直到找到try语句块对应的catch块
+##### try
+* 可能出现异常，程序尝试调用的语句模块
+* 如果try中没有异常，则跳过catch，否则调用合适的catch
+##### catch
+* 如果try中出现异常，catch会捕获相应的throw，并根据throw的类型选择合适的catch语句块，执行相应的函数
+* 如果没有对应的catch，则默认调用abort()
+```c++
+int main()
+{
+  try
+  {
+    z = hmean(x, y);  // 尝试调用可能产生异常的函数
+  }
+  catch(char * s)    // 如果try出错，则s==throw的内容并执行catch中代码
+  {
+    std::cout<<s<<endl;
+  }
+  std::cout<<z<<endl;
+}
+double hmean(int a, int b)
+{
+  if(a == -b)
+    throw "wrong";
+  return 2.0*a*b/(a+b)   
+}
+// x=3, y=6 -> 4
+// x=3, y=-3 -> wrong
+```
+##### 将对象用作异常类型
+* 可以使用不同的异常类型来区分不同的异常
+* 对象可以携带信息，可以根据信息确定异常的原因
+```c++
+class bad_hmean
+{
+private:
+    int v1;
+    int v2;
+public:
+    bad_hmean(int a, int b):v1(a),v2(b){}
+    void print_hmean();
+}
+class bad_gmean
+{
+    private:
+    int v1;
+    int v2;
+public:
+    bad_gmean(int a, int b):v1(a),v2(b){}
+    void print_gmean();
+}
+int main()
+{
+    try
+    {
+        z = hmean(x, y);
+        w = gmean(x, y);
+    }
+    catch(bad_gmean& bg)
+    {
+        bg.print_gmean();
+    }
+    catch(bad_hmean& bh)
+    {
+        bh.print_hmean();
+    }
+}
+double hmean(int a, int b)
+{
+    if(...)
+        throw bad_hmean(a, b);
+    ...
+}
+double gmean(int a, int b)
+{
+    if(...)
+        throw bad_gmean(a, b);
+    ...
+}
+```
+##### 栈解退
+* 如果try没有直接调用引发异常的函数，而是调用了对引发异常的函数进行调用的函数，则会引发栈解退
+* throw后，并不会返回一个函数就停止，而是继续释放，直到到达try处
+* 同时，不会直接执行出错的下一句，而是执行最邻近的catch，不断比较合适的catch块
+* 在throw时，某些临时变量无法从栈中删除，就要靠栈解退实现
+##### 其他属性
+* 为什么要使用引用？—— 基类引用可以针对派生类，使用基类引用即可以捕获所有派生类异常；如：文件异常(读异常，写异常，not found异常...)，那么只需要catch一个文件异常的引用，即可以检查所有读写异常
+* catch块排列顺序——按照先派生类，再基类，由小到大，由具体到笼统的顺序。因为catch是按照顺序进行排查异常的，如果基类写前面，则无法检查更细致的问题
+* 捕获任何异常——catch(...)
+##### exception类
+* 可以视为是各种异常的基类
+```c++
+class bad_hmean : public std::exception  // 继承
+{
+  public:
+    const char* what(){return "wrong";}
+    ...
+}
+```
+* 使用exception&可以捕获各种派生类型的异常
+```c++
+catch(exception& e)  // 利用基类引用，处理所有派生类异常
+{
+  ...
+}
+```
+## RTTI（运行阶段类型识别）
+* RTTI只能用于包含虚函数的类层次结构
+##### dynamic_cast<>
+* 如果转换不合法，则返回为NULL，否则进行类型转换
+```c++
+class Grand {...};
+class Superb : public Grand {...};
+class Magnificent : public Superb{...};
+Grand * pg = new Grand;
+Grand * ps = new Superb;
+Grand * pm = new Magnificent;
+Magnificent* p1 = (Magnificent*) pm;    // valid, Magn -> Magn
+Magnificent* p2 = (Magnificent*) pg;    // invalid, Magn -> Grand
+Superb* p3 = (Magnificent*) pm;         // valid, Sup -> Magn
+Superb* p4 = dynamic_cast<Superb*> pg
+```
+* 可以利用返回为0或指针的特点，放入if语句进行条件判断。即如果可以转化成对应数据类型，则执行if内容，否则不执行。
+* 可以使用引用，但是返回不会为0，而是会引发exception异常
+```c++
+Superb& s = dynamic_cast<Superb&> rg;
+```
+##### typeid和type_info
+* 获取内容的类型，可用于类型是否相同的比较
+* 如果在if else语句中使用了typeid，则应考虑更改成虚函数或dynamic_cast<>
+```c++
+typeid(ps) == typeid(pm);
+```
+## static_cast、const_cast和reiterpret_cast
+* const_cast用于const和volatile两种类型的转换，typename和expression类型必须一致
+* static_cast用于typename和expression可以相互隐式转换的情形
+* dynamic_cast用于在类层次结构中进行向上转换
+```c++
+xxx_cast<typename> (expression)
+```
+
+---
+
+# **智能指针模板类**
+* 使用智能指针时，当指针过期，会自动调用析构函数进行内存释放
+* 包含头文件memory才能使用智能指针
+* 使用智能指针时不需要使用delete或delete[]
+* 智能指针有三种：auto_ptr，shared_ptr，unique_ptr
+```c++
+auto_ptr<double> p(new double);
+```
+* 智能指针的转换函数和赋值函数是含有explicit的，即必须显式定义
+```c++
+shared_ptr<double> pd;
+double* p_reg = new double;
+pd = p_reg;                             // invalid
+pd = shared_ptr<double> (p_reg);       // valid
+shared_ptr<double> pshare = p_reg;     // invalid
+shared_ptr<double> pshare(p_reg);      // valid
+```
+* 智能指针只能指向new过的堆，不能指向栈
+```c++
+string s = "hello, f5";
+shared_ptr<string> ps(&s);  // invalid
+```
+* shared_ptr使用引用计数，即*可以有多个指针指向同一个内存*，仅当最后一个指向内存的指针销毁时，才调用析构函数；而unique_ptr使用控制权的概念，即每次*只能有一个指针指向一个内存区*
+```c++
+auto_ptr<string> s(new string("Hello, f5"))
+auto_ptr<string> t;
+t = s;        //    出现问题，当t和s销毁时，字符串内存销毁了两次
+unique_ptr<string> s(new string("Hello, f5"))
+unique_ptr<string> t;
+t = s;        //    不允许，因为两者冲突，指向同一个内存
+// 可以使用t = std::move(s)来移交控制权
+// 由于t和s都是长期存在，所以不允许；如果s是一个临时变量，则被允许，因为s完成操作后即消失。即unique<string>p = unique<string>(new string("OK"))被允许 
+shared_ptr<string> s(new string("Hello, f5"))
+shared_ptr<string> t;
+t = s;        //    允许，删除时仅在最后一个指针销毁时调用析构函数
+```
+* *使用new分配内存时，才能使用auto_ptr和shared_ptr；使用new[]分配时，只能使用unique_ptr*
+
+---
+
+# **STL类（基础）**
+* STL提供了一组表示容器、迭代器、函数对象和算法的模板
+* 容器：同质的，类似于数组，只能保存相同数据类型的数据(数据结构之一)
+* 迭代器：能够用于遍历容器中的数据(容器使用的特殊指针)
+* 函数对象：类似于函数的对象，可以是类对象和函数指针
+* 算法：完成特定任务的方法
+* STL不是面向对象编程，而是泛型编程
+* 容器是一种数据结构，模板是算法；但是容器是由模板实现的
+## vector模板类
+* 使用动态分配，可以由用户声明长度
+* vector< type, num> vecName;
+* 迭代器可以视为是一种广义指针，通过声明，可以访问vector中的各个元素，进行增删查改等
+```c++
+vector<string> s(10);
+vector<string>::iterator ps;  // 声明一个迭代器
+ps = s.begin();               // ps指向迭代器开头
+*ps = 'c';                    // 开头设置为c  
+ps++;                         // 指向第二个元素
+ps.insert(...);               // 插入
+ps.erase(...);                // 删除
+ps.push_back('d');            // 在尾部加入一个d元素
+...
+```
+* 定义了非成员函数实现对各种不同容器类进行相同操作。比如for_each()，random_shuffle()，sort()等
+## 泛型编程
+##### 容器
+* 容器是由模板类实现的，是存储数据的数据结构的一种
+* 所有容器都具有的基本特征，如赋值，构造函数，复制构造函数，析构函数，实例化等
+* 容器有三种复杂度——编译时间、固定时间、线性时间
+* **序列容器**——指容器中数据有顺序，存在第一个元素和最后一个元素，中间的元素左右两边各有一个元素，允许进行随机访问，常见的有vector, deque, list ,queue, stack, array, forward_list, priority_queue
+* **关联容器**——键值对，类似于python的字典。常见的有set(其值==键), multset(set中可以有重复键), map(python中字典，键唯一，每个键一个值), multimap(一个键可以多个值)
+* **无序关联容器**——关联容器使用树结构，而无序关联容器使用哈希表，常见的是在关联容器前加上unordered,如unordered_map
+##### 迭代器
+* 模板使算法独立于数据的类型，而迭代器使算法独立于使用的容器类型。如：模板使得不论是int数组还是double数组，都可以进行操作；而迭代器使得不论是数组，还是链表，都可以进行操作
+* 迭代器基本操作包括：解引用（*），递增递减（++/--），赋值（=），判断（==/!=）
+* STL定义了5种迭代器——输入/输出/双向/随机访问/正向迭代器
+    * 输入 / 输出迭代器：无序，只能++递增，分别只能读/写
+    * 正向迭代器：有序，可以++递增，能够读写
+    * 双向迭代器：有序，可以++和--，能够读写
+    * 随机访问迭代器：有序，可以++和--，还能够进行±n的跨越式访问，能够读写
+* *迭代器相当于指针，而容器相当于数据类型*，要访问容器（数据结构）的值，就要定义迭代器（指针）
+* iterator头文件中，除了常规的iterator外，还定义了如reverse_iterator，对该迭代器进行++操作将会访问前一个单元
+```c++
+copy(words.rbegin(), words.rend(), show);  // rbegin和end指向相同，但前者是reverse_iterator，后者是iterator
+vector<string>::reverse_iterator ri;      // 显示声明了一个指针（迭代器）
+for(ri=words.rbegin(); ri!=words.rend(); ++ri)
+    cout<< *ri;
+```
+* 这些新加入的迭代器，会以容器类型作为模板参数，容器对象作为构造函数参数
+```c++
+back_insert_iterator<vector<int>> back(vectorName);
+```
+```c++
+#include <iterator>
+#include <iostream>
+void show(const std::string& s) {std::cout<<s<<std::endl;}
+int main()
+{
+    using namespace std;
+    string s1[4] = {"a", "b", "c", "d"};
+    string s2[2] = {"e", "f"};
+    vector<string> words(4);
+    copy(s1, s1+4, words.begin());
+    for_each(words.begin(), words.end(), show);        // a b c d
+    copy(s2, s2+2, back_insert_iterator<vector<string>> (words));
+    for_each(words.begin(), words.end(), show);        // a b c d e f
+}
+```
+##### 函数对象
+
+---
+
+# **C++11新标准** 
