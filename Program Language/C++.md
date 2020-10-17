@@ -34,8 +34,8 @@
   - [默认参数](#默认参数)
   - [函数重载(多态)](#函数重载多态)
   - [函数模板](#函数模板)
-        - [显示具体化](#显示具体化)
-        - [实例化](#实例化)
+      - [显示具体化](#显示具体化)
+      - [实例化](#实例化)
   - [decltype](#decltype)
 - [**引用&**](#引用)
 - [**内存模型和名称空间**](#内存模型和名称空间)
@@ -52,63 +52,68 @@
   - [友元函数](#友元函数)
   - [类的自动类型转换和强制类型转换](#类的自动类型转换和强制类型转换)
   - [动态内存分配](#动态内存分配)
-        - [复制构造函数](#复制构造函数)
-          - [浅复制](#浅复制)
-          - [深复制](#深复制)
-          - [赋值函数 Vs 复制构造函数 Vs 构造函数](#赋值函数-vs-复制构造函数-vs-构造函数)
+      - [复制构造函数](#复制构造函数)
+        - [浅复制](#浅复制)
+        - [深复制](#深复制)
+        - [赋值函数 Vs 复制构造函数 Vs 构造函数](#赋值函数-vs-复制构造函数-vs-构造函数)
   - [静态成员函数](#静态成员函数)
   - [成员初始化列表](#成员初始化列表)
   - [继承](#继承)
-        - [派生类和基类的特殊关系:](#派生类和基类的特殊关系)
-        - [虚函数](#虚函数)
-        - [隐藏](#隐藏)
-        - [public、private、protected继承](#publicprivateprotected继承)
+      - [派生类和基类的特殊关系:](#派生类和基类的特殊关系)
+      - [虚函数](#虚函数)
+      - [隐藏](#隐藏)
+      - [public、private、protected继承](#publicprivateprotected继承)
   - [抽象基类(ABC)](#抽象基类abc)
   - [继承和动态内存分配](#继承和动态内存分配)
-        - [派生类不使用new](#派生类不使用new)
-        - [派生类使用new](#派生类使用new)
-        - [友元](#友元)
+      - [派生类不使用new](#派生类不使用new)
+      - [派生类使用new](#派生类使用new)
+      - [友元](#友元)
   - [类设计小结](#类设计小结)
-        - [三种默认函数](#三种默认函数)
-        - [按值传递和按引用传递](#按值传递和按引用传递)
-        - [返回引用和返回值](#返回引用和返回值)
-        - [继承](#继承-1)
-        - [类函数](#类函数)
+      - [三种默认函数](#三种默认函数)
+      - [按值传递和按引用传递](#按值传递和按引用传递)
+      - [返回引用和返回值](#返回引用和返回值)
+      - [继承](#继承-1)
+      - [类函数](#类函数)
 - [**代码复用**](#代码复用)
   - [valarray类](#valarray类)
   - [包含 Vs 私有继承](#包含-vs-私有继承)
   - [多重继承(MI)](#多重继承mi)
-        - [虚基类](#虚基类)
+      - [虚基类](#虚基类)
   - [类模板](#类模板)
-        - [表达式参数](#表达式参数)
-        - [模板递归（嵌套）](#模板递归嵌套)
-        - [模板具体化](#模板具体化)
-        - [将模板作为参数](#将模板作为参数)
-        - [模板类和友元](#模板类和友元)
-        - [模板别名](#模板别名)
+      - [表达式参数](#表达式参数)
+      - [模板递归（嵌套）](#模板递归嵌套)
+      - [模板具体化](#模板具体化)
+      - [将模板作为参数](#将模板作为参数)
+      - [模板类和友元](#模板类和友元)
+      - [模板别名](#模板别名)
 - [**友元和异常**](#友元和异常)
   - [友元](#友元-1)
   - [嵌套类](#嵌套类)
   - [异常](#异常)
-        - [abort()](#abort)
-        - [throw](#throw)
-        - [try](#try)
-        - [catch](#catch)
-        - [将对象用作异常类型](#将对象用作异常类型)
-        - [栈解退](#栈解退)
-        - [其他属性](#其他属性)
-        - [exception类](#exception类)
+      - [abort()](#abort)
+      - [throw](#throw)
+      - [try](#try)
+      - [catch](#catch)
+      - [将对象用作异常类型](#将对象用作异常类型)
+      - [栈解退](#栈解退)
+      - [其他属性](#其他属性)
+      - [exception类](#exception类)
   - [RTTI（运行阶段类型识别）](#rtti运行阶段类型识别)
-        - [dynamic_cast<>](#dynamic_cast)
-        - [typeid和type_info](#typeid和type_info)
+      - [dynamic_cast<>](#dynamic_cast)
+      - [typeid和type_info](#typeid和type_info)
   - [static_cast、const_cast和reiterpret_cast](#static_castconst_cast和reiterpret_cast)
 - [**智能指针模板类**](#智能指针模板类)
 - [**STL类（基础）**](#stl类基础)
   - [vector模板类](#vector模板类)
   - [泛型编程](#泛型编程)
-        - [容器](#容器)
-        - [迭代器](#迭代器)
-        - [函数对象](#函数对象)
+      - [容器](#容器)
+      - [迭代器](#迭代器)
+      - [函数对象(函数符)](#函数对象函数符)
+        - [函数符概念](#函数符概念)
+        - [预定义函数符](#预定义函数符)
+        - [自适应函数符](#自适应函数符)
+        - [函数适配器](#函数适配器)
+      - [算法](#算法)
 - [**C++11新标准**](#c11新标准)
 
 
@@ -1519,8 +1524,184 @@ int main()
     for_each(words.begin(), words.end(), show);        // a b c d e f
 }
 ```
-##### 函数对象
+##### 函数对象(函数符)
+* 函数符是可以以函数方式与()结合使用的任意对象。这包括函数名、函数指针、重载了()的类对象
+```c++
+template<typename Inputiter, typename Func>
+Func for_each(Inputiter first, Inputiter second, Func f);
+// 如果f处是一个函数名，则使用函数指针；如果f处是一个类对象，则使用重载()的对象
+```
+
+> Q:以for_each为例，为什么要返回一个Func类型呢？<br/>
+> A:因为传入的f可能是一个类，那么这个类可能在处理过程中被改变，所以需要返回更改过后的f方便用户访问。
+>> ```c++
+>> #include <iostream>
+>> #include <iterator>
+>> #include <algorithm>
+>> #include <list>
+>> class myprint
+>> {
+>>     private:
+>>         int cnt_;
+>>     public:
+>>         myprint(int cnt=0):cnt_(cnt){}
+>>         int show(){return cnt_;}
+>>         void operator()(int x){std::cout<< x<< std::endl; cnt_++;}
+>> };
+>>
+>> int main()
+>> {
+>>     using namespace std;
+>>     list<int> arr;
+>>     for(size_t i=0; i<5; i++)
+>>         arr.push_back(i);
+>>     //myprint a = for_each(arr.begin(), arr.end(), myprint());
+>>     myprint a;
+>>     a = for_each(arr.begin(), arr.end(), a); // 此处要a=for_each(...)，否则a.show()仍为0
+>>     cout<< a.show()<< endl;
+>>     system("pause");
+>> }
+>> ```
+
+> Q：为什么要重载()或者说为什么for_each的第三个参数一定要是一元函数呢？<br/>
+> A：这与for_each内部的实现有关，可以看下面的解析：
+>> ```c++
+>> template<class InIt, class Func>
+>> Func for_each(InIt first, InIt second, Func f)
+>> {
+>>    _For_Each(first, second, f);
+>> }
+>> 
+>> template<class InIt, class Func> inline
+>> void _For_Each(InIt first, InIt second, Func& f)
+>> {
+>>   for(; first!= second; first++)
+>>   {
+>>     f(*first);   // 函数指针
+>>   } 
+>> }
+>> ```
+> 由此可以看出，重载()操作符后，f(*first)即可以按照重载的内容进行操作；传入函数指针，也可以按照正常流程运行。
+
+* 重载()的类可以如下所示
+```c++
+class Linear
+{
+  private:
+    double y0_;
+    double slope_;
+  public:
+    Linear(double y=0.0, double slope=1.0) : y0_(y), slope_(slope){}
+    double operator()(double x) {return y0_ + slope_ * x;}
+};
+
+int main()
+{
+  Linear L1(1, 2);    // 调用构造函数生成y和slope
+  double out = L1(3); // out = 1 + 2 * 3
+}
+```
+###### 函数符概念
+* 生成器——不同参数就可以调用的函数符
+* 一元函数——调用一个参数
+* 二元函数——调用两个参数
+* 谓词——返回bool的一元函数
+* 二元谓词——返回bool的二元函数
+```c++
+// 使用函数指针
+bool tooBig(int n)
+{return n>100;}
+
+list<int> scores;
+scores.remove_if(tooBig); // 只能移除大于100的
+```
+```c++
+// 使用重载运算符()
+template<typename T>
+class tooBig
+{
+  private:
+    T cutoff;
+  public:
+    tooBig(T t): cutoff(t){}
+    bool operator()(T n) {return n>cutoff;}
+}
+
+list<int> scores;
+tooBig<int> f200(200);
+scores.remove_if(f200)
+// scores.remove_if(tooBig<int> (300))
+```
+* 以for_each为例，第三个参数需要为一元函数，如果某个函数需要两个参数，则可以使用类的方法缩减为一个参数
+```c++
+template<class T>
+bool tooBig(T a, T b)
+{
+  return a>b;
+}
+
+template<class T>
+class tooBig2
+{
+  private:
+    T b;
+  public:
+    tooBig2(T t): b(t) {}
+    bool operator()(T& a) {return tooBig<T>(a, b);}
+}
+
+/*
+tooBig2<int> tB100(100);
+for_each(..., ...,tB100(x)); // 等价于tooBig(x, 100);
+*/
+```
+###### 预定义函数符
+* 如果要实现两个迭代器相加，则不能使用"+"，而要创建一个函数执行加法，然后把函数名作为函数指针传入迭代器中
+* 为了避免这么麻烦，STL为所有算术运算、逻辑运算与关系运算创建了模板函数符
+
+运算符 | 相应函数符
+:---: | :---:
+  '+'   | plus<>
+  '-'   | minus<>
+  ... | ...
+  '==' | equal_to
+  ... | ...
+
+###### 自适应函数符
+* 让函数符成为自适应的：携带了标识参数类型和返回类型的typedef成员，分别是result_type, first_argument_type, second_argument_type
+* 这些typedef让函数适配器对象知道有这些成员，并可以使用
+
+###### 函数适配器
+* 如果某个函数需要两个参数，而需要放入一元函数的函数符中，那么有两种方法
+  * 使用tooBig2的方法
+  * 使用适配器binder1st和binder2nd自动完成
+* 适配器binder1st使用方法
+```c++
+binder1st(f2, val) f1;
+f1(x);
+f2(val, x);   // 两者等价
+for_each(list.begin(), list.end(), binder1st(plus<double>(), 1.5)); // 将区间内每个值都加上1.5
+```
+* 适配器binder2nd使用方法类似，只不过val是第二个参数
+```c++
+binder1st(f2, val) f1; // f1(x) == f2(val, x)
+binder2nd(f2, val) f1; // f1(x) == f2(x, val)
+```
+
+##### 算法
+* 均使用模板提供泛型+迭代器提供数据通用访问
+* 基本上接受表示范围的两个迭代器+对数据操作的算法
+* 就地算法：新结果被保存在原来的位置<br/>
+  赋值算法：新结果被保存到新的位置
+* 同样的功能，可以选择使用“容器方法”和“函数”，但要注意两者区别。容器方法由于是类内成员，所以可以更改如长度相关的数据，而函数只能处理数据，如果不经过赋值，可能会出现数据被删除但是长度没变的问题
+```c++
+lsit<int> score;
+score.remove()  // 容器方法，移除数据后，长度会变
+remove(score, ...) //函数，移除数据，但是长度信息等不会变
+// score = remove(score, ...)只有这样才与容器方法等效
+```
 
 ---
 
 # **C++11新标准** 
+
