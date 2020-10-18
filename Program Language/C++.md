@@ -236,7 +236,7 @@ for(double x: points)  // 使用该方法只能读出数据
 for(double &y: points)  // 使用&可以修改数据
   y = y*0.1;
 ```
-[Back to Top](#C++基础知识)
+[Back to Top](#c基础知识)
 
 ---
 
