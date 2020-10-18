@@ -34,8 +34,8 @@
   - [默认参数](#默认参数)
   - [函数重载(多态)](#函数重载多态)
   - [函数模板](#函数模板)
-      - [显示具体化](#显示具体化)
-      - [实例化](#实例化)
+    - [显示具体化](#显示具体化)
+    - [实例化](#实例化)
   - [decltype](#decltype)
 - [**引用&**](#引用)
 - [**内存模型和名称空间**](#内存模型和名称空间)
@@ -52,69 +52,81 @@
   - [友元函数](#友元函数)
   - [类的自动类型转换和强制类型转换](#类的自动类型转换和强制类型转换)
   - [动态内存分配](#动态内存分配)
-      - [复制构造函数](#复制构造函数)
-        - [浅复制](#浅复制)
-        - [深复制](#深复制)
-        - [赋值函数 Vs 复制构造函数 Vs 构造函数](#赋值函数-vs-复制构造函数-vs-构造函数)
+    - [复制构造函数](#复制构造函数)
+      - [浅复制](#浅复制)
+      - [深复制](#深复制)
+      - [赋值函数 Vs 复制构造函数 Vs 构造函数](#赋值函数-vs-复制构造函数-vs-构造函数)
   - [静态成员函数](#静态成员函数)
   - [成员初始化列表](#成员初始化列表)
   - [继承](#继承)
-      - [派生类和基类的特殊关系:](#派生类和基类的特殊关系)
-      - [虚函数](#虚函数)
-      - [隐藏](#隐藏)
-      - [public、private、protected继承](#publicprivateprotected继承)
+    - [派生类和基类的特殊关系:](#派生类和基类的特殊关系)
+    - [虚函数](#虚函数)
+    - [隐藏](#隐藏)
+    - [public、private、protected继承](#publicprivateprotected继承)
   - [抽象基类(ABC)](#抽象基类abc)
   - [继承和动态内存分配](#继承和动态内存分配)
-      - [派生类不使用new](#派生类不使用new)
-      - [派生类使用new](#派生类使用new)
-      - [友元](#友元)
+    - [派生类不使用new](#派生类不使用new)
+    - [派生类使用new](#派生类使用new)
+    - [友元](#友元)
   - [类设计小结](#类设计小结)
-      - [三种默认函数](#三种默认函数)
-      - [按值传递和按引用传递](#按值传递和按引用传递)
-      - [返回引用和返回值](#返回引用和返回值)
-      - [继承](#继承-1)
-      - [类函数](#类函数)
+    - [三种默认函数](#三种默认函数)
+    - [按值传递和按引用传递](#按值传递和按引用传递)
+    - [返回引用和返回值](#返回引用和返回值)
+    - [继承](#继承-1)
+    - [类函数](#类函数)
 - [**代码复用**](#代码复用)
   - [valarray类](#valarray类)
   - [包含 Vs 私有继承](#包含-vs-私有继承)
   - [多重继承(MI)](#多重继承mi)
-      - [虚基类](#虚基类)
+    - [虚基类](#虚基类)
   - [类模板](#类模板)
-      - [表达式参数](#表达式参数)
-      - [模板递归（嵌套）](#模板递归嵌套)
-      - [模板具体化](#模板具体化)
-      - [将模板作为参数](#将模板作为参数)
-      - [模板类和友元](#模板类和友元)
-      - [模板别名](#模板别名)
+    - [表达式参数](#表达式参数)
+    - [模板递归（嵌套）](#模板递归嵌套)
+    - [模板具体化](#模板具体化)
+    - [将模板作为参数](#将模板作为参数)
+    - [模板类和友元](#模板类和友元)
+    - [模板别名](#模板别名)
 - [**友元和异常**](#友元和异常)
   - [友元](#友元-1)
   - [嵌套类](#嵌套类)
   - [异常](#异常)
-      - [abort()](#abort)
-      - [throw](#throw)
-      - [try](#try)
-      - [catch](#catch)
-      - [将对象用作异常类型](#将对象用作异常类型)
-      - [栈解退](#栈解退)
-      - [其他属性](#其他属性)
-      - [exception类](#exception类)
+    - [abort()](#abort)
+    - [throw](#throw)
+    - [try](#try)
+    - [catch](#catch)
+    - [将对象用作异常类型](#将对象用作异常类型)
+    - [栈解退](#栈解退)
+    - [其他属性](#其他属性)
+    - [exception类](#exception类)
   - [RTTI（运行阶段类型识别）](#rtti运行阶段类型识别)
-      - [dynamic_cast<>](#dynamic_cast)
-      - [typeid和type_info](#typeid和type_info)
+    - [dynamic_cast<>](#dynamic_cast)
+    - [typeid和type_info](#typeid和type_info)
   - [static_cast、const_cast和reiterpret_cast](#static_castconst_cast和reiterpret_cast)
 - [**智能指针模板类**](#智能指针模板类)
 - [**STL类（基础）**](#stl类基础)
   - [vector模板类](#vector模板类)
   - [泛型编程](#泛型编程)
-      - [容器](#容器)
-      - [迭代器](#迭代器)
-      - [函数对象(函数符)](#函数对象函数符)
-        - [函数符概念](#函数符概念)
-        - [预定义函数符](#预定义函数符)
-        - [自适应函数符](#自适应函数符)
-        - [函数适配器](#函数适配器)
-      - [算法](#算法)
+    - [容器](#容器)
+    - [迭代器](#迭代器)
+    - [函数对象(函数符)](#函数对象函数符)
+      - [函数符概念](#函数符概念)
+      - [预定义函数符](#预定义函数符)
+      - [自适应函数符](#自适应函数符)
+      - [函数适配器](#函数适配器)
+    - [算法](#算法)
 - [**C++11新标准**](#c11新标准)
+  - [右值引用](#右值引用)
+  - [移动语义](#移动语义)
+    - [移动语义](#移动语义-1)
+    - [std::move()](#stdmove)
+    - [C++11新的类功能](#c11新的类功能)
+      - [delete和default关键字](#delete和default关键字)
+      - [委托构造函数](#委托构造函数)
+      - [继承构造函数](#继承构造函数)
+      - [override & final](#override--final)
+  - [Lambda](#lambda)
+  - [包装器](#包装器)
+  - [可变参数模板](#可变参数模板)
 
 
 # **基本概念**
@@ -411,7 +423,7 @@ int rat;
 int & rodent = rat;
 // "int & rodent; rodent=rat;" is invalid
 ```
-+ 可以通过初始化声明来设置引用，但是不能通过赋值来设置
++ 可以通过初始化声明来设置引用，如果是const，则不能更改引用；如果不是const，则可以通过直接对引用或者引用内容进行修改
 ```c++
 // 最后p指向bunnies，而rodent仍为rats的引用，为100
 int rats = 100;
@@ -419,9 +431,11 @@ int * p = &rats;
 int & rodent = *p; // rodent与*p共用地址和内容，此后p改变并不影响rodent
 int bunnies = 50;
 p = &bunnies;
+
+rodent = *p; // 此时rodent和rats都是50，但是此时rodent和rats的地址仍然没变
 ```
 + 可以通过指针或者引用来实现函数对main中数据的改变
-+ 在返回引用的时候要注意，千万不能返回一个临时变量！要么返回new过的，要么返回传入的引用参数
++ *在返回引用的时候要注意，千万不能返回一个临时变量！要么返回new过的，要么返回传入的引用参数*
 + 由于返回的是引用，所以可以作为左值和右值，如果不想函数作为左值，则需要在返回值处加入const
 + *数组->指针； 结构体->指针/引用； 类->引用*
 
@@ -917,7 +931,7 @@ class Student
     ...
    public:
      Student(const char* str, const double* pd, int n) : name(str), scores(pd, n) {...};  // 注意，此处用的是name(str)而不是string(str)
-} 
+}
 // 继承
 Sclass Student : private std::string, private std::valarray<double>
 {
@@ -925,7 +939,7 @@ Sclass Student : private std::string, private std::valarray<double>
     ...
   public:
     Student(const std::string8 & str, const double* pd, int n) : std::string(str), std::valarray(pd, n) {...};  // 注意，此处用的是类名
-} 
+}
 ```
 * 在继承中，由于没有父类的对象，所以无法通过对象名字来实现调用，此时使用强制类型转换
 ```c++
@@ -1704,4 +1718,284 @@ remove(score, ...) //函数，移除数据，但是长度信息等不会变
 ---
 
 # **C++11新标准** 
+## 右值引用
+* 左值——在内存中有空间的量<br/>
+  右值——在寄存器中存储的临时变量或不容更改的值，如函数返回值，表达式，const常量
+* 右值可以关联字面常量（C风格数组除外，其表示地址），x+y等表达式，返回值的函数（返回引用的除外）
+> 返回引用的函数在return时，需要返回new过的内容或者传入的引用值，即不能返回右值，所以不能赋给右值参数
+>> ```c++
+>> int& f1(int& x){x=x+1; return x;}  // valid，因为x是左值
+>> int& f2(int& x){return x+1;} // invalid，因为x+1是右值
+>> const int& f3(int& x){x=x+1; return x;} // valid，因为x是左值
+>> const int& f4(int& x){return x+1;} // valid，因为const type&可以接受左值或右值，但是此时会生成临时变量temp，进行完返回后再删除
+>> ```
+* 对右值使用&可以获得其地址
+```c++
+int x = 10;
+int& lx = x;
+int&& rx = 10;
+// &10 is invalid
+cout<< &x<<endl;  // 0xff00
+cout<< &lx<<endl; // 0xff00
+cout<< &rx<<endl; // 0xff04
+```
+* *const type&（常量左值引用）可以被赋予右值，因为const代表了该值不能被修改，则可以认为不能作为左值使用，那么可以作为右值使用（注意：如果在函数参数列表中使用，会产生临时变量!!）*
+```c++
+void printL(string& s){cout<< s;}
+void printLR(const string& s){cout<< s;}
+int main()
+{
+  printL("hello");  // error
+  printLR("hello"); // right
+}
+```
+* 右值引用关联的是当前语句的值，即后面右值发生改变，但是右值引用仍不变
+```c++
+int x=10;
+int y=20;
+int&& sum=x+y;  // sum为30
+x=20;           // sum仍为30
+```
+
+## 移动语义
+##### 移动语义
+* 移动语义实际上避免了数据的大规模移动，而是在原地等待修改
+* 复制构造函数可以使用深复制，进行数据的转移；移动构造函数只会在原有位置调整数据
+* 在下列代码中，生成three的时候调用了移动构造函数。先由one+two生成临时变量，同时通过移动语义，将three和该临时变量进行浅复制，不用new新的空间，节省操作和空间（比如考虑n非常大）
+```c++
+class Useless
+{
+  private:
+    int n;
+    char* pc;
+    ...
+  public:
+    Useless(const Useless& u){...}
+    Useless(Useless&& u){...}
+}
+
+Useless::Useless(const Useless& u):n(u.n)
+{
+  pc = new char[n];
+  ...
+}
+
+Useless::Useless(Useless&& u):n(u.n)
+{
+  u.n = 0;
+  pc = u.pc;        // 夺取控制权，成为窃取(pilfering)
+  u.pc = nullptr;   // 由于临时变量u会被析构函数调用，同时当类过期时，也会调用析构函数，如果不将临时变量的指针设为nullptr，则退出该函数时，该内存区域就会被清空
+}
+
+int main()
+{
+  Useless one;
+  Useless two;
+  Useless three(one+two);
+}
+```
+* 如果上述代码不使用移动构造函数，而是使用复制构造函数，那么生成three的时候，会由one+two先生成临时变量，再由临时变量new一块区域并初始化该区域，再将这块区域复制给three，再把临时变量生成的区域delete[]，增加了时间和空间复杂度
+> ![IMG_20201018_181311.jpg](https://i.loli.net/2020/10/18/La2RBznKfPSsuZl.jpg)
+* 移动语义也可以用于operator =()的重载
+##### std::move()
+* 对于左值，其实也可以使用移动语义，比如可以摒弃复制构造函数，直接使用移动构造函数
+```c++
+Useless one;
+Useless two(one); // 如何在此处使用移动构造函数而非复制构造函数呢？
+```
+* std::move(left value)可以将左值转换成右值
+* 如果没有定义移动构造函数，则move仍将调用复制构造函数
+* 如果move(x)中x不是左值，而是右值，也不会发生任何变化
+
+##### C++11新的类功能
+###### delete和default关键字
+* C++原本默认提供4种函数——构造函数、析构函数、复制构造函数、赋值函数
+* C++11引入移动语义后新加入2种默认函数——移动复制构造函数和移动赋值函数
+> 当提供了复制XX函数时，不会自动生成移动XX函数<br/>
+> 同理，当提供了移动XX函数时，不会自动生成复制XX函数
+* 如果想禁用或者开启默认方法，则可以使用delete和default关键字
+> default只有6个函数可能使用(默认函数)<br/>delete可用于任何函数，使用delete限制某些类型的操作
+```c++
+class Use
+{
+  Use() = default;    // 使用默认构造函数
+  Use(Use&) = delete; // 禁用默认复制构造函数
+}
+```
+###### 委托构造函数
+* 允许在构造函数中使用之前定义的构造函数进行初始化等操作
+```c++
+class Use
+{
+  private:
+    int n_;
+    int k_;
+  public:
+    Use();
+    Use(int n);
+    Use(int n, int k);
+}
+// 注意定义的顺序，被委托的函数要放前面
+Use::Use(int n) : n_(n) {k_ = 0;}
+Use::Use(int n, int k): Use(10){}
+Use::Use() : Use(10, 20)  // 委托了Use(int n, int k)函数
+```
+###### 继承构造函数
+* 使派生类能够使用基类的构造函数(默认构造函数、复制构造函数和移动构造函数除外)
+* 在子类的private中使用baseClass::baseClass的方式，前一个baseClass代表名称空间，后一个baseClass代表构造函数名
+```c++
+class base
+{
+  private:
+    int n_;
+  public:  
+    base() {n_ = 0;}
+    base(int n): n_(n) {};
+}
+
+// 注意，不能使用父类的默认构造函数，复制构造函数和移动构造函数
+class child: public base
+{
+  private:
+    int k_;
+  public:
+    using base::base;
+    child() {k_=0; n_=0;} 
+    child(int n): base(n) {k_=0;}
+    child(int n, int k): base(n), k_(k){}
+}
+```
+###### override & final
+* 在子类使用override，将检查是否正确的重载了父类的虚方法
+```c++
+class base
+{
+  ...
+  virtual int add(int, int);
+  virtual double add(double, double);
+}
+class child: public base
+{
+  ...
+  virtual int add(int, int) override {...}  // 不报错
+  virtual double add(int, double) override {...} // 如果base没有该函数，则会报错，因为此时并非重载虚函数，而是会隐藏父类函数
+}
+```
+* 在父类使用final，声明该函数已经是最终版本，不允许子类进行重载
+```c++
+class base
+{
+  ...
+  virtual int add(int, int) final {...}
+}
+```
+
+
+## Lambda
+```c++
+[] (int x) {return x%3==0;}
+```
+* 上述为一个用于判断是否整除3的lambda函数
+* []表示无需函数名，()为参数列表，{}为操作
+* 当{}内只有一句return xx时，lambda无需返回值，因为可以通过decltype自动推断；但是当{}内有多句语句，则需要使用后置类型推断
+```c++
+[] (int x) -> int {int y=x; return x-y;}
+```
+* lambda可以作为函数对象，使用于迭代器算法中
+* 可以使用auto name为lambda函数命名，这样可以实现简洁调用
+```c++
+auto mod3 = [](int x){return x%3==0;}
+```
+* []使得lambda可以访问{}任何值
+> 1. [i, j, ...]使得可以访问lambda中的i,j,...参数的值<br/>
+> 2. [&i, &j, ...]使得可以按引用访问i,j,...<br/>
+> 3. [=]使得可以访问所有参数的值<br/>
+> 4. [&]使得可以按引用访问所有参数<br/>
+>> ```c++
+>> // 实现求取被3整除的数据个数和被13整除的数据个数
+>> int cnt3 = cnt13 = 0;
+>> auto func = [&](int x){cnt3+=(x%3==0); cnt13+=(x%13==0);}
+>> for_each(list.begin(), list.end(), func);
+>> cout<<cnt3<<cnt13<<endl;
+>> ```
+
+## 包装器
+* 调用特征标——返回类型和形式参数列表定义的
+* 具有相同调用特征标的函数对象、函数指针、lambda可视为是一样的function
+```c++
+template<class T, typename F>
+T use_f(T v, F f) {return f(v);}
+
+class Fp
+{
+  double z_;
+  Fp(double z=1.0):z_(z){}
+  double operator()(double p){return z_*p;}
+}
+
+auto Fq = [](double x){return x*x;}
+
+double dub(double x){return 2.0*x;}
+
+// use_f(2.0, dub)
+// use_f(2.0, Fp())
+// use_f(2.0, Fq)
+// 上述三种方式会生成三种不同的模板实例化
+```
+> 1. 实例化各种函数指针、lambda、函数对象 
+>> ```c++
+>> // 包装器使用方法——function< returnType (params List) >
+>> function<double(double)> ef1 = dub;
+>> function<double(double)> ef2 = Fp();
+>> function<double(double)> ef3 = Fq;
+>> // use_f(2.0, ef1)
+>> // use_f(2.0, ef2)
+>> // use_f(2.0, ef3)
+>>// 上述三种方式会生成一种模板实例化
+>> ```
+> 2. 直接传入生成包装器临时变量
+>> ```c++
+>> // 包装器使用方法——function< returnType (params List) >
+>> function<double(double)> func;
+>> // use_f(2.0, func(dub))
+>> // use_f(2.0, func(Fp()))
+>> // use_f(2.0, func(Fq))
+>> // 上述三种方式会生成一种模板实例化
+>> ```
+> 3. 直接在模板声明中定义成包装器
+>> ```c++
+>> // 包装器使用方法——function< returnType (params List) >
+>> template<class T>
+>> T use_f(T v, function<T(T)> f){return f(v);}
+>> // use_f(2.0, dub)
+>> // use_f(2.0, Fp())
+>> // use_f(2.0, Fq)
+>> // 上述三种方式会生成一种模板实例化
+>> ```
+
+## 可变参数模板
+* 使用typename...来表示长度不定且数据类型各异的参数列表；使用...name来展开参数列表
+```c++
+// 会导致无限递归
+template<typename... Args>
+void show1(Args... args)
+{
+  show1(args...);
+}
+
+// 不会永远递归，但是会打印格式错误，最后一个参数会多打印一个逗号
+template<typename T, typename... Args>
+void show2(T value, Args... args)
+{
+  cout<< value<< ",";
+  show2(args...);
+}
+
+// 正确调用方式，通过重载一个单参数的同名函数，既能解决打印格式错误，又能终止递归
+template<typename T>
+void show2(T value)
+{
+  cout<< value<< endl;
+}
+```
 
