@@ -236,7 +236,7 @@ for(double x: points)  // 使用该方法只能读出数据
 for(double &y: points)  // 使用&可以修改数据
   y = y*0.1;
 ```
-[Back to Top](#c基础知识)
+:top:[Back to Top](#c基础知识):top:
 
 ---
 
@@ -286,6 +286,8 @@ int a = 10;
 const int * p = &a;  // 此时，*p为const，不能通过p改变a的值，但是可以直接改变a的值，如a = 11(√)； *p = 11(×)
 int* const t = &a;   // 此时，*t可以更改a的值，但是不能指向别的地址
 ```
+
+:top:[Back to Top](#c基础知识):top:
 
 ---
 
@@ -413,6 +415,8 @@ auto add(t1 a, t2 b) -> decltype(a+b)
 }
 ```
 
+:top:[Back to Top](#c基础知识):top:
+
 ---
 
 
@@ -439,6 +443,8 @@ rodent = *p; // 此时rodent和rats都是50，但是此时rodent和rats的地址
 + *在返回引用的时候要注意，千万不能返回一个临时变量！要么返回new过的，要么返回传入的引用参数*
 + 由于返回的是引用，所以可以作为左值和右值，如果不想函数作为左值，则需要在返回值处加入const
 + *数组->指针； 结构体->指针/引用； 类->引用*
+
+:top:[Back to Top](#c基础知识):top:
 
 ---
 
@@ -511,6 +517,8 @@ namespace student
 }
 ```
 - namespace TOM = student::tom;则TOM为tom的别名
+
+:top:[Back to Top](#c基础知识):top:
 
 ---
 
@@ -901,6 +909,7 @@ hasDMA& hasDMA::hasDMA(const hasDMA &hs)
 |() [] ->|是|成员|否|是|是|
 |友元|否|友元|否|否|是|
 
+:top:[Back to Top](#c基础知识):top:
 
 ---
 
@@ -1221,6 +1230,8 @@ array<int, 12> a;
 month<int> b;
 ```
 
+:top:[Back to Top](#c基础知识):top:
+
 ---
 
 
@@ -1429,6 +1440,8 @@ typeid(ps) == typeid(pm);
 xxx_cast<typename> (expression)
 ```
 
+:top:[Back to Top](#c基础知识):top:
+
 ---
 
 # **智能指针模板类**
@@ -1468,6 +1481,8 @@ shared_ptr<string> t;
 t = s;        //    允许，删除时仅在最后一个指针销毁时调用析构函数
 ```
 * *使用new分配内存时，才能使用auto_ptr和shared_ptr；使用new[]分配时，只能使用unique_ptr*
+
+:top:[Back to Top](#c基础知识):top:
 
 ---
 
@@ -1715,6 +1730,8 @@ score.remove()  // 容器方法，移除数据后，长度会变
 remove(score, ...) //函数，移除数据，但是长度信息等不会变
 // score = remove(score, ...)只有这样才与容器方法等效
 ```
+
+:top:[Back to Top](#c基础知识):top:
 
 ---
 
