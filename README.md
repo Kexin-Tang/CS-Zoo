@@ -12,3 +12,4 @@
   * :warning:[操作系统](https://github.com/Kexin-Tang/CS_Notes/blob/main/Operation%20System/Operation%20System.md)
   * :warning:[数据结构与算法](https://github.com/Kexin-Tang/CS_Notes/blob/main/Data%20Structure%20%26%20Algorithm/Data%20Structure%20%26%20Algorithm.md)
 * :warning:[leetcode刷题笔记](https://github.com/Kexin-Tang/CS_Notes/blob/main/leetcode.md)
+* :construction:[leetcode常用函数](https://github.com/Kexin-Tang/CS_Notes/blob/main/leetcode_normal_functions.md)
