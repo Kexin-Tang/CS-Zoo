@@ -2016,4 +2016,4 @@ void show2(T value)
   cout<< value<< endl;
 }
 ```
-
+:top:[Back to Top](#c基础知识):top:
