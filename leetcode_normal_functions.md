@@ -219,7 +219,29 @@ int main()
     cout<< a+b<< endl;  // 输出300
 }
 ``` 
+* unordered_map类——Hash实现快速查找
+    * it->first == key; it->second == second
+    * map[key] = value
+    * find()用于查找key,没找到返回map.end()
+```c++
+#include <unordered_map>
+...
 
+vector<int> twoSum(vector<int>& nums, int target)
+{
+    unordered_map<int, int> num_map;
+    for(int i=0; i<nums.size(); i++)
+    {
+        auto it = num_map.find(target-nums[i]);
+        
+        if(it!=num_map.end())
+            return vector<int> {it->second, i};
+        else
+            num_map[nums[i]] = i;
+    }
+    return vector<int> {};
+}
+```
 ---
 
 ## Python
