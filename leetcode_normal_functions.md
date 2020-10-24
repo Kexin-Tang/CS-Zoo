@@ -293,26 +293,21 @@ int main()
 
 ###### 普通队列
 
-- queue.push(x)
-> 将x插入队列尾部
-- queue.pop()
-> 将队首弹出（不返回值）
-- queue.size()
-> 队列大小
-- queue.front() / queue.back()
-> 返回队首/队尾
+名称 | 功能
+:---: | :---:
+queue.push(x) | 将x插入队列尾部
+queue.pop() | 将队首弹出（不返回值）
+queue.size() | 队列大小
+queue.front() / queue.back() | 返回队首/队尾
 
 ###### 优先队列 priority_queue
 
-使用大顶堆/小顶堆（默认大顶堆，即队首>队尾）
-- queue.top
-> 返回队首
-- queue.size()
-> 返回数据大小
-- queue.empty()
-> 返回bool指明是否为空
-- queue.push(x) / queue.pop()
-> 插入/弹出数据(*对优先队列的数据进行增删时，会自动进行排序!!*)
+名称 | 功能
+:---: | :---:
+queue.top | 返回队首
+queue.size() | 返回数据大小
+queue.empty() | 返回bool指明是否为空
+queue.push(x) / queue.pop() | 插入/弹出数据(*对优先队列的数据进行增删时，会自动进行排序!!*)
 ```c++
 // 使用时注意，默认为大顶堆
 // 函数原型：priority_queue<Type, Container, Functional>
@@ -320,5 +315,7 @@ priority_queue<int, vector<int>, less<int> > a;     // 大顶堆，队首大
 priority_queue<int> b;                              // 与a相同
 priority_queue<int, vector<int>, greater<int> > c;  // 小顶堆，队首小
 ```
+
+:top:[Back to top](#概述)
 
 ---
