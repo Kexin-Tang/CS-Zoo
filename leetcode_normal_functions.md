@@ -1,6 +1,6 @@
 
 # 概述
-本项目主要总结自己在使用C++和Python刷leetcode的过程中，经常用到的操作、函数和方法
+本项目主要总结自己在使用C++刷leetcode的过程中，经常用到的操作、函数和方法
 
 
 # C++
@@ -54,12 +54,16 @@
         <td>查找一个子序列，并返回首次出现的位置</td>
     </tr>
     <tr>
-        <td rowspan="3">修改函数</td>
+        <td rowspan="4">修改函数</td>
         <td>reverse(it.begin(), it.end())</td>
         <td>用于将数据进行翻转</td>
     </tr>
     <tr>
         <td>容器.pop/push_back()</td><td>在尾部插入/删除一个元素</td>
+    </tr>
+    <tr>
+        <td>容器.insert()</td>
+        <td>在指定位置插入指定的内容</td>
     </tr>
     <tr>
         <td>replace(it.begin(), it.end(), oldVal, newVal)</td>
@@ -153,6 +157,13 @@ cout<< equal(arr1.begin()+1, arr1.end(), arr2.begin(), arr2.end()); // false，�
 ##### 修改函数
 * reverse(it.begin(), it.end())
 * pop/push_back()
+* insert家族
+> * vec.insert(vec.begin(), val)
+>> 在头部插入一个val
+> * vec.insert(vec.end(), arr.begin(), arr.end())
+>> 在vec的后面插入arr，即生成vec+arr
+
+
 * replace家族
 > * replace(it.begin(), it.end(), oldVal, newVal)
 >> 将会把迭代器区间内的oldVal替换为newVal
@@ -201,7 +212,16 @@ s.erase(s.begin(), s.begin()+5);    // 删除iterator间的内容
 >> 会将原数据删除，并复制到一个新的容器之中
 
 ### 类
-* stringsteam类——可以实现任意类型转换
+
+类名 | 作用
+:---: | :---:
+[stringsteam](#stringsteam) | 完成任意类型的转换
+[unordered_map](#unordered_map) | hash表实现快速查找
+[struct](#struct) | 结构体相关
+[queue](#queue) | 队列相关
+
+
+* stringsteam
 ```c++
 #include <sstream>
 #include <iostream>
@@ -219,7 +239,7 @@ int main()
     cout<< a+b<< endl;  // 输出300
 }
 ``` 
-* unordered_map类——Hash实现快速查找
+* unordered_map
     * it->first == key; it->second == second
     * map[key] = value
     * find()用于查找key,没找到返回map.end()
@@ -242,6 +262,35 @@ vector<int> twoSum(vector<int>& nums, int target)
     return vector<int> {};
 }
 ```
----
 
-## Python
+* struct
+与C语言中只能设置结构体内成员不同，在C++中可以和类一样，声明构造函数，直接调用构造函数即可
+```c++
+struct Node
+{
+    int val;
+    Node* next;
+    Node() : val(0), next(nullptr) {}   // 注意，不能用";"
+    Node(int v) : val(v), next(nullptr) {}
+    ...
+}
+
+int main()
+{
+    Node a = Node();
+    Node* pb = new Node(2);
+}
+```
+
+* queue
+> - queue.push(x)
+>> 将x插入队列尾部
+> - queue.pop()
+>> 将队首弹出（不返回值）
+> - queue.size()
+>> 队列大小
+> - queue.front() / queue.back()
+>> 返回队首/队尾
+
+
+---
