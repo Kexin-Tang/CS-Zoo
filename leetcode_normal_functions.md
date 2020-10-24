@@ -172,7 +172,7 @@ void sort (RandomAccessIterator first, RandomAccessIterator last, Compare comp);
 * nth_element()
 ```c++
 vector<int> arr={1,2,3,4,5};
-nth_element(arr.begin(), 3, arr.end());
+nth_element(arr.begin(), arr.begin()+3, arr.end());
 // 最终输出可能为2,1,3,5,4，只要3对了就OK
 ```
 
