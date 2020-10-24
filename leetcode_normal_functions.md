@@ -211,7 +211,7 @@ s.erase(s.begin(), s.begin()+5);    // 删除iterator间的内容
 > * remove_copy(it.begin(), it.end(), itNew.begin(), val)
 >> 会将原数据删除，并复制到一个新的容器之中
 
-[Back to top](#概述)
+:top:[Back to top](#概述):top:
 
 ---
 
@@ -316,6 +316,6 @@ priority_queue<int> b;                              // 与a相同
 priority_queue<int, vector<int>, greater<int> > c;  // 小顶堆，队首小
 ```
 
-:top:[Back to top](#概述)
+:top:[Back to top](#概述):top:
 
 ---
