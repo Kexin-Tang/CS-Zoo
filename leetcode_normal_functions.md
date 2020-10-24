@@ -211,6 +211,10 @@ s.erase(s.begin(), s.begin()+5);    // 删除iterator间的内容
 > * remove_copy(it.begin(), it.end(), itNew.begin(), val)
 >> 会将原数据删除，并复制到一个新的容器之中
 
+[Back to top](#概述)
+
+---
+
 ### 类
 
 类名 | 作用
@@ -221,7 +225,8 @@ s.erase(s.begin(), s.begin()+5);    // 删除iterator间的内容
 [queue](#queue) | 队列相关
 
 
-* stringsteam
+###### stringsteam
+
 ```c++
 #include <sstream>
 #include <iostream>
@@ -239,10 +244,11 @@ int main()
     cout<< a+b<< endl;  // 输出300
 }
 ``` 
-* unordered_map
-    * it->first == key; it->second == second
-    * map[key] = value
-    * find()用于查找key,没找到返回map.end()
+###### unordered_map
+
+* it->first == key; it->second == second
+* map[key] = value
+* find()用于查找key,没找到返回map.end()
 ```c++
 #include <unordered_map>
 ...
@@ -263,7 +269,8 @@ vector<int> twoSum(vector<int>& nums, int target)
 }
 ```
 
-* struct
+###### struct
+
 与C语言中只能设置结构体内成员不同，在C++中可以和类一样，声明构造函数，直接调用构造函数即可
 ```c++
 struct Node
@@ -282,15 +289,16 @@ int main()
 }
 ```
 
-* queue
-> - queue.push(x)
->> 将x插入队列尾部
-> - queue.pop()
->> 将队首弹出（不返回值）
-> - queue.size()
->> 队列大小
-> - queue.front() / queue.back()
->> 返回队首/队尾
+###### queue
+
+- queue.push(x)
+> 将x插入队列尾部
+- queue.pop()
+> 将队首弹出（不返回值）
+- queue.size()
+> 队列大小
+- queue.front() / queue.back()
+> 返回队首/队尾
 
 
 ---
