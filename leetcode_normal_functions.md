@@ -268,6 +268,19 @@ vector<int> twoSum(vector<int>& nums, int target)
     return vector<int> {};
 }
 ```
+* 向map里增添元素时，可以使用下列两种方式。应注意的是，`使用insert插入元素会检查是否满足集合唯一性`，而`使用[]插入的方式会覆盖原来的内容`
+```c++
+unordered_map<int, string> a;
+a.insert(pair<int, string>(1, "1"));
+a.insert(unordered_map<int, string>::value_type(1, "1"));
+a[2] = "2";
+```
+* 使用erase进行元素的清除
+```c++
+int n = a.erase("1");       if 成功, n=1; else, n=0
+a.erase(a.begin(), a.end());
+```
+
 
 #### struct
 
