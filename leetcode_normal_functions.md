@@ -223,6 +223,7 @@ s.erase(s.begin(), s.begin()+5);    // 删除iterator间的内容
 [unordered_map](#unordered_map) | hash表实现快速查找
 [struct](#struct) | 结构体相关
 [queue](#queue) | 队列相关
+[pair](#pair)   | pair相关
 
 
 #### stringsteam
@@ -328,6 +329,26 @@ priority_queue<int, vector<int>, less<int> > a;     // 大顶堆，队首大
 priority_queue<int> b;                              // 与a相同
 priority_queue<int, vector<int>, greater<int> > c;  // 小顶堆，队首小
 ```
+
+#### pair
+
+* 使用pair时，分别使用first和second访问对应的两个元素
+* 可以在声明时直接初始化，也可以使用make_pair()来进行赋值
+* 当函数返回pair类型时，需要使用`std::tie`来接收
+```c++
+pair<int, string> getInfo() {return make_pair(1, "tom");}
+
+int main()
+{
+    int id;
+    string name;
+    tie(id, name) = getInfo();      // 不能像python那样直接写两个变量名作为接收方
+}
+```
+
+
+
+
 
 :top:[Back to top](#概述):top:
 
