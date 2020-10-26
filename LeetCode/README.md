@@ -27,6 +27,7 @@
 ###### Easy
 
 ###### Medium
+[372. Super Pow](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/372.%20Super%20Pow.md)
 [633. Sum of Square Numbers](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/633.%20Sum%20of%20Square%20Numbers.md)
 
 ###### Hard
