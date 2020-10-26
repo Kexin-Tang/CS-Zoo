@@ -31,11 +31,11 @@
     <tr>
         <td rowspan="6">查找函数</td>
         <td>lower_bound(it.begin(), it.end(), val)</td>
-        <td>查找第一个不小于val的值</td>
+        <td>有序数组中查找第一个不小于val的值</td>
     </tr>
     <tr>
         <td>upper_bound(it.begin(), it.end(), val)</td>
-        <td>查找第一个大于val的值</td>
+        <td>有序数组中查找第一个大于val的值</td>
     </tr>
     <tr>
         <td>find(it.begin(), it.end(), val)</td>
@@ -122,7 +122,7 @@ cout<< equal(arr1.begin()+1, arr1.end(), arr2.begin(), arr2.end()); // false，�
 ```
 
 ##### 查找函数
-* bound家族
+* bound家族(*要在有序数组中才能使用*)
 > * lower_bound (itBegin, itEnd, val)
 >> ```c++
 >> // 在范围[begin, end)中，查找不小于val的第一个值，不存在则返回it.begin()
