@@ -21,3 +21,12 @@
 ###### Hard
 
 ---
+
+## Math
+
+###### Easy
+
+###### Medium
+[633. Sum of Square Numbers](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/633.%20Sum%20of%20Square%20Numbers.md)
+
+###### Hard
