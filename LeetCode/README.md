@@ -39,6 +39,7 @@
 ###### Easy
 
 ###### Medium
-[11. Container With Most Water](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/11.%20Container%20With%20Most%20Water.md)
+[11. Container With Most Water](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/11.%20Container%20With%20Most%20Water.md)<br/>
 
 ###### Hard
+[42. Trapping Rain Water](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/42.%20Trapping%20Rain%20Water.md)<br/>
