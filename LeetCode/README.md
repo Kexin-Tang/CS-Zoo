@@ -6,7 +6,7 @@
 ###### Easy
 
 ###### Medium
-[189. Rotate Array]https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/189.%20Rotate%20Array.md)<br/>
+[189. Rotate Array](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/189.%20Rotate%20Array.md)<br/>
 
 ###### Hard
 [4. Median of Two Sorted Arrays](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/4.%20Median%20of%20Two%20Sorted%20Arrays.md)
