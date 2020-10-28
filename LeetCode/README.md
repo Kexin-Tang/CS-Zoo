@@ -43,6 +43,7 @@
 [11. Container With Most Water](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/11.%20Container%20With%20Most%20Water.md)<br/>
 [15. 3Sum](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/15.%203Sum.md)<br/>
 [75. Sort Colors](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/75.%20Sort%20Colors.md)<br/>
+[142. Linked List Cycle II](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/142.%20Linked%20List%20Cycle%20II.md)<br/>
 
 
 ###### Hard
