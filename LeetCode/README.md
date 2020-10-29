@@ -45,6 +45,7 @@
 [75. Sort Colors](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/75.%20Sort%20Colors.md)<br/>
 [142. Linked List Cycle II](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/142.%20Linked%20List%20Cycle%20II.md) *(有关于带环链表的总结)* <br/>
 [287. Find the Duplicate Number](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/287.%20Find%20the%20Duplicate%20Number.md)<br/>
+[457. Circular Array Loop](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/457.%20Circular%20Array%20Loop.md)<br/>
 
 
 ###### Hard
