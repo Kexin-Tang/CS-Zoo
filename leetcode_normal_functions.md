@@ -224,6 +224,7 @@ s.erase(s.begin(), s.begin()+5);    // 删除iterator间的内容
 [struct](#struct) | 结构体相关
 [queue](#queue) | 队列相关
 [pair](#pair)   | pair相关
+[stack](#stack) | 栈相关
 
 
 #### stringsteam
@@ -347,7 +348,15 @@ int main()
 ```
 
 
+#### stack
 
+名称 | 功能
+:---: | :---:
+stack.pop() | 弹出栈顶
+stack.push(x) | 将x压入栈
+stack.top() | 返回栈顶元素，但不删除
+stack.empty() | 若为空，则返回true
+stack.size() | 返回栈中元素个数
 
 
 :top:[Back to top](#概述):top:
