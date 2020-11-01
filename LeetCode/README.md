@@ -53,3 +53,15 @@
 
 ###### Hard
 [42. Trapping Rain Water](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/42.%20Trapping%20Rain%20Water.md)<br/>
+
+---
+
+## Linked Node
+
+###### Easy
+
+###### Medium
+
+###### Hard
+[25. Reverse Nodes in K-Group](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/25.%20Reverse%20Nodes%20in%20k-Group.md)<br/>
+
