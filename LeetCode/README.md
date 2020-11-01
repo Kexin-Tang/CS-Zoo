@@ -19,6 +19,7 @@
 ###### Medium
 [34. Find First and Last Position of Element in Sorted Array](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/34.%20Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array.md)<br/>
 [153. Find Minimum in Rotated Sorted Array](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/153.%20Find%20Minimum%20in%20Rotated%20Sorted%20Array.md) *(pivot有序数组)*<br/>
+[162. Find Peak Element](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/162.%20Find%20Peak%20Element.md)<br/>
 
 ###### Hard
 [4. Median of Two Sorted Arrays](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/4.%20Median%20of%20Two%20Sorted%20Arrays.md)<br/>
