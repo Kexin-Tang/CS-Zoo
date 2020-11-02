@@ -56,11 +56,12 @@
 
 ---
 
-## Linked Node
+## Linked List
 
 ###### Easy
 
 ###### Medium
+[148. Sort List](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/148.%20Sort%20List.md)<br/>
 [445. Add Two Numbers II](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/445.%20Add%20Two%20Numbers%20II.md)<br/>
 
 ###### Hard
