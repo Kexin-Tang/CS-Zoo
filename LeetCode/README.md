@@ -61,6 +61,7 @@
 ###### Easy
 
 ###### Medium
+[445. Add Two Numbers II](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/445.%20Add%20Two%20Numbers%20II.md)<br/>
 
 ###### Hard
 [25. Reverse Nodes in K-Group](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/25.%20Reverse%20Nodes%20in%20k-Group.md)<br/>
