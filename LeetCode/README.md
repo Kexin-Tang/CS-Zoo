@@ -65,5 +65,17 @@
 [445. Add Two Numbers II](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/445.%20Add%20Two%20Numbers%20II.md)<br/>
 
 ###### Hard
+[23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)<br/>
 [25. Reverse Nodes in K-Group](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/25.%20Reverse%20Nodes%20in%20k-Group.md)<br/>
 
+
+---
+
+## Heap
+###### Easy
+
+###### Medium
+
+
+###### Hard
+[23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)<br/>
