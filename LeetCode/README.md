@@ -76,6 +76,7 @@
 ###### Easy
 
 ###### Medium
+[17. Letter Combinations of a Phone Number](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/17.%20Letter%20Combinations%20of%20a%20Phone%20Number.md)<br/>
 [22. Generate Parentheses](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/22.%20Generate%20Parentheses.md)<br/>
 
 ###### Hard
