@@ -71,6 +71,18 @@
 
 ---
 
+## Recursion
+
+###### Easy
+
+###### Medium
+[22. Generate Parentheses](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/22.%20Generate%20Parentheses.md)<br/>
+
+###### Hard
+
+
+---
+
 ## Heap
 ###### Easy
 
