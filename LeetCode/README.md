@@ -81,6 +81,17 @@
 
 ###### Hard
 
+---
+
+## Stack
+
+###### Easy
+
+###### Medium
+[1019. Next Greater Node In Linked List](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1019.%20Next%20Greater%20Node%20In%20Linked%20List.md)<br/>
+
+###### Hard
+
 
 ---
 
