@@ -2,12 +2,14 @@
 
 - [Array](#array)
 - [Binary Search](#binary-search)
+- [Tree](#tree)
 - [Math](#math)
 - [Two Pointers](#two-pointers)
 - [Linked List](#linked-list)
 - [Recursion](#recursion)
 - [Stack](#stack)
 - [Heap](#heap)
+- [Queue](#queue)
 
 
 ---
@@ -33,6 +35,17 @@
 
 ###### Hard
 [4. Median of Two Sorted Arrays](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/4.%20Median%20of%20Two%20Sorted%20Arrays.md)<br/>
+
+---
+
+## Tree
+
+###### Easy
+
+###### Medium
+[102. Binary Tree Level Order Traversal](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
+
+###### Hard
 
 ---
 
@@ -113,3 +126,15 @@
 
 ###### Hard
 [23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)<br/>
+
+---
+
+
+## Queue
+
+###### Easy
+
+###### Medium
+[102. Binary Tree Level Order Traversal](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
+
+###### Hard
