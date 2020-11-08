@@ -86,6 +86,7 @@
 ###### Medium
 [148. Sort List](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/148.%20Sort%20List.md) *(Merge Sort)* <br/>
 [445. Add Two Numbers II](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/445.%20Add%20Two%20Numbers%20II.md)<br/>
+[725. Split Linked List in Parts](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/725.%20Split%20Linked%20List%20in%20Parts.md)<br/>
 
 ###### Hard
 [23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)<br/>
