@@ -82,6 +82,7 @@
 ## Linked List
 
 ###### Easy
+[160. Intersection of Two Linked Lists](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/160.%20Intersection%20of%20Two%20Linked%20Lists.md)<br/>
 
 ###### Medium
 [148. Sort List](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/148.%20Sort%20List.md) *(Merge Sort)* <br/>
