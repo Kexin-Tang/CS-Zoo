@@ -44,6 +44,7 @@
 
 ###### Medium
 [102. Binary Tree Level Order Traversal](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
+[1367. Linked List in Binary Tree](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
 
 ###### Hard
 
@@ -88,6 +89,7 @@
 [148. Sort List](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/148.%20Sort%20List.md) *(Merge Sort)* <br/>
 [445. Add Two Numbers II](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/445.%20Add%20Two%20Numbers%20II.md)<br/>
 [725. Split Linked List in Parts](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/725.%20Split%20Linked%20List%20in%20Parts.md)<br/>
+[1367. Linked List in Binary Tree](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
 
 ###### Hard
 [23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)<br/>
@@ -103,6 +105,7 @@
 ###### Medium
 [17. Letter Combinations of a Phone Number](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/17.%20Letter%20Combinations%20of%20a%20Phone%20Number.md)<br/>
 [22. Generate Parentheses](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/22.%20Generate%20Parentheses.md)<br/>
+[1367. Linked List in Binary Tree](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
 
 ###### Hard
 
