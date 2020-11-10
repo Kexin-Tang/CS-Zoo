@@ -282,7 +282,11 @@ a[2] = "2";
 int n = a.erase("1");       if 成功, n=1; else, n=0
 a.erase(a.begin(), a.end());
 ```
-
+* 如果想把容器中的值放入hash表中，可以使用如下的方式初始化
+```c++
+vector<int> G = {...};
+unordered_map<int> m(G.begin(), G.end());
+```
 
 #### struct
 
