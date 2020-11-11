@@ -89,6 +89,7 @@
 [148. Sort List](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/148.%20Sort%20List.md) *(Merge Sort)* <br/>
 [445. Add Two Numbers II](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/445.%20Add%20Two%20Numbers%20II.md)<br/>
 [725. Split Linked List in Parts](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/725.%20Split%20Linked%20List%20in%20Parts.md)<br/>
+[1171. Remove Zero Sum Consecutive Nodes from Linked List](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1171.%20Remove%20Zero%20Sum%20Consecutive%20Nodes%20from%20Linked%20List.md)<br/>
 [1367. Linked List in Binary Tree](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
 
 ###### Hard
