@@ -335,6 +335,7 @@ priority_queue<int, vector<int>, less<int> > a;     // 大顶堆，队首大
 priority_queue<int> b;                              // 与a相同
 priority_queue<int, vector<int>, greater<int> > c;  // 小顶堆，队首小
 ```
+* 优先队列插入pair时，会根据key的大小进行排序！所以有时使用priority_queue + unordered_map时会需要将map的key和value反过来传递给queue
 
 #### pair
 
