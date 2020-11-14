@@ -5,9 +5,7 @@
 ---
 
 * 计算机基础知识
-  * 编程语言
-    * :cat:[C++](https://github.com/Kexin-Tang/CS_Notes/blob/main/Program%20Language/C%2B%2B.md)
-    * :frog:[Python](https://github.com/Kexin-Tang/CS_Notes/blob/main/Program%20Language/Python.md)
+  * :cat:[C++](https://github.com/Kexin-Tang/CS_Notes/blob/main/Program%20Language/C%2B%2B.md)
   * :tiger:[计算机网络](https://github.com/Kexin-Tang/CS_Notes/blob/main/Computer%20Network/Computer%20Network.md)
   * :koala:[操作系统](https://github.com/Kexin-Tang/CS_Notes/blob/main/Operation%20System/Operation%20System.md)
   * :horse:[数据结构与算法](https://github.com/Kexin-Tang/CS_Notes/blob/main/Data%20Structure%20%26%20Algorithm/Data%20Structure%20%26%20Algorithm.md)
@@ -18,3 +16,4 @@
   * :sheep:[计算机网络]
   * :bird:[操作系统]
   * :chicken:[数据结构](https://github.com/Kexin-Tang/CS-Zoo/blob/main/meeting/algorithm.md)
+  * :frog:[Python]((https://github.com/Kexin-Tang/CS-Zoo/blob/main/meeting/C%2B%2B.md))
