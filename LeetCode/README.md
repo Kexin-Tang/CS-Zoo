@@ -1,16 +1,24 @@
 # 导航栏
 
-- [Array](#array)
-- [Binary Search](#binary-search)
-- [Tree](#tree)
+- 数据结构
+  - [Array](#array)
+  - [Tree](#tree)
+  - [Linked List](#linked-list)
+  - [Stack](#stack)
+  - [Heap](#heap)
+  - [Queue](#queue)
+
+- 算法
+  - [贪心]()
+  - [动态规划]()
+  - [滑动窗口]()
+  - [DFS]()
+  - [Binary Search](#binary-search)
+  - [Two Pointers](#two-pointers)
+  - [Recursion](#recursion)
+  - [Sort](#sort)
+  
 - [Math](#math)
-- [Two Pointers](#two-pointers)
-- [Linked List](#linked-list)
-- [Recursion](#recursion)
-- [Stack](#stack)
-- [Heap](#heap)
-- [Queue](#queue)
-- [Sort](#sort)
 
 
 ---
@@ -118,10 +126,11 @@
 ###### Easy
 
 ###### Medium
+[402. Remove K Digits](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/402.%20Remove%20K%20Digits.md)*(单调栈)*<br/>
 [1019. Next Greater Node In Linked List](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1019.%20Next%20Greater%20Node%20In%20Linked%20List.md)<br/>
 
 ###### Hard
-
+[42. Trapping Rain Water](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/42.%20Trapping%20Rain%20Water.md)*(单调栈)*<br/>
 
 ---
 
@@ -152,6 +161,16 @@
 [1122. Relative Sort Array](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1122.%20Relative%20Sort%20Array.md)*(哈希排序，自定义排序，计数排序)* <br/>
 
 ###### Medium
+[75. Sort Colors](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/75.%20Sort%20Colors.md)<br/>
 
+###### Hard
+[23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)*(堆排序)*<br/>
+
+---
+## 贪心
+###### Easy
+
+###### Medium
+[402. Remove K Digits](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/402.%20Remove%20K%20Digits.md)<br/>
 
 ###### Hard
