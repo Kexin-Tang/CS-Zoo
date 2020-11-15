@@ -10,6 +10,7 @@
 - [Stack](#stack)
 - [Heap](#heap)
 - [Queue](#queue)
+- [Sort](#sort)
 
 
 ---
@@ -142,5 +143,15 @@
 
 ###### Medium
 [102. Binary Tree Level Order Traversal](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
+
+###### Hard
+
+---
+## Sort
+###### Easy
+[1122. Relative Sort Array](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1122.%20Relative%20Sort%20Array.md)*(哈希排序，自定义排序，计数排序)* <br/>
+
+###### Medium
+
 
 ###### Hard
