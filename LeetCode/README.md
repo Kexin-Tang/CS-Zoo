@@ -9,7 +9,7 @@
   - [Queue](#queue)
 
 - 算法
-  - [贪心]()
+  - [贪心](#贪心)
   - [动态规划]()
   - [滑动窗口]()
   - [DFS]()
@@ -17,6 +17,7 @@
   - [Two Pointers](#two-pointers)
   - [Recursion](#recursion)
   - [Sort](#sort)
+  - [去重](#去重)
   
 - [Math](#math)
 
@@ -126,8 +127,10 @@
 ###### Easy
 
 ###### Medium
+[316. Remove Duplicate Letters](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/316.%20Remove%20Duplicate%20Letters.md)*(类单调栈)*<br/>
 [402. Remove K Digits](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/402.%20Remove%20K%20Digits.md)*(单调栈)*<br/>
 [1019. Next Greater Node In Linked List](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1019.%20Next%20Greater%20Node%20In%20Linked%20List.md)<br/>
+
 
 ###### Hard
 [42. Trapping Rain Water](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/42.%20Trapping%20Rain%20Water.md)*(单调栈)*<br/>
@@ -174,3 +177,15 @@
 [402. Remove K Digits](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/402.%20Remove%20K%20Digits.md)<br/>
 
 ###### Hard
+
+---
+
+## 去重
+###### Easy
+
+###### Medium
+[316. Remove Duplicate Letters](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/316.%20Remove%20Duplicate%20Letters.md)<br/>
+
+###### Hard
+
+---
