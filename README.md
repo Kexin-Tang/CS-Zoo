@@ -16,4 +16,4 @@
   * :sheep:[计算机网络]
   * :bird:[操作系统]
   * :chicken:[数据结构](https://github.com/Kexin-Tang/CS-Zoo/blob/main/meeting/algorithm.md)
-  * :frog:[C++]((https://github.com/Kexin-Tang/CS-Zoo/blob/main/meeting/C%2B%2B.md))
+  * :frog:[C++](https://github.com/Kexin-Tang/CS-Zoo/blob/main/meeting/C%2B%2B.md)
