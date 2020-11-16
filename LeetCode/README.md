@@ -165,6 +165,7 @@
 
 ###### Medium
 [75. Sort Colors](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/75.%20Sort%20Colors.md)<br/>
+[406. Queue Reconstruction by Height](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/406.%20Queue%20Reconstruction%20by%20Height.md)<br/>
 
 ###### Hard
 [23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)*(堆排序)*<br/>
