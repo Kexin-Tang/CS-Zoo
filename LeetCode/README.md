@@ -10,7 +10,7 @@
 
 - 算法
   - [贪心](#贪心)
-  - [动态规划]()
+  - [动态规划](#动态规划)
   - [滑动窗口]()
   - [DFS]()
   - [Binary Search](#binary-search)
@@ -53,6 +53,7 @@
 ###### Easy
 
 ###### Medium
+[96. Unique Binary Search Trees](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/96.%20Unique%20Binary%20Search%20Trees.md)<br/>
 [102. Binary Tree Level Order Traversal](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
 [1367. Linked List in Binary Tree](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
 
@@ -178,6 +179,16 @@
 ###### Medium
 [134. Gas Station](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/134.%20Gas%20Station.md)<br/>
 [402. Remove K Digits](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/402.%20Remove%20K%20Digits.md)<br/>
+
+###### Hard
+
+---
+
+## 动态规划
+###### Easy
+
+###### Medium
+[96. Unique Binary Search Trees](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/96.%20Unique%20Binary%20Search%20Trees.md)<br/>
 
 ###### Hard
 
