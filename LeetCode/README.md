@@ -42,6 +42,7 @@
 [34. Find First and Last Position of Element in Sorted Array](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/34.%20Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array.md)<br/>
 [153. Find Minimum in Rotated Sorted Array](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/153.%20Find%20Minimum%20in%20Rotated%20Sorted%20Array.md) *(pivot有序数组)*<br/>
 [162. Find Peak Element](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/162.%20Find%20Peak%20Element.md) *(二分查找总结)* <br/>
+[222. Count Complete Tree Nodes](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/222.%20Count%20Complete%20Tree%20Nodes.md)<br/>
 
 ###### Hard
 [4. Median of Two Sorted Arrays](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/4.%20Median%20of%20Two%20Sorted%20Arrays.md)<br/>
@@ -55,6 +56,7 @@
 ###### Medium
 [96. Unique Binary Search Trees](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/96.%20Unique%20Binary%20Search%20Trees.md)<br/>
 [102. Binary Tree Level Order Traversal](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
+[222. Count Complete Tree Nodes](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/222.%20Count%20Complete%20Tree%20Nodes.md)<br/>
 [1367. Linked List in Binary Tree](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
 
 ###### Hard
