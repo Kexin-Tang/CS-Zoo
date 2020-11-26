@@ -164,7 +164,7 @@
 ---
 ## Sort
 ###### Easy
-[1030. Matrix Cells in Distance Order](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1030.%20Matrix%20Cells%20in%20Distance%20Order.md)*(桶排序)*<br/>
+[1030. Matrix Cells in Distance Order](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1030.%20Matrix%20Cells%20in%20Distance%20Order.md)*(基数排序)*<br/>
 [1122. Relative Sort Array](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1122.%20Relative%20Sort%20Array.md)*(哈希排序，自定义排序，计数排序)* <br/>
 
 ###### Medium
@@ -173,6 +173,7 @@
 
 ###### Hard
 [23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)*(堆排序)*<br/>
+[164. Maximum Gap](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/164.%20Maximum%20Gap.md)*(桶排序，基数排序)*<br/>
 
 ---
 ## 贪心
