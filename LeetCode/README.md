@@ -174,6 +174,7 @@
 ###### Hard
 [23. Merge k Sorted Lists](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/23.%20Merge%20k%20Sorted%20Lists.md)*(堆排序)*<br/>
 [164. Maximum Gap](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/164.%20Maximum%20Gap.md)*(桶排序，基数排序)*<br/>
+[493. Reverse Pairs](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/493.%20Reverse%20Pairs.md)*(归并排序)*<br/>
 
 ---
 ## 贪心
