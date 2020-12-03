@@ -137,6 +137,7 @@
 
 ###### Hard
 [42. Trapping Rain Water](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/42.%20Trapping%20Rain%20Water.md)*(单调栈)*<br/>
+[321. Create Maximum Number](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/321.%20Create%20Maximum%20Number.md)*(单调栈+402综合)*<br/>
 
 ---
 
