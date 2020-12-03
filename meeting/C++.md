@@ -5,3 +5,11 @@ bool comp(int a, int b) { return a<b; }   // 在编译后会变成 bool comp(Sol
 ...
 }
 ```
+
+
+capacity Vs size
+```
+capacity返回的是容器的大小
+size返回的是元素的个数
+一般而言，capacity>=size，即水杯>=水的量
+```
