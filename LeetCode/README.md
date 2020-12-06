@@ -185,6 +185,7 @@
 [134. Gas Station](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/134.%20Gas%20Station.md)<br/>
 [402. Remove K Digits](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/402.%20Remove%20K%20Digits.md)<br/>
 [452. Minimum Number of Arrows to Burst Balloons](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/452.%20Minimum%20Number%20of%20Arrows%20to%20Burst%20Balloons.md)<br/>
+[621. Task Scheduler](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/621.%20Task%20Scheduler.md)<br/>
 [767. Reorganize String](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/767.%20Reorganize%20String.md)<br/>
 
 ###### Hard
