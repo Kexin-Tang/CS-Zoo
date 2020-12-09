@@ -119,6 +119,7 @@
 ###### Medium
 [17. Letter Combinations of a Phone Number](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/17.%20Letter%20Combinations%20of%20a%20Phone%20Number.md)<br/>
 [22. Generate Parentheses](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/22.%20Generate%20Parentheses.md)<br/>
+[842. Split Array into Fibonacci Sequence](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/842.%20Split%20Array%20into%20Fibonacci%20Sequence.md)<br/>
 [1367. Linked List in Binary Tree](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
 
 ###### Hard
