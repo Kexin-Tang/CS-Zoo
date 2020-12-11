@@ -160,6 +160,7 @@
 
 ###### Medium
 [102. Binary Tree Level Order Traversal](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
+[649. Dota2 Senate](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/649.%20Dota2%20Senate.md)<br/>
 
 ###### Hard
 
@@ -187,6 +188,7 @@
 [402. Remove K Digits](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/402.%20Remove%20K%20Digits.md)<br/>
 [452. Minimum Number of Arrows to Burst Balloons](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/452.%20Minimum%20Number%20of%20Arrows%20to%20Burst%20Balloons.md)<br/>
 [621. Task Scheduler](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/621.%20Task%20Scheduler.md)<br/>
+[649. Dota2 Senate](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/649.%20Dota2%20Senate.md)<br/>
 [659. Split Array into Consecutive Subsequences](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/659.%20Split%20Array%20into%20Consecutive%20Subsequences.md)<br/>
 [767. Reorganize String](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/767.%20Reorganize%20String.md)<br/>
 [861. Score After Flipping Matrix](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/861.%20Score%20After%20Flipping%20Matrix.md)<br/>
