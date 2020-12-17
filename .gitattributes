@@ -1,1 +1,2 @@
-Shell.md linguist-language=bash
+Shell.md linguist-language=shell
+*.md linguist-language=c++
