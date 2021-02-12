@@ -13,8 +13,8 @@
   * :elephant:[Tmux总结](https://github.com/Kexin-Tang/CS-Zoo/blob/main/tmux.md)
 * Leetcode
   * C++
-    * :dog:[leetcode刷题笔记(C++)](https://github.com/Kexin-Tang/CS_Notes/tree/main/LeetCode)
-    * :bird:[leetcode常用函数(C++)](https://github.com/Kexin-Tang/CS_Notes/blob/main/leetcode_normal_functions.md)
+    * :dog:[leetcode刷题笔记(C++)](https://github.com/Kexin-Tang/CS-Zoo/tree/master/LeetCode/cpp)
+    * :bird:[leetcode常用函数(C++)](https://github.com/Kexin-Tang/CS-Zoo/blob/master/LeetCode/leetcode_functions_cpp.md)
   * Python
     * :wolf:[leetcode刷题笔记(Python)]()
     * :horse:[leetcode常用函数(Python)]()
