@@ -34,7 +34,7 @@
 ###### Easy
 
 ###### Medium
-[189. Rotate Array](https://github.com/Kexin-Tang/CS_Notes/blob/main/LeetCode/189.%20Rotate%20Array.md) *(pivot有序数组)*<br/> 
+[189. Rotate Array](./189.%20Rotate%20Array.md) *(pivot有序数组)*<br/> 
 
 ###### Hard
 
@@ -51,10 +51,10 @@
 ###### Easy
 
 ###### Medium
-[96. Unique Binary Search Trees](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/96.%20Unique%20Binary%20Search%20Trees.md)<br/>
-[102. Binary Tree Level Order Traversal](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
-[222. Count Complete Tree Nodes](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/222.%20Count%20Complete%20Tree%20Nodes.md)<br/>
-[1367. Linked List in Binary Tree](https://github.com/Kexin-Tang/CS-Zoo/blob/main/LeetCode/1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
+[96. Unique Binary Search Trees](./96.%20Unique%20Binary%20Search%20Trees.md)<br/>
+[102. Binary Tree Level Order Traversal](./102.%20Binary%20Tree%20Level%20Order%20Traversal.md)<br/>
+[222. Count Complete Tree Nodes](./222.%20Count%20Complete%20Tree%20Nodes.md)<br/>
+[1367. Linked List in Binary Tree](./1367.%20Linked%20List%20in%20Binary%20Tree.md)<br/>
 
 ###### Hard
 
