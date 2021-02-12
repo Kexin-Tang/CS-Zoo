@@ -16,5 +16,5 @@
     * :dog:[leetcode刷题笔记(C++)](https://github.com/Kexin-Tang/CS-Zoo/tree/master/LeetCode/cpp)
     * :bird:[leetcode常用函数(C++)](https://github.com/Kexin-Tang/CS-Zoo/blob/master/LeetCode/leetcode_functions_cpp.md)
   * Python
-    * :wolf:[leetcode刷题笔记(Python)]()
-    * :horse:[leetcode常用函数(Python)]()
+    * :wolf:[leetcode刷题笔记(Python)](https://github.com/Kexin-Tang/CS-Zoo/tree/master/LeetCode/python)
+    * :horse:[leetcode常用函数(Python)](https://github.com/Kexin-Tang/CS-Zoo/blob/master/LeetCode/leetcode_functions_python.md)
