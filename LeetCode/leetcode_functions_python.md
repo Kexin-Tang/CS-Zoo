@@ -7,11 +7,19 @@ t = [[0]*n]*m   # 错误，改变一个元素会改变一整行或一整列
 
 * 翻转 -- `list.reverse()`或`list[:,:,-1]`
 
-# dict排序
+# dict
+* 排序
 ```py
 sort(dict.keys(), reverse=False)
 sort(dict.items(), key=lambda item: item[1])
 ```
+* 初始化
+```py
+# 如果key(i)不存在，则设为0，否则获取其value
+data = {}
+data.setdefault(i, 0)
+```
+
 
 # 无穷
 ```py
