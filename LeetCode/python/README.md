@@ -16,3 +16,8 @@
 
 ## 滑动窗口
 * [567. Permutation in String](./567.%20Permutation%20in%20String.md)
+
+---
+
+## 并查集
+* [765. Couples Holding Hands](./765.%20Couples%20Holding%20Hands.md)
