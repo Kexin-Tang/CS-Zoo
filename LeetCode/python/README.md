@@ -16,6 +16,7 @@
 
 ## 滑动窗口
 * [567. Permutation in String](./567.%20Permutation%20in%20String.md)
+* [995. Minimum Number of K Consecutive Bit Flips](./995.%20Minimum%20Number%20of%20K%20Consecutive%20Bit%20Flips.md)
 
 ---
 
