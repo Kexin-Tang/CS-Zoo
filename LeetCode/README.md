@@ -21,3 +21,29 @@
 
 * [442. Find All Duplicates in an Array](./python/442.%20Find%20All%20Duplicates%20in%20an%20Array.md)
 * [448. Find All Numbers Disappeared in an Array](./python/448.%20Find%20All%20Numbers%20Disappeared%20in%20an%20Array.md)
+
+## 滑动窗口
+
+一般的题目都是要求某个数组中**最大/最小**子串, 基本来说都可以用以下的代码来作为模板
+
+```py
+def function(nums){
+    n = len(nums)
+    left, right =0, 0   # 窗口左右两侧
+    cnt = 0             # 根据题目要求, 一般是记录某些控制窗口增加/缩小的条件
+    res = 0
+
+    for i in range(n):
+        if(cnt满足某某条件):
+            right += 1  # 扩大窗口
+            ...
+        else:
+            left += 1   # 缩小窗口
+            ...
+    return res
+}
+```
+
+* [567. Permutation in String](./python/567.%20Permutation%20in%20String.md)
+* [995. Minimum Number of K Consecutive Bit Flips](./python/995.%20Minimum%20Number%20of%20K%20Consecutive%20Bit%20Flips.md)
+* [1004. Max Consecutive Ones III](./python/1004.%20Max%20Consecutive%20Ones%20III.md)

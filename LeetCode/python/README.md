@@ -1,7 +1,6 @@
 ## 堆(heap)
 
 * [23. Merge k Sorted Lists](./23.%20Merge%20k%20Sorted%20Lists.md)
-
 * [703. Kth Largest Element in a Stream](./703.%20Kth%20Largest%20Element%20in%20a%20Stream.md)
 
 
@@ -23,3 +22,18 @@
 
 ## 并查集
 * [765. Couples Holding Hands](./765.%20Couples%20Holding%20Hands.md)
+
+---
+
+## 哈希
+* [697. Degree of an Array](./697.%20Degree%20of%20an%20Array.md)
+
+---
+
+## 动态规划
+* [53. Maximum Subarray](./53.%20Maximum%20Subarray.md)
+
+---
+
+## 分治
+* [53. Maximum Subarray](./53.%20Maximum%20Subarray.md)
