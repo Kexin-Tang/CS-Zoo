@@ -10,6 +10,7 @@
 * [136. Single Number](./136.%20Single%20Number.md)
 * [442. Find All Duplicates in an Array](./442.%20Find%20All%20Duplicates%20in%20an%20Array.md)
 * [448. Find All Numbers Disappeared in an Array](./448.%20Find%20All%20Numbers%20Disappeared%20in%20an%20Array.md)
+* [1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit](./1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.md)
 
 ---
 
