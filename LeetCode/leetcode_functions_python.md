@@ -1,3 +1,17 @@
+导航栏
+- [list](#list)
+- [dict](#dict)
+- [无穷](#无穷)
+- [判断类型](#判断类型)
+- [堆(heapq)模块](#堆heapq模块)
+- [collections](#collections)
+- [itertools](#itertools)
+- [bisect](#bisect)
+- [全局变量](#全局变量)
+- [ord & chr](#ord--chr)
+- [sortedContainers](#sortedcontainers)
+
+
 # list
 * 多维list初始化
 ```py
@@ -163,3 +177,52 @@ data = list(permutations('ABC',2)) # ['AB', 'AC', 'BC', 'BA', 'CA', 'CB']
 # ord & chr
 * `ord()`返回ASCII码
 * `chr()`返回ASCII符号
+
+# sortedContainers
+
+* [sortedContainers](http://www.grantjenks.com/docs/sortedcontainers/)是一个提供排序列表, 排序集合, 排序字典等数据结构的库
+* `sortedList`
+  * 创建一个有序列表
+  ```py
+  from sortedcontainers import SortedList
+  data = [3,5,1,7,2,0]
+  sl = SortedList(data)
+  print(sl)     # [0,1,2,3,5,7]
+  ```
+  * 添加元素
+    * `SortedList.add(val)`, 添加一个元素, 时间复杂度 O(logN)
+    * `SortedList.update(list)`, 将一组元素更新到原数据中, 时间复杂度 O(k * logN)
+    ```py
+    sl = SortedList([4,3,1,2])
+    sl.add(0)                   # [0,1,2,3,4]
+    sl.update([9,4,2])          # [0,1,2,2,3,4,9]
+    ```
+  * 删除元素
+    * `SortedList.remove(val)`, 删除一个元素, 如果该元素不存在则会报错, 时间复杂度 O(logN)
+    * `SortedList.discard(val)`, 删除一个元素, 如果元素不存在则忽略, 时间复杂度 O(logN)
+    * `SortedList.clear()`, 删除所有元素, 时间复杂度 O(N)
+    * `SortedList.pop(pos=-1)`, 删除指定位置的元素, 时间复杂度 O(logN)
+  * 查找元素
+    * `SortedList.bisect_right(val)`, 查找 val 应该插入的位置, 如果 val 元素已经出现过, 则查找最右侧的位置, 时间复杂度 O(logN)
+    * `SortedList.bisect_left(val)` 同上, 只不过是查找最左侧的位置
+    * `SortedList.count(val)`, 统计 val 出现的次数, 复杂度 O(logN)
+    * `SortedList.index(val[, start, stop])`, 在 [start, stop] 范围内查找指定元素的索引, 复杂度为 O(logN)
+    ```py
+    sl = SortedList([1,2,3,3,3,5,9])
+    sl.bisect_right(3)  # 5
+    sl.bisect_left(3)   # 2
+    sl.count(3)         # 3
+    sl.index(5)         # 5
+    ```
+    * 循环元素
+      * `SortedList.irange(min, max, inclusive=(True, True), reverse=False)` 将原数据在[min, max]区间内产生新的排序列表, *inclusive*表明是否需要将min, max两个端点包含进去, 而*reverse*表明是否需要逆序(从大到小)
+      ```py
+      sl = SortedList("abcdefghij")
+      sub = sl.irange('c', 'g') # ['c', 'd', 'e', 'f', 'g']
+      ```
+      * `SortedList.islice(start, stop, reverse=False)` 将数据在[start, stop) 范围内的元素取出并生成新的排序列表
+      ```py
+      sl = SortedList("abcdefghij")
+      sub = sl.islice(2, 5) # ['c', 'd', 'e']
+      ```
+* `SortedDict` 和 `SortedSet`都有着类似的操作
