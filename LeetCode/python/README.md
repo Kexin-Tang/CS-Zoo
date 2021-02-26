@@ -18,6 +18,7 @@
 * [567. Permutation in String](./567.%20Permutation%20in%20String.md)
 * [995. Minimum Number of K Consecutive Bit Flips](./995.%20Minimum%20Number%20of%20K%20Consecutive%20Bit%20Flips.md)
 * [1004. Max Consecutive Ones III](./1004.%20Max%20Consecutive%20Ones%20III.md)
+* [1052. Grumpy Bookstore Owner](./1052.%20Grumpy%20Bookstore%20Owner.md)
 
 ---
 
@@ -36,5 +37,12 @@
 
 ---
 
-## 分治
+## 分治 / 递归
 * [53. Maximum Subarray](./53.%20Maximum%20Subarray.md)
+* [78. Subsets](./78.%20Subsets.md)
+* [90. Subsets II](90.%20Subsets%20II.md)
+
+---
+
+## 压缩编码
+* [1178. Number of Valid Words for Each Puzzle](./1178.%20Number%20of%20Valid%20Words%20for%20Each%20Puzzle.md)
