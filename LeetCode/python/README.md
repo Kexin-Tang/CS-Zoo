@@ -1,48 +1,49 @@
 ## 堆(heap)
 
-* [23. Merge k Sorted Lists](./23.%20Merge%20k%20Sorted%20Lists.md)
-* [703. Kth Largest Element in a Stream](./703.%20Kth%20Largest%20Element%20in%20a%20Stream.md)
+* [23. 合并K个升序链表](./23.%20合并K个升序链表.md)
+* [703. 数据流中的第 K 大元素](./703.%20数据流中的第K大元素.md)
 
 
 ---
 
 ## 数组
-* [136. Single Number](./136.%20Single%20Number.md)
-* [442. Find All Duplicates in an Array](./442.%20Find%20All%20Duplicates%20in%20an%20Array.md)
-* [448. Find All Numbers Disappeared in an Array](./448.%20Find%20All%20Numbers%20Disappeared%20in%20an%20Array.md)
-* [1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit](./1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.md)
+* [136. 只出现一次的数字](./136.%20只出现一次的数字.md)
+* [442. 数组中重复的数据](./442.%20数组中重复的数据.md)
+* [448. 找到所有数组中消失的数字](./448.%20找到所有数组中消失的数字.md)
+* [1438. 绝对差不超过限制的最长连续子数组](./1438.%20绝对差不超过限制的最长连续子数组.md)
 
 ---
 
 ## 滑动窗口
-* [567. Permutation in String](./567.%20Permutation%20in%20String.md)
-* [995. Minimum Number of K Consecutive Bit Flips](./995.%20Minimum%20Number%20of%20K%20Consecutive%20Bit%20Flips.md)
-* [1004. Max Consecutive Ones III](./1004.%20Max%20Consecutive%20Ones%20III.md)
-* [1052. Grumpy Bookstore Owner](./1052.%20Grumpy%20Bookstore%20Owner.md)
+* [567. 字符串的排列](./567.%20字符串的排列.md)
+* [995. K 连续位的最小翻转次数](./995.%20K%20连续位的最小翻转次数.md)
+* [1004. 最大连续1的个数III](./1004.%20最大连续1的个数III.md)
+* [1052. 爱生气的书店老板](./1052.%20爱生气的书店老板.md)
 
 ---
 
 ## 并查集
-* [765. Couples Holding Hands](./765.%20Couples%20Holding%20Hands.md)
+* [765. 情侣牵手](./765.%20情侣牵手.md)
 
 ---
 
 ## 哈希
-* [697. Degree of an Array](./697.%20Degree%20of%20an%20Array.md)
+* [697. 数组的度](./697.%20数组的度.md)
 
 ---
 
 ## 动态规划
-* [53. Maximum Subarray](./53.%20Maximum%20Subarray.md)
+* [53. 最大子序和](./53.%20最大子序和.md)
 
 ---
 
 ## 分治 / 递归
-* [53. Maximum Subarray](./53.%20Maximum%20Subarray.md)
-* [78. Subsets](./78.%20Subsets.md)
-* [90. Subsets II](90.%20Subsets%20II.md)
+* [53. 最大子序和](./53.%20最大子序和.md)
+* [78. 子集](./78.%20子集.md)
+* [90. 子集II](90.%20子集II.md)
+* [395. 至少有K个重复字符的最长子串](395.%20至少有K个重复字符的最长子串.md)
 
 ---
 
 ## 压缩编码
-* [1178. Number of Valid Words for Each Puzzle](./1178.%20Number%20of%20Valid%20Words%20for%20Each%20Puzzle.md)
+* [1178. 猜字谜](./1178.%20猜字谜.md)
