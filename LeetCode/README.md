@@ -4,8 +4,8 @@
 ## 堆
 
 一般而言，堆算法都可以用来解决 <**TOP-K**> 问题，比如说如下题目:
-* [23. Merge k Sorted Lists](./python/23.%20Merge%20k%20Sorted%20Lists.md)
-* [703. Kth Largest Element in a Stream](./python/703.%20Kth%20Largest%20Element%20in%20a%20Stream.md)
+* [23. 合并K个升序链表](./python/23.%20合并K个升序链表.md)
+* [703. 数据流中的第K大元素](./python/703.%20数据流中的第K大元素.md)
 
 ---
 
@@ -19,8 +19,10 @@
 > 
 > 对应关系为 nums[i]的正负值可表示 值为i + 1是否出现，若出现则将其变为加上负号，即 nums[i] *= -1,默认为正整数即未出现
 
-* [442. Find All Duplicates in an Array](./python/442.%20Find%20All%20Duplicates%20in%20an%20Array.md)
-* [448. Find All Numbers Disappeared in an Array](./python/448.%20Find%20All%20Numbers%20Disappeared%20in%20an%20Array.md)
+* [442. 数组中重复的数据](./python/442.%20数组中重复的数据.md)
+* [448. 找到所有数组中消失的数字](./python/448.%20找到所有数组中消失的数字.md)
+
+---
 
 ## 滑动窗口
 
@@ -44,6 +46,42 @@ def function(nums){
 }
 ```
 
-* [567. Permutation in String](./python/567.%20Permutation%20in%20String.md)
-* [995. Minimum Number of K Consecutive Bit Flips](./python/995.%20Minimum%20Number%20of%20K%20Consecutive%20Bit%20Flips.md)
-* [1004. Max Consecutive Ones III](./python/1004.%20Max%20Consecutive%20Ones%20III.md)
+* [567. 字符串的排列](./python/567.%20字符串的排列.md)
+* [995. K 连续位的最小翻转次数](./python/995.%20K%20连续位的最小翻转次数.md)
+* [1004. 最大连续1的个数III](./python/1004.%20最大连续1的个数III.md)
+
+---
+
+## 最大递增子序列(LIS)
+
+针对 *LIS* 的题目, 都需要使用 **动态规划** 的方法. 常规的动态规划时间复杂度为O(N<sup>2</sup>), 使用二分查找的动态规划, 时间复杂度为O(N logN).
+
+1. **动态规划的核心设计思想是数学归纳法**.
+
+> 数学归纳法: 先假设结论在 `k<n` 时成立，然后根据这个假设，想办法推导证明出 `k=n` 的时候此结论也成立.
+
+我们可以假设 `dp[0...i-1]` 都已经被算出来了，问题就简化为: 怎么通过这些结果算出 `dp[i]`？ 
+> (`dp[i]` 表示以 `nums[i]` 这个数结尾的最长递增子序列的长度)
+
+2. **二分查找的核心设计思想是一种扑克牌游戏**.
+
+首先，给你一排扑克牌，我们像遍历数组那样从左到右一张一张处理这些扑克牌，最终要把这些牌分成若干堆。
+
+只能把点数小的牌压到点数比它大的牌上；如果当前牌点数较大没有可以放置的堆，则新建一个堆，把这张牌放进去；如果当前牌有多个堆可供选择，则选择最左边的那一堆放置。
+
+<img src="https://pic.leetcode-cn.com/8fa6beb86e462be7ee37e97ed1e5ac4980210a31e2fa43f39b0beea3e14609ef.jpeg">
+
+牌的堆数就是最长递增子序列的长度(如上图则为5).
+
+* [300. 最长递增子序列](./python/300.%20最长递增子序列.md)
+* [354. 俄罗斯套娃信封问题](./python/354.%20俄罗斯套娃信封问题.md)
+
+---
+
+## 双排序
+
+双排序问题就是一种牵涉到两个维度的排序问题, 一般情形如 `[left, right]` 或 `[width, height]` 等.
+
+针对这种问题, 一般对**某一个维度进行正序排列, 对另一个维度进行逆序排列**. 通过这样处理后, 一般可以忽略某个维度, 只对另一个维度进行考虑, 而另一个维度通常涉及到 **动态规划** 或 **滑动窗口**.
+
+* [354. 俄罗斯套娃信封问题](./python/354.%20俄罗斯套娃信封问题.md)
