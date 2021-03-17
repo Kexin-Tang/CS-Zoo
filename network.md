@@ -98,6 +98,10 @@
    6. 关闭TCP连接
    7. 浏览器对收到的数据进行渲染
 
+**10. HTTP 1.0 Vs 1.1 Vs 2.0**
+* 在HTTP1.1中规定，一个TCP连接中可以传输多个HTTP请求，这是1.1的新特性
+* 在HTTP2.0中规定，一个TCP连接中可以将多个HTTP请求合在一起发送/接收，这是2.0的新特性
+
 ---
 
 ## Cookie &amp; Session
@@ -119,13 +123,15 @@
 * Cookie在客户端，Session在服务器端
 * Cookie只能存储较少的ASCII数据，Session可以存任意数据。
 * Cookie有效期比较⻓，在浏览器中一般⻓期保存。Session有效期比较短，在用户会话结束之后立刻失效。
-* Cookie的安全性比较差，因为存放在用户端。
+* Cookie的安全性比较差，因此存放在用户端。
 
 ---
 
 ## DNS
 
-DNS是用来将 URL &rarr; IP Address
+* DNS是用来将 URL &rarr; IP Address
+* 使用UDP协议实现
+* 先对本机DNS服务器查询，如果不在本机DNS服务器中，则分级查询，比如对于`www.hust.edu/eic`，根域名 &rarr; edu域名 &rarr; hust.edu域名 &rarr; eic域名。
 
 ---
 
