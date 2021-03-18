@@ -162,7 +162,9 @@ div{
 
 *alt* 是图片加载不出来时代替的文本；*title* 是鼠标悬浮图片上时的提示
 
-**15. 
+**15. margin塌陷**
+* 垂直之间塌陷的原则是以两盒子最大的外边距为准，如上面的div margin-bottom为50px，下面的div margin-top为40px，则两者之间的margin是50px而非90px
+* 嵌套时为内部元素添加margin-top，内外部元素都会向下移动
 
 ---
 
@@ -170,7 +172,378 @@ div{
 
 ### 基础知识
 
+**1. 普通函数 Vs 箭头函数**
+1. 箭头函数是匿名函数，普通函数是匿名或者具名函数
+2. *this* 指向不同，普通函数中 *this* 指向调用的对象；而箭头函数指向箭头函数定义时所处的对象，而不是箭头函数使用时所在的对象，默认使用父级的 *this*
+3. 普通函数有 *arguments*，存储了传入的对象；箭头函数没有 *arguments*
+4. 箭头函数不能使用 *new*，即不能作为构造函数
+> argument和this这两个是有特殊性的
+
+**2. == &amp; ===**
+* == 是先进行类型转换，再进行判断，只会判断值，不会判断类型
+* === 不进行类型转换，会判断值和类型
+
+**3. 变量提升**
+
+JS会自动把用`var`定义的变量声明提前(但是不会提升变量赋值, 如果一个变量先使用再赋值, 那么提升时赋值为`undefined`)
+```js
+// 下面文件执行时, 输出结果为 undefined, 10, 99
+var a = 99
+f()
+console.log(a)  // 会在f()执行完成后执行, 打印全局变量99
+function f(){
+  console.log(a)  // 会将局部变量a的声明提前, 此时a=undefined
+  var a = 10
+  console.log(a)  // 打印局部变量a=10
+}
+```
+
+**4. 防止自动提交和Bubble**
+
+使用`e.preventDefault()`和`e.stopPropagation()`
+
+**5. 原型 &amp; 原型链**
+
+原型：每个对象都会在其内部初始化一个属性，就是 *prototype*，原型中的属性和方法是可以被所有对象使用的，他们保存在一个单独的空间中，不会因为创建新的对象而保存到不同的地方。
+
+原型链：利用原型让一个引用类型继承另一个引用类型的属性和方法。如 *Student* &rarr; *Person* &rarr; *Object*。
+
+**6. 类的定义**
+1. 给每个不同的对象创建不同的空间，即定义的内容不是存储在`__proto__`中供所有对象使用的
+```js
+function U(a, b){
+    const u = {};
+    u.a = a;
+    u.b = b;
+    u.add = (a, b) => a+b;
+    return u;
+}
+const u = U(1, 2);
+u.add();    // 3
+```
+
+2. 分开定义属性和方法
+```js
+function U(a, b) {
+    this.a = a;
+    this.b = b;
+};
+U.prototype.add = function() {
+    return this.a + this.b;
+};
+const u = U(1, 2);
+u.add();    // 3
+```
+
+3. 使用`constructor`
+```js
+class U{
+    constructor(a, b){
+        this.a = a;
+        this.b = b;
+    };
+    add: () => this.a + this.b;
+};
+const u = new U(1, 2);
+u.add();    // 3
+```
+
+**7. let &amp; var**
+
+*let* 必须定义后才能使用，且不能重复定义，同时具有块作用域；
+```js
+for (var i = 0; i <10; i++) {  
+  setTimeout(function() {  // 同步注册回调函数到 异步的 宏任务队列。
+    console.log(i);        // 执行此代码时，同步代码for循环已经执行完成
+  }, 0);
+}
+// 输出结果
+// 10   共10个
+
+for (let i = 0; i < 10; i++) { 
+  setTimeout(function() {
+    console.log(i);    //  i 是循环体内局部作用域，不受外界影响。
+  }, 0);
+}
+// 输出结果：
+// 0  1  2  3  4  5  6  7  8 9
+```
+
+**8. null &amp; undefined**
+
+*null* 是代表没有定义，即不存在，*undefined* 是代表无初始值。
+
+**9. 柯里化**
+
+把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。
+```js
+function func1(x){
+    return function (y){
+        return x + y;
+    }
+};
+a = func1(1);
+b = a(2);   // 3
+```
+优点：(1)参数复用；(2)延迟运行，即先运行需要第一个参数的内容，然后再返回一个可以执行其他参数的函数；(3)预先判断，根据第一个参数，返回不同的函数去处理后面的参数。
+
+**10. JS数据类型**
+* 基本数据类型：Number, String, undefined, null, Object, Symbol, Boolean
+* 引用数据类型：Array, Object, Map, Set
+
+**11. 立即执行函数**
+
+1. 定义与执行方法如下
+```js
+// method 1
+(function(){
+    ...
+}());
+// method 2
+(function(){
+    ...
+})()
+```
+2. 立即执行函数只有一个作用：创建一个独立的作用域。这个作用域里面的变量，外面访问不到。
+```js
+// 相当于使用在for中用let代替var
+var liList = ul.getElementsByTagName('li')
+for(var i=0; i<6; i++){
+  (function(j){
+    liList[j].onclick = function(){
+      alert(j) // 0、1、2、3、4、5
+    }
+  })(i)
+}
+```
+3. 立即执行函数只是函数的一种调用方式，只是声明完之后立即执行，这类函数一般都只是调用一次，调用完之后会立即销毁，不会占用内存。
+4. 闭包则主要是让外部函数可以访问内部函数的作用域，也减少了全局变量的使用，保证了内部变量的安全，但因被引用的内部变量不能被销毁，增大了内存消耗，使用不当易造成内存泄露。
+
+**12. 闭包**
+
+闭包就是用函数访问某些函数内部保护的私密数据。
+* 优点：封装；减少全局变量
+* 缺点：内存泄漏
+> 怎么解决内存泄漏？ &rarr; 将不需要使用的赋值为null即可
+```js
+function a(){
+     var i=0;
+     function b(){
+         i++;
+         alert(i);
+     }
+     return b;
+}
+// 因为i会被保存在内存中，所以可以被不断的访问
+var c = a();
+c();// 1
+c();// 2
+c();// 3
+```
+
+**13. 实现`setTimeout`与`setInterval`**
+* `setTimeInterval`
+```js
+// 利用嵌套调用
+function myInterval(fn, interval){
+    let t = null;
+    return {
+        start: function(){
+            t = setTimeout(()=>{
+                fn();
+                this.start();
+            }, interval);
+        },
+        end: function(){
+            clearTimeout(t);
+            t = null;
+        }
+    }
+}
+```
+
+**14. `call()`, `apply()`与`bind()`**
+
+这些函数都是用来改变程序的上下文，即改变 *this* 的指向。
+
+1. 如果使用 *apply* 或 *call* 方法，那么 *this* 指向他们的第一个参数，*apply* 的第二个参数是一个参数数组，*call* 的第二个及其以后的参数都是数组里面的元素。
+```js
+const obj1 = {
+    name: "tom",
+    func: function() {
+        console.log(this.name);
+    }
+};
+const obj2 = {
+    name: "jerry"
+};
+obj1.func.apply(obj2);  // jerry
+obj1.func.call(obj2);   // jerry
+```
+2. *bind* 与他们相似，但是<u>并不会立即执行</u>，而是进行绑定后等待调用。同时，如果多次对绑定不同的函数，只会对首次绑定的生效。(传参方式同 *call*)
+```js
+let max0 = Math.max.bind(Math, 1, 20, 9, 7);    // 此时并无输出
+max0(); // 20
+```
+
+**15. 手写bind**
+* 简单版本，不能支持 *new*
+```js
+Function.prototype.myBind = function(myThis, ...args1){
+    const fn = this;    // fn即为调用该函数的对象，如fn.myBind()
+    return function(...args2){
+        return fn.apply(myThis, [...args1, ...args2]);
+    }
+}
+```
+* 高级版本，支持 *new*
+```js
+Function.prototype.myBind = function(myArgs){
+    const slice = Array.prototype.slice;
+    const args1 = slice.call(arguments, 1);    // 除了第一个代表函数的参数外的其他参数
+    const fn = this;
+    if(typeof fn !== 'function'){
+        throw new Error("Must pass a function");
+    }
+    function temp(){
+        const args2 = slice.call(arguments, 0);
+        return fn.apply(temp.prototype.isPrototypeOf(this)? this: myArgs
+        , args1.concat(args2));
+    }
+    temp.prototype = fn.prototype;
+
+    return temp;
+}
+```
+
+**16. new的过程**
+```js
+// new fn(args)
+const temp = {}
+temp.__proto__ = fn.prototype
+fn.apply(temp, [...args]) // fn.call(temp, ...args)
+return temp
+```
+
+**17. ES6**
+
+ES6新加特性，典型的如下：
+   1. 加入 *let*, *const*
+   2. 加入了 *Promise*
+   3. 加入了 *async/await*
+   4. 增加了反引号(`)
+   5. 增加了 `for ... of ...`
+   6. 增加了 *class*
+   7. 增加了 *Symbol*
+
+**18. Promise**
+
+*Promise* 的构造函数是同步的，但是 *then* 和 *catch* 是异步的。
+
+*Promise* 有三种情形：*Pending*, *Resolved*, *Rejected*。
+
+*Promise* 中的 *rejected* 是 *Promise* 的方法，而 *catch* 是实例对象的方法。同时，*rejected* 用于抛出异常，*catch* 用于捕获异常。
+
+
+
+
 ### 看代码说结果
+
+**题目一**
+```js
+var A=function(){}
+
+A.prototype.n=1
+
+var b=new A()
+
+A.prototype={
+     n:2,
+     m:3
+}
+
+var c=new A()
+
+console.log(b.n,b.m,c.n,c.m)    // 1, undefined, 2, 3
+```
+b在继承A的时候，n=1，m不存在；c在继承A的时候，n=2，m=3。
+
+**题目二**
+```js
+var F=function(){};
+
+Object.prototype.a=function(){
+     console.log('a()')
+};
+
+Function.prototype.b=function(){
+     console.log('b()')
+}
+
+var f=new F();
+
+f.a()// a()
+f.b()// 找不到函数
+F.a()// a()
+F.b()// b()
+```
+
+**题目三**
+```js
+var length = 10;
+ 
+function fn() {
+    return this.length + 1;
+}
+ 
+var obj = {
+    length: 5,
+    test1: function () {
+        return fn();
+    }
+};
+ 
+obj.test2 = fn;
+ 
+console.log(obj.test1())    // 11，相当于直接调用fn
+console.log(obj.test2())    // 6，相当于在obj中定义了一个返回length+1的函数
+```
+该题目中相当于定义
+```js
+var obj = {
+    length: 5,
+    test1: function() {
+        return fn();
+    },
+    test2: function() {
+        return this.length + 1;
+    }
+}
+```
+
+**题目四**
+```js
+console.log('event start')
+setTimeout(function () {
+    console.log('setTimeout');
+});
+
+new Promise(function(resolve,reject){
+    console.log('promise start')
+    resolve()
+}).then(function(){
+    console.log('promise end')
+})
+console.log('event end')
+// event start
+// promise start
+// promise end
+// event end
+// setTimeout
+```
+该问题涉及到宏任务(macro-task)和微任务(micro-task)的概念。宏任务包括`setTimeout`和`setInterval`，微任务包括`Promise`。<u>当前执行栈执行完毕时会立刻先处理所有微任务队列中的事件，然后再去宏任务队列中取出一个事件。同一次事件循环中，微任务永远在宏任务之前执行。</u>
+
+**题目五**
 
 ### 编程题
 1. 使用下列语句，实现首先输出hello，3s后输出world,再间隔3s,再输出; `u.console("hello").settimeout(3000).console("world").settimeout(3000).console('!')` 
@@ -193,6 +566,12 @@ function U(){
 
 const u = new U();
 u.console("hello").settimeout(3000).console('world').settimeout(3000).console('!');
+```
+
+2. 使用 *Set* 去重
+```js
+let nums = [1,1,2,3,2];
+let sets = [... new Set(nums)];
 ```
 
 ---
