@@ -18,6 +18,12 @@ HTML是 *Hyper Text Markup Language*，即超文本标记语言。
 
 Cookie既可以从服务端也可以从客户端访问数据，每次发出请求时都会发送Cookie的数据。具有一定的时效性，过期了就被删除了。
 
+**4. Attribute &amp; Property**
+```html
+<input id="the-input" type="typo" value="Name:" />
+```
+在上述例子中，`input.getAttribute('type')`输出为`typo`，`input.type`输出为`text`，即 *Property* 相当于人固有的部件，耳朵眼睛鼻子等；*Attribute* 相当于人附加的部件，如名字外号学历等。*Attribute* 的输出就是DOM中写入的内容，而*Property*可能与看见的不同，且都是在固定的范围内取，比如`type`只能为 *text*, *checkbox*等。
+
 ---
 
 ## CSS
@@ -444,7 +450,9 @@ ES6新加特性，典型的如下：
 
 *Promise* 中的 *rejected* 是 *Promise* 的方法，而 *catch* 是实例对象的方法。同时，*rejected* 用于抛出异常，*catch* 用于捕获异常。
 
+**19. 事件传播**
 
+在捕获过程中，由外到内，查找具体是哪个部件有事；响应是由内到外，被称为冒泡，不断的扩散。可以使用`e.stopPropagation`来终止冒泡。
 
 
 ### 看代码说结果
@@ -544,6 +552,10 @@ console.log('event end')
 该问题涉及到宏任务(macro-task)和微任务(micro-task)的概念。宏任务包括`setTimeout`和`setInterval`，微任务包括`Promise`。<u>当前执行栈执行完毕时会立刻先处理所有微任务队列中的事件，然后再去宏任务队列中取出一个事件。同一次事件循环中，微任务永远在宏任务之前执行。</u>
 
 **题目五**
+```js
+console.log(0.1 + 0.2 == 0.3);  // false
+```
+因为无法精确表示小数0.1，0.2等，所以会有舍入误差，比如0.1+0.2=0.3000004，所以上述式子不等。
 
 ### 编程题
 1. 使用下列语句，实现首先输出hello，3s后输出world,再间隔3s,再输出; `u.console("hello").settimeout(3000).console("world").settimeout(3000).console('!')` 
