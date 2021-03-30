@@ -10,6 +10,7 @@
   * :tropical_fish:[JavaScript](https://github.com/Kexin-Tang/JavaScript-cookbook)
   * :tiger:[计算机网络](https://github.com/Kexin-Tang/CS_Notes/blob/main/network.md)
   * :koala:[操作系统](https://github.com/Kexin-Tang/CS_Notes/blob/main/OS.md)
+  * :dolphin:[MySQL数据库](https://github.com/Kexin-Tang/MySQL-cookbook)
   * :pig:[Shell语法](https://github.com/Kexin-Tang/CS-Zoo/blob/main/Shell.md)
   * :elephant:[Tmux总结](https://github.com/Kexin-Tang/CS-Zoo/blob/main/tmux.md)
   * :penguin:[前端](https://github.com/Kexin-Tang/CS-Zoo/blob/master/Front-end.md)
