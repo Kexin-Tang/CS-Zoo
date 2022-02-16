@@ -6,10 +6,12 @@
 
 ---
 
-* 计算机基础知识
-  * :cat:[C++](https://github.com/Kexin-Tang/cppPrimerPlus-cookbook)
-  * :snake:[Python](https://github.com/Kexin-Tang/Python-cookbook)
+* 编程语言
+  * 🐟[Rust](https://github.com/Kexin-Tang/CS_Notes/blob/main/Rust-cookbook.md)
+  * 🐱[C++](https://github.com/Kexin-Tang/cppPrimerPlus-cookbook)
+  * 🐍[Python](https://github.com/Kexin-Tang/Python-cookbook)
   * :tropical_fish:[JavaScript](https://github.com/Kexin-Tang/JavaScript-cookbook)
+* 计算机基础知识 
   * :tiger:[计算机网络](https://github.com/Kexin-Tang/CS_Notes/blob/main/network.md)
   * :koala:[操作系统](https://github.com/Kexin-Tang/CS_Notes/blob/main/OS.md)
   * :dolphin:[MySQL数据库](https://github.com/Kexin-Tang/MySQL-cookbook)
