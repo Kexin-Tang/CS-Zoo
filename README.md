@@ -2,8 +2,6 @@
 
 本项目主要记录本人在学习计算机相关课程时总结的知识点，便于日后复习、找工刷题使用，如果有错误，敬请谅解，并劳烦及时提醒:)
 
-一些杂碎的知识点，可以进入[米奇妙♂妙屋](http://kexintang.xyz/)来看看。
-
 ---
 
 * 编程语言
@@ -11,6 +9,7 @@
   * 🐱[C++](https://github.com/Kexin-Tang/cppPrimerPlus-cookbook)
   * 🐍[Python](https://github.com/Kexin-Tang/Python-cookbook)
   * :tropical_fish:[JavaScript](https://github.com/Kexin-Tang/JavaScript-cookbook)
+  * [Effective C++](https://github.com/Kexin-Tang/CS-Zoo/blob/master/effective_cpp.md)
 * 计算机基础知识 
   * :tiger:[计算机网络](https://github.com/Kexin-Tang/CS_Notes/blob/main/network.md)
   * :koala:[操作系统](https://github.com/Kexin-Tang/CS_Notes/blob/main/OS.md)
