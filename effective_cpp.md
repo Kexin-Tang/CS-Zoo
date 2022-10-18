@@ -305,24 +305,91 @@ Derive& Derive::operator=(const Derive& rhs) {
 }
 ```
 
-## 禁止copy
+---
 
-“如果子类不定义构造函数, 那么默认构造函数会尝试调用父类的对应构造函数”, 于是我们可以创建一个父类, 其中copy相关的函数放入private中并且不做任何实现. 那么对于其他类, 如果不想支持copy, **只需要继承这个父类, 并且不实现任何copy相关函数**以保证会使用默认的.
+# 不要在class内定义复杂函数(实现复杂函数)
+
+class中定义的内容默认为inline, 对于复杂函数, inline会降低效率. 所以复杂函数可以在class中声明, 在外部定义.
+
+```cpp
+class Object {
+public:
+    // 对于构造函数, 析构函数, __str__, getter / setter可以在类内定义(默认为inline)
+    Object() =default;
+    Object(const Object& rhs) { num = rhs.num; }
+    void complex_function();    // 复杂函数只声明
+private:
+    int num;
+};
+
+void Object::complex_function() {   // 在外面定义, 避免生成inline
+    ...
+}
+```
+
+## inline
+
+* inline只对函数定义有效, 函数声明不需要加inline
+* inline推荐使用在非常简易的函数上, 相当于把函数调用替换成函数体
+  ```cpp
+  inline void print(int num) { cout << num << endl; }
+  void function() {
+    print(10);  //  cout << 10 << endl;
+    print(20);  //  cout << 20 << endl;
+  }
+  ```
+* inline只是一个推荐, 编译器是否做优化是不一定的
+  > 如果inline函数包含loop, recursion, static, switch等复杂内容, 编译器不会把其优化成inline
+
+## 为什么需要inline?
+函数的调用会涉及到从内存指定位置load到栈中, 执行然后弹出栈. 这些过程需要耗费额外的时间. 为了避免一些很简单的小函数频繁的入栈出栈, 我们使用inline去优化.
+
+## 为什么不能滥用inline?
+inline的优化是通过占用额外的空间实现的, 比如说有一个function, 如果不是inline的, 我们只需要存储一份定义即可, 但是如果是inline的, 我们需要将每个调用这个函数的地方都替换成函数定义, 会增加很多额外的空间.
+
+如果inline函数很复杂, 其内部执行时间 > 入栈出栈的切换时间, 那么没有必要损耗额外的空间.
+
+## inline vs #define
+`#define`是预编译阶段直接用文本替换, inline是在编译的时候将函数体插在调用的地方.
+
+---
+
+# default函数 & delete函数
+
+C++ 11新特性
+
+## =default
+
+只能用于没有参数的类特殊函数, 比如默认构造函数以及析构函数, 编译器将为显式声明的 "=default"函数自动生成函数体以获得更好的效率.
+
+```cpp
+class Object {
+public:
+    Object() = default;
+    ...
+    ~Object() = default;
+}
+```
+
+## =delete
+
+* 禁用类的某些转换构造函数, 从而避免不期望的类型转换
+* 禁用copy相关
+* 禁用某些用户自定义的类的 new 操作符
 
 ```cpp
 class Uncopy {
 public:
     ...
-private:
-    Uncopy(const Uncopy& rhs);              // 只声明不定义 
-    Uncopy& operator=(const Uncopy& rhs);
-}
-
-class Object: private Uncopy {
-public:
-    ...         // 正常定义其他函数, 不要定义copy assignment & copy constructor
-private:
-    ...
+    // 不允许从int强制转换, 但是double可以
+    Object(int) = delete;
+    Object(double);
+    // 禁止拷贝
+    Object(const Object&) = delete;
+    Object& operator=(const Object&) = delete;
+    // 禁止new
+    void* operator new(size_t) = delete;
+    void* operator new[](size_t) = delete;
 }
 ```
 
@@ -348,6 +415,14 @@ private:
 # override vs overload
 
 override是子类继承父类的virtual函数, overload是同名但函数签名不同.
+
+---
+
+# 按值传递 vs 按引用传递
+
+如果按值传递, 那么会调用copy constructor, 效率低, 所以对于用户自定义的class以及STL容器, 一般使用按引用传递.
+
+但是对于**内置类型**(int, double, bool等), **函数对象**, **指针**以及**STL::iterator**, 一般推荐按值传递.
 
 ---
 
@@ -476,6 +551,9 @@ int main() {
 unique_ptr<int> p(new int[10]); // bad
 unique_ptr<vector<int>> p(new vector<int>);
 ```
+
+---
+
 
 ---
 
