@@ -554,12 +554,150 @@ unique_ptr<vector<int>> p(new vector<int>);
 
 ---
 
+# 注意member函数在二元运算符中的顺序
+
+假设Object类允许做隐式类型转换, 且重载了operator*.
+
+```cpp
+class Object {
+public:
+    ...
+    Object(int num) : _num(num) {}
+    ...
+    Object& operator*(const Object& rhs) {_num *= rhs._num;}
+private:
+    int _num;
+}
+```
+
+当执行的时候会发生下面的情况:
+
+```cpp
+int num = 10;
+Object obj(10);
+
+obj * num;  // ok, 相当于 obj.operator*(Object(num))
+num * obj;  // error, 2.operator*(obj), 但是int的operator*并不支持参数是Object
+```
+
+解决的方法有两种:
+1. 加explicit彻底不允许隐式类型转换(但是很多时候这种简单的类型转换用于计算是ok的)
+2. 额外定义一个non-member函数`const Object operator*(const Object& lhs, const Object& rhs)`
 
 ---
 
-# constexpr
+# 偏特化 & 全特化 (specialization)
 
-<s>常量表达式和非常量表达式的计算时机不同，非常量表达式只能在程序运行阶段计算出结果；而常量表达式的计算往往发生在程序的编译阶段，这可以极大提高程序的执行效率，因为表达式只需要在编译阶段计算一次，节省了每次程序运行时都需要计算一次的时间。
+**类模版可以全特化&偏特化, 函数模版只能全特化**.
 
-`constexpr`关键字的功能是使指定的常量表达式获得在程序编译阶段计算出结果的能力，而不必等到程序运行阶段。
-> 注：获得编译阶段得出结果的能力不代表一定在编译期间被执行</s>
+## 全特化
+
+全特化的模板参数列表应当是空的`template<>`, 并且应当给出"模板实参"列表`class Object<type>` or `function<type>()`
+
+```cpp
+template<>
+class Object<int> {
+    ...
+}
+
+template<>
+void function<int> () {
+    ...
+}
+```
+
+## 偏特化
+
+偏特化也是为了给自定义一个参数集合的模板，但偏特化后的模板需要进一步的实例化才能形成确定的签名.
+
+```cpp
+template<typename T>
+class Object<T> {
+    ...
+}
+
+// error
+template<typename T>
+void function(T a, T b) {
+
+}
+```
+
+实际上函数只需要通过重载即可实现偏特化.
+
+```cpp
+void function(int, int);
+void function(double, double);
+```
+
+但是也有例外, 就是std中的函数不允许重载, 比如说`std::swap`. 其实现非常直接, 就是利用一个temp变量实现交换. 但是对于用户自定义类型, 有时候不需要copy, 只需要交换指针即可, 那么用户需要自定义swap.
+
+假设我们的class是模版类, 因为成员是private, 所以肯定需要在class中定义一个`Object<T>::swap`函数. 为了让用户能够仍然保持使用`swap(var1, var2)`的格式, 我们需要定义一个non-member的`swap(Object<T>, Object<T>)`函数, 但是我们又不能偏特化, 所以只能重载, 但是又不能在std重载, 我们只能通过namespace来实现.
+
+```cpp
+namespace MySpace{
+    template<typename T>
+    class ObjectImpl {
+        ...
+    };
+
+    template<typename T>
+    class Object {
+    public:
+        ...
+        void swap(const Object<T>& rhs) {
+            using std::swap;        // 为何使用这个? 看下面的分析
+            swap(ptr, rhs.ptr);
+        }
+    private:
+        ObjectImpl<T>* ptr;
+    };
+
+    // ok, 没有偏特化, 又是在非std上重载
+    template<>
+    void swap(const Object<T>& a, const Object<T>& b) {
+        a.swap(b);
+    }
+}
+```
+
+> 为何使用`using std::swap`? 因为这样的话, 我们交换ptr的swap函数就能够根据传入的参数动态选择最合适的, 如果是内置类型, 那么调用`std::swap`, 如果是非内置类型, 那么调用`MySpace::swap`.
+> 
+> 如果我们直接使用`std::swap` / `MySpace::swap`会丧失编译器帮我们适配的机会, 容易造成问题.
+
+---
+
+# 转型(cast)
+
+## `const_cast<T>`
+
+ 用来修改变量的const属性.
+
+## `reinterpret_cast<T>`
+
+较少使用, 本质是编译器的指令, 用于位的简单重新解释, 可以进行完全不相关的内容之间的转换.
+
+```cpp
+char* p = "hello world";                // 假设这个string的地址是0x00000011
+int num = reinterpret_cast<int> (p);    // 把0x00000011用int表示成3
+```
+
+## `dynamic_cast<T>`
+
+* 只能用于指针或者引用
+* 只能用于含有虚函数的类, 即只能作用于子类父类转换
+* dynamic_cast转换操作符在执行类型转换时首先将检查能否成功转换，如果能成功转换则转换之，如果转换失败，如果是指针则返回一个0值，如果是转换的是引用，则抛出一个bad_cast异常。
+
+## `static_cast<T>`
+
+1. 父类子类转换
+   1. 向上转换 &rarr; 派生类转为基类是安全的
+   2. 向下转换 &rarr; 基类转为派生类是不安全的
+2. 基本数据类型转换 & 指针类型转换
+3. 任何类型表达式转为void
+
+---
+
+# 悬垂指针(dangling pointer)
+
+ 如果返回的是handler(即pointer, reference, iterator)等, 然后这个handler指向某个类型的内部, 那么有可能出现对象被销毁, 但是该返回值仍然存在.
