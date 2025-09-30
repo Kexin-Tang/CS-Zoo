@@ -10,7 +10,7 @@
   * RDB snapshot &rarr; 内存数据二进制格式写进磁盘
   * AOF(append-only file) &rarr; 追加指令
 * 常见用法
-  * pub/sub 消息队列
+  * 消息队列
   * 分布式缓存
   * 集群
   * 哨兵机制

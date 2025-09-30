@@ -9,29 +9,6 @@ free => 3
 ```
 `len`标记内容长度, `free`标记可使用的剩余空间, `buffer`是预先分配的内存空间.
 
-## 特点
-1. O(1)获得长度信息
-2. 避免溢出 &rarr; 1MB以下double扩容, 1mb以上每次扩容1MB
-3. 二进制安全(Binary Safe) &rarr; 以数组长度而不是`\0`决定终止位置, 可以存储更复杂的内容
-4. 惰性空间回收(Lazy Space Reclamation) &rarr; string变短时不会马上回收已分配空间, 而是跟踪free的区域以便于后续再次扩容
-
-## 高级知识
-
-字符串可以保存三种类型: int, embstr和raw.
-
-如果是int, 那么会直接把该值放到redisObject的`ptr`属性中.
-![encoding=int](./pic/2_1.png)
-
-如果是较短的字符串, 那么redisObject和SDS将会通过一次内存分配函数来分配一块连续的内存空间.
-![encoding=embstr](./pic/2_2.png)
-
-如果是较长的字符串, 那么redisObject和SDS将会通过两次内存分配.
-![encoding=raw](./pic/2_3.png)
-
-其优缺点如下:
-1. embstr可以减少分配和回收的次数, 同时因为是连续内存空间所以效率更高.
-2. 因为其连续内存空间, 所以实际上可以认为是**只读**字符串, 当需要扩容时需要变成raw再操作.
-
 ## 应用场景
 
 ### 计数器
@@ -51,19 +28,58 @@ free => 3
 
 用于存储Object, 本身其value就是一个新的key-value pair.
 
+当元素个数较小且元素本身不大的时候, 使用ZipList存储; 否则使用HashTable存储. 这两个数据结构将会在下一篇详细介绍.
 
+## 应用场景
+
+当我们想要保存一个对象的时候, 我们有多种方法
+1. 使用String, 其key为单独的属性
+2. 使用String, 其value为序列化字符串
+3. 使用Hash
+
+```
+# method1
+SET user:1:name tom
+SET user:1:age 18
+
+# method2
+SET user:1 "{name: tom, age: 18}"
+
+# method3
+HMSET user:1 name tom age 18
+```
+方法一的key过多, 内存效率低, 且key之间没有关联性.
+方法二适合只读内容, 不然每次更新都需要序列化/反序列化.
+方法三最直观, 但是底层数据结构可能耗费更多内存, 并且存在切换底层数据结构的损耗.
 
 ---
 
 # List
 
+支持双向插入删除, 底层是双向链表(Double LinkedList)或者压缩列表(ZipList). 最新版本下使用QuickList代替这两种数据结构.
+
+和Hash类似, 当数据量小的时候使用ZipList, 否则是Double LinkedList.
+
+## 应用场景
+
+### 消息队列
+消息队列需要保证三大特性:
+1. 消息有序 &rarr; 一端插入一端弹出
+2. 处理重复消息 &rarr; 生产者本身需要包含全局消息ID, 消费者需要记录已处理的消息ID
+3. 消息可靠性 &rarr; `BRPOPLPUSH`会让消费者拿取消息后不会立即删除消息, 而是转存到一个备份List以供重新读取
+
+但是问题也非常明显, List的消息每个只能弹出一次, 无法满足多个消费者的情况.
+
+
 ---
 
 # Set
+类似Python中的set, 无序保存不重复值.
 
 ---
 
 # Sorted Set (ZSet)
+对比Set, 每个值多了一个score, 并且元素按照score进行排序. 其实现是ZipList或跳表(SkipList).
 
 ---
 
