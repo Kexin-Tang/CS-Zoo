@@ -1,3 +1,9 @@
+# 映射关系
+
+![映射关系](./pic/3_1.png)
+
+较新版本中ZipList被ListPack淘汰, 但是本质上类似.
+
 # SDS (Simple Dynamic String)
 
 ## 特点
@@ -25,7 +31,7 @@
 
 ---
 
-# ZipList
+# ZipList / ListPack
 
 ---
 
@@ -38,3 +44,4 @@
 ---
 
 # SkipList
+
