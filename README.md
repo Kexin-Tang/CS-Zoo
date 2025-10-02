@@ -15,8 +15,9 @@
   * 🐨 [操作系统](./basic/os/OS.md)
   * 🐬 [MySQL数据库](./basic/database/mysql_cookbook.md)
 * Tools
-  * 🐚 [Shell语法](./tools/Shell.md)
-  * 🐘 [Tmux](./tools/tmux.md)
+  * 🐚 [shell语法](./tools/shell.md)
+  * 🐘 [tmux](./tools/tmux.md)
+  * 🦐 [Redis](./redis/)
 * Interview
   * 🐧 [前端](./interview/frontend.md)
 * Leetcode
