@@ -1,6 +1,6 @@
 # 映射关系
 
-![映射关系](./pic/3_1.png)
+![映射关系](./pic/3_DataType_DataStructure_Mapping.png)
 
 较新版本中ZipList被ListPack淘汰, 但是本质上类似.
 
@@ -17,13 +17,13 @@
 字符串可以保存三种类型: int, embstr和raw.
 
 如果是int, 那么会直接把该值放到redisObject的`ptr`属性中.
-![encoding=int](./pic/2_1.png)
+![encoding=int](./pic/3_SDS_Encoding_Int.png)
 
 如果是较短的字符串, 那么redisObject和SDS将会通过一次内存分配函数来分配一块连续的内存空间.
-![encoding=embstr](./pic/2_2.png)
+![encoding=embstr](./pic/3_SDS_Encoding_Embstr.png)
 
 如果是较长的字符串, 那么redisObject和SDS将会通过两次内存分配.
-![encoding=raw](./pic/2_3.png)
+![encoding=raw](./pic/3_SDS_Encoding_Raw.png)
 
 其优缺点如下:
 1. embstr可以减少分配和回收的次数, 同时因为是连续内存空间所以效率更高.
