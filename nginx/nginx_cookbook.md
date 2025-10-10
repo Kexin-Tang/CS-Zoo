@@ -27,6 +27,7 @@ Nginx是一个高性能的网页服务器、反向代理服务器和负载均衡
 2. 资源缓存: 可以缓存静态资源, 减少服务端负载, 如CDN(Content Delivery Network)
 3. 网络安全: 隐藏服务端的真实IP, 减少网络攻击; 同时还可实现SSL加密, 访问控制等
 
+> [!NOTE]
 > CDN: 当用户访问网站时, 网站服务器需要通过互联网传递数据. 如果网站的资源存储在靠近用户的CDN服务器上, 就可以减少数据传输的时间.
 
 ## Nginx 反向代理
@@ -188,6 +189,7 @@ http {
 }
 ```
 
+> [!IMPORTANT]
 > ⚠️ 路径转发规则
 > * `location /finance/ { proxy_pass http://finance_server; }` &rarr; 原始url会传递, 即`/finance/xxxx`
 > * `location /finance/ { proxy_pass http://finance_server/; }` &rarr; 忽略前缀, 即`/xxxx`
@@ -215,6 +217,7 @@ http {
 }
 ```
 
+> [!IMPORTANT]
 > ⚠️ 注意关键词, root是添加, alias是替换. 假如url都是`http://domain.com/animal/cat/orangecat.jpg`
 > * `alias` &rarr; `/home/src/jpg/orangecat.jpg`
 > * `root` &rarr; `/home/src/jpg/animal/cat/orangecat.jpg`
