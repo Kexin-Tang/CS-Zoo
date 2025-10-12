@@ -63,3 +63,26 @@ replicaof <从机2的IP> 6379
 ![Master Slave Proxy](./pic/6_master_slave_proxy.png)
 
 # 增量复制
+
+如果主从之间TCP链接断开之后重连, 此时主机可能已经有了许多新的写操作, 如何将最新的数据复制到从机呢? 如果使用全量复制, 那么每次都要生成RDB并传输并重新加载, 每一步都有较大开销. 所以Redis选择增量复制.
+
+![Incremental Replica](./pic/6_incremental_replica.png)
+> 左侧`Slave1`因为断开时间太久, 丢失数据太多所以使用**全量复制(FULLRESYNC)**; 右侧`Slave2`断开时间比较短, 可以使用**增量复制(CONTINUE)**.
+
+首先介绍一下两个概念:
+* `repl_backlog_buffer` &rarr; **环形缓冲区**, 当master同步写命令到slave的时候, 该写命令也会被保存到缓冲区
+* `replication offset` &rarr; 标记环形缓冲区的同步进度
+  * `master_repl_offset` &rarr; 记录master**写**到的位置
+  * `slave_repl_offset` &rarr; 记录slave**读**到的位置
+
+当重新建立连接的时候:
+1. 从机发送`psync {runId} {slave_repl_offset}`到主机, 主机就能知道当前slave上一次读到的位置
+2. 计算差值`offset = master_repl_offset - slave_repl_offset`, 同时我们标记buffer的大小`size = size(repl_backlog_buffer)`
+   * 如果`offset < size`, 即主机的新增数据还未覆盖上一次读的数据, 则把`[slave_repl_offset % size, master_repl_offset % size]`中的数据放到**replication buffer**并增量复制
+   * 如果`offset >= size`, 即主机的新增数据已经覆盖了之前的内容, 那么直接全量复制即可
+
+![Ring Buffer](./pic/6_ring_buffer.png)
+
+## 设置buffer大小
+
+为了避免网络恢复的时候使用全量复制, buffer的大小应该和**主机平均每秒写入速度**以及**网络恢复时间**相关 &rarr; `buffer_size >= avg_network_backup_time * avg_write_speed`.
