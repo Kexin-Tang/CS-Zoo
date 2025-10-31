@@ -8,6 +8,9 @@
 
 其中写同步是用于将主机中新写入的内容同步到从机, 从而保证客户端能够读取到新鲜的数据.
 
+> [!IMPORTANT]
+> 主从复制是异步的: master会把内容放到写缓存.
+
 ## 过程
 
 ![Replica Process](./pic/6_master_slave_replica_process.png)
