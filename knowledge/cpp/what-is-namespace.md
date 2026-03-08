@@ -85,3 +85,51 @@ int main() {
 * template 必须放在header &rarr; template 在编译期实例化<sup>[*]</sup>
 
 > [*] 详情参考[Template](./what-is-template.md)
+
+---
+
+# Nested namespace
+
+`namespace`可以嵌套，C++17引入下列语法，两者等同。
+```cpp
+namespace Company::Org::Team {
+    void function();
+}
+```
+
+```cpp
+namespace Company {
+namespace Org {
+namespace Team {
+    void function();
+}
+}
+}
+```
+
+---
+
+# Anonymous namespace
+
+匿名 `namespace` 中定义的内容只在本 cpp 文件可见，相当于把一些内容 private 了。
+
+```cpp
+// mod.cpp
+namespace mod {
+namespace {
+    int private_attr = ...;
+    int private_function() {...};
+}
+
+    int public_function() {...};
+}
+```
+
+```cpp
+#include "mod.h"
+
+int main() {
+    mod::public_function(); // ✅
+    mod::private_function(); // ❌
+}
+```
