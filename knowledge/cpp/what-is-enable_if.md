@@ -10,26 +10,35 @@ struct enable_if<true, T> {
     using type = T;
 };
 ```
-其实现类似如上，当expr valid的时候就使用`enable_if<>::type`作为类型，否则为void，即会触发[SFINAE](./what-is-SFINAE.md)将把该模版剔除出substitution。
+其实现类似如上，当`expr` valid的时候就使用`T`作为类型，否则触发[SFINAE](./what-is-SFINAE.md)将把该模版剔除出substitution。
 
 ```cpp
 #include <type_traits>
 #include <iostream>
 
 template<typename T>
-typename std::enable_if<std::is_integral<T>::value>::type
+std::enable_if<std::is_integral<T>::value>::type
 print(T value)
 {
     std::cout << "int";
 }
 
 template<typename T>
-typename std::enable_if<std::is_floating_point<T>::value>::type
+std::enable_if<std::is_floating_point<T>::value>::type
 print(T value)
 {
     std::cout << "float";
 }
 ```
+
+> [!NOTICE]
+> enable_if 本身就包含 "不正确就剔除，正确就返回一个类型"，因此**定义的时候不需要写返回类型**
+> ```cpp
+> template<typename T>
+> std::enable_if<std::is_integer<T>::value, int>::type
+> function(T t) {...}
+> ```
+> 当T是int的时候，函数自动生成签名`int function(int t)`。
 
 # `enable_if_t`
 
@@ -39,7 +48,7 @@ print(T value)
 #include <iostream>
 
 template<typename T>
-typename std::enable_if_t<std::is_integral<T>::value>
+std::enable_if_t<std::is_integral<T>::value>
 print(T value)
 {
     std::cout << "int";
