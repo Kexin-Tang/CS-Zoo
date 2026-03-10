@@ -206,6 +206,5 @@ void print(Args... args) {
 * [CRTP](./what-is-CRTP.md)
 * [Compile-time Computation](./what-is-compile-time-computation.md)
 * [type traits](./what-is-type-traits.md)
-* [requires](./what-is-requires.md)
 * [allocator model](./what-is-allocator.md)
 
