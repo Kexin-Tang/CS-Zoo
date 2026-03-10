@@ -2,9 +2,13 @@
 
 `decltype` 是 C++11 引入的一个关键字，用来 **在编译期获取表达式的类型**。他不会计算表达式，只是 **推导表达式的类型**。
 
-```cpp
-decltype(expression)
-```
+* 如果 expr 是一个 id-expression，那么 decltype 不会推导表达式的值类别
+  * 如果 expr 中只包含一个变量名，此时 decltype 会返回这个变量的类型
+  * 如果 expr 只包含一个访问类数据成员的表达式，此时 decltype 会返回这个数据成员的类型
+* 否则，decltype 会同时推导 expr 的类型（假设为 T）和值类别
+  * 如果 expr 是一个 lvalue，那么 decltype 将返回 T&
+  * 如果 expr 是一个 xvalue，那么 decltype 将返回 T&&
+  * 如果 expr 是一个 prvalue，那么 decltype 将返回 T
 
 ---
 
@@ -89,3 +93,16 @@ auto print(T t) -> decltype(t.size(), void()) {
     std::cout << "has size()\n";
 }
 ```
+
+---
+
+# `std::declval`
+
+与`decltype`配合使用。
+
+比如`decltype`中需要使用`decltype(T().size())`，但是T可能没有构造函数，那么`T()`就是错误的。而且我们只需要知道`T`是否含有`size()`即可，我们并不需要真正创建并运行它。
+
+`decltype(std::declval<T>().size())` 可以假装我们有一个T，并不会真的创建任何东西。
+
+> [!NOTICE]
+> 注意 `std::declval` 并没有具体实现，所以不能放在运行代码中，只能放在 `decltype`, `sizeof` 等表达式中。
