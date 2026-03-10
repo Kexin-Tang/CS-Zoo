@@ -69,3 +69,23 @@ int a = 10;
 decltype(a) b;   // int
 decltype((a)) c; // int&
 ```
+
+---
+
+# `-> decltype(expr, void())`
+
+C++中逗号表达式作用就是：保证每一个都valid，然后用最后一个的值。
+
+```cpp
+int a = (1, 2);     // a = 2
+int b = (1 / 0, 2); // 报错，因为 1/0 是invalid操作
+```
+
+所以看到 `-> decltype(expr, void())` 的意思是：保证 expr 不报错，且最终推断的类型是void。
+```cpp
+// 如果类型T有size()这个方法，那么返回类型是void
+template<typename T>
+auto print(T t) -> decltype(t.size(), void()) {
+    std::cout << "has size()\n";
+}
+```
