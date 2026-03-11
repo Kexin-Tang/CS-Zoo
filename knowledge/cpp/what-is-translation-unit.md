@@ -96,6 +96,12 @@ static int x = 10;
 # inline
 如果我们在header中定义的函数或者全局变量是inline的则不会触发ODR问题。因为inline function允许多个identical definition。
 
+```cpp
+// utils.h
+void simple_func() {...}        // ❌ violates ODR
+inline void inline_func() {...} // ✅
+```
+
 ---
 
 # constexpr
