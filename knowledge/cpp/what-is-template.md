@@ -203,7 +203,7 @@ void print(Args... args) {
 
 * [SFINAE](./what-is-SFINAE.md)
 * [concept](./what-is-concept.md)
-* [CRTP](./what-is-CRTP.md)
+* [CRTP](./what-is-polymorphism.md#CRTP)
 * [Compile-time Computation](./what-is-compile-time-computation.md)
 * [type traits](./what-is-type-traits.md)
 * [allocator model](./what-is-allocator.md)
