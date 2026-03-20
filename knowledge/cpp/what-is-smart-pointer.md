@@ -227,3 +227,8 @@ if (auto p = wp.lock()) { // lock() 返回一个 shared_ptr / nullptr
 4. ⚠️ 不能用`use_count()`的返回值来作为业务逻辑判断依据，因为它是一个瞬时值，并发下引用计数会随时变化
 5. ⚠️ `shared_ptr` 仍然可能内存泄漏，比如循环引用
 6. ⚠️ `weak_ptr` 并不会让对象生命周期延长
+
+> [!NOTICE]
+> * `get()` &rarr; 获取raw pointer，对象仍然存在
+> * `release()` &rarr; 获取raw pointer，指针变为nullptr
+> * `reset(ptr)` &rarr; 销毁原来管理的资源，开始管理新的资源
