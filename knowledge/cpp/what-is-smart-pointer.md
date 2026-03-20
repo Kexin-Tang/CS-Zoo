@@ -224,4 +224,6 @@ if (auto p = wp.lock()) { // lock() 返回一个 shared_ptr / nullptr
 1. ❌ `unique_ptr.get()` 拿到raw ptr然后delete，导致unique_ptr本身并不知道指向的内容已经清除了，未来再次delete会出错
 2. ❌ 使用raw ptr构造多个 `shared_ptr`，会产生多个控制块，最后同一块内存被删除多次
 3. ⚠️ `get()` 是拿raw ptr，本质上还是拥有资源的；`release()` 是放弃所有权并返回raw ptr，之后需要用户自己管理
-4. ❌ 不能用`use_count()`的返回值来作为业务逻辑判断依据，因为它是一个瞬时值，并发下引用计数会随时变化
+4. ⚠️ 不能用`use_count()`的返回值来作为业务逻辑判断依据，因为它是一个瞬时值，并发下引用计数会随时变化
+5. ⚠️ `shared_ptr` 仍然可能内存泄漏，比如循环引用
+6. ⚠️ `weak_ptr` 并不会让对象生命周期延长
