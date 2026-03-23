@@ -422,3 +422,24 @@ std::string s2 = nrvo_func();
 ---
 
 # 生命周期延长规则
+
+生命周期延长机制主要针对“本来很快就销毁的**临时对象/右值**临时量”。左值通常本来就有独立生命周期（由其定义位置决定），一般不需要“延长”。
+
+* `const T&`
+```cpp
+const std::string& s = std::string("abc");
+```
+
+⚠️ 函数返回引用的时候不能返回临时变量，即临时变量的生命周期不能通过如下方式延长
+```cpp
+const std::string& func() {
+    return std::string("abc");
+}
+
+const std::string& ref = func(); // ref 引用的是已经被销毁的内容！
+```
+
+* `T&&`
+```cpp
+std::string&& ref = std:;string("abc");
+```
