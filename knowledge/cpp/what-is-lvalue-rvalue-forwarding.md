@@ -328,12 +328,96 @@ void func(T&& x) {
 
 # auto&&
 
+与模版函数中的`T&&`类似，也会做引用折叠，既能绑定左值也能绑定右值。
+
+```cpp
+int x = 10;
+auto&& a = x;   // a 是 int&
+auto&& b = 20;  // b 是 int&&
+```
+
+比如循环的时候使用`auto&&`而非`auto`可以保证引用和cv属性，同时避免元素拷贝。
+```cpp
+for (auto&& x : vec_x) {...}
+```
+
+但是根据引用折叠，**`auto&&`代表的一定是引用类型，一定不会指向基本类型**。
+
 ---
 
 # decltype(auto)
 
+和普通 auto 最大区别是：
+* auto 会丢掉一些引用和 cv 信息
+* decltype(auto) 可以保留表达式的精确类型
+
+```cpp
+int x = 1;
+int& rx = x;
+
+decltype(auto) a = x; // int
+decltype(auto) b = rx; // int&
+```
+
+```cpp
+// 如果 f(...) 返回引用，那么 decltype(auto) 也返回引用
+// 如果返回值类型，那么它也返回值
+template<typename F, typename... Args>
+decltype(auto) call(F&& f, Args&&... args) {
+    return std::forward<F>(f)(std::forward<Args>(args)...);
+}
+```
+
 ---
-# copy elision 和 RVO/NRVO
+# Copy Elision 和 RVO/NRVO
+
+这是优化"返回对象时别乱拷贝/移动"的机制。
+
+编译器可以直接在最终位置构造对象，跳过中间临时对象的拷贝/移动。
+
+```
+// 代码中
+1. 先构造临时对象
+2. 再拷贝/移动到目标对象
+
+// 编译器
+直接在目标对象所在内存上构造
+```
+
+* RVO (Return Value Optimization) &rarr; 当函数返回一个临时对象时，直接构造到接收者位置。
+* NRVO (Named Return Value Optimization) &rarr; 当返回一个有名字的局部变量时做优化。
+```cpp
+std::string rvo_func() {
+    return "Hello World";
+}
+
+std::string nrvo_func() {
+    std::string s = "Hello World";
+    return s;
+}
+
+// 相当于不会先通过函数创建一个临时变量，再移动/拷贝到s1和s2
+// 而是相当于直接对s1和s2调用了一次构造函数
+//
+// old: std::string(const char *) + std::string(std::string&&)
+// new: std::string(const char *)
+std::string s1 = rvo_func();
+std::string s2 = nrvo_func();
+```
+
+> [!NOTICE]
+> 通过下面例子可以看出，即使删掉了移动和拷贝构造函数，程序仍可编译。
+> ```cpp
+> struct A {
+>     A() = default;
+>     A(const A&) = delete;
+>     A(A&&) = delete;
+> };
+> 
+> A make() {
+>     return A{};
+> }
+> ```
 
 ---
 
