@@ -198,6 +198,44 @@ void print(Args... args) {
 ```
 
 ---
+# NTTP (Non-Type Template Parameter)
+
+即传入模版的不是类型，而是**编译期常量**。
+
+```cpp
+template<int size>
+struct Array {
+     int data[size];
+}
+
+Array<10> arr;
+```
+当然也可以使用`auto`来代替。
+
+```cpp
+template<auto V>
+struct Const { static constexpr auto value = V; };
+
+Const<42> x;
+Const<'A'> y;
+
+```
+
+还可以使用别的结构化类型。
+```cpp
+struct Config {
+    int level;
+    bool fast;
+    constexpr bool operator==(const Config&) const = default;
+};
+
+template<Config C>
+struct Engine {};
+```
+
+> ⚠️ 不要滥用，代码膨胀可能会非常明显，比如使用`template<int N>`，传入的N不同就会在编译期产生不同的代码，比如`Array<1>`和`Array<2>`就有两份代码。
+
+---
 
 # 高级功能
 
