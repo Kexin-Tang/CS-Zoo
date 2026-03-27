@@ -189,12 +189,88 @@ void func2(T t, int u) {...}
 
 # Variadic template
 
-允许不定参数。
+## 模版函数
 ```cpp
 template<typename... Args>
 void print(Args... args) {
-    (std::cout << ... << args);
+    std::cout << sizeof...(args) << sizeof...(Args) << args;
 }
+
+print(1, 3.14, 'a'); // Args... = int, double, char; args... = 1, 3.14, 'a'
+```
+
+## 模版变量
+```cpp
+template<typename... Args>
+constexpr size_t count = sizeof...(Args);
+
+count<>;                 // 0
+count<int>;              // 1
+count<int, int, double>; // 3
+```
+
+## Parameter Pack Expansion
+参数包展开就是把每个元素给“摊开”，比如
+```cpp
+template<typename... Ts>
+void f(Ts... args) {
+    g(args...);
+}
+
+f(1, 2.5, "abc"); // g(1, 2.5, "abc")
+```
+
+## Fold Expression
+fold expression 就是摊开后用一个运算符连接起来。
+
+### 一元左折叠 `(... op args)`
+
+```cpp
+template<typename... Ts>
+auto minus(Ts... args) {
+    return (... - args);
+}
+
+minus(1, 2, 3, 4); // ((1 - 2) - 3) - 4;
+```
+
+### 一元右折叠 `(args op ...)`
+
+```cpp
+template<typename... Ts>
+auto minus(Ts... args) {
+    return (args - ...);
+}
+
+minus(1, 2, 3, 4); // 1 - (2 - (3 - 4));
+```
+
+### 二元左折叠 `(start op ... op args)`
+
+可以处理空参数包。
+
+```cpp
+template<typename... Ts>
+auto minus(Ts... args) {
+    return (100 - ... - args);
+}
+
+minus(1, 2, 3, 4); // (((100 - 1) - 2) - 3) - 4;
+minus()； // 100
+```
+
+### 二元右折叠 `(args op ... op end)`
+
+可以处理空参数包。
+
+```cpp
+template<typename... Ts>
+auto minus(Ts... args) {
+    return (args - ... - 100);
+}
+
+minus(1, 2, 3, 4); // 1 - (2 - (3 - (4 - 100)));
+minus(); // 100 ⚠️ 不是-100，因为没有参数包就退化成只有初始值
 ```
 
 ---
