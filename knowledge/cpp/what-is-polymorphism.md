@@ -20,6 +20,8 @@ Animal* obj = new Dog();
 obj.speak(); // Animal sound
 ```
 
+另一种编译器多态是[template](./what-is-template.md)。
+
 ## 运行期多态 (Dynamic Polymorphism)
 
 取决于对象指向的类型。
@@ -171,4 +173,8 @@ CRTP的核心作用
 
 CRTP适合"要多态行为，但更在意性能和编译期约束"的地方。
 
+---
 
+# `std::variant` vs 多态
+
+请参考[std::variant 和 std::visit](./what-is-variant-and-visit.md)。
