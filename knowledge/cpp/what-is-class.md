@@ -1,3 +1,56 @@
+# member initializer list
+
+构造函数里通常优先使用 member initializer list，因为成员对象和基类部分在进入构造函数体之前就已经要完成初始化。
+
+如果不在初始化列表里做，而是在构造函数体里写赋值，那很多时候并不是“初始化”，而是“先默认构造，再赋值”，这通常更低效，而且有些成员根本没法这么做。
+
+## 哪些内容必须使用 member initializer list
+
+* const
+* 引用
+* 没有默认构造函数的成员对象
+```cpp
+class B {
+public:
+    B(int x) {}
+};
+
+class A {
+public:
+    A(int x) : b(x) {}
+private:
+    B b;
+};
+```
+* 基类
+```cpp
+class Base {
+public:
+    Base(int x) {}
+};
+
+class Derived : public Base {
+public:
+    Derived(int x) : Base(x) {}
+};
+```
+
+## 初始化顺序
+
+并不是按照写的顺序，而是先**基类**，然后按**成员的声明顺序**。
+
+```cpp
+class A {
+public:
+    A() : y(2), x(y) {} // x先声明所以先初始化，此时y还未初始化
+private:
+    int x;
+    int y;
+};
+```
+
+---
+
 # `class` 不只是“面向对象语法”
 
 C++中的`class`不只是提供API和成员变量，他还包括了：
