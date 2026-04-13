@@ -273,3 +273,42 @@ Unix/Linux 中创建进程常见方式是 `fork()`。`fork()` 后，子进程初
 - message queue
 - semaphore
 - signal
+
+---
+
+# Control Block
+
+操作系统为了管理“正在运行的实体”而维护的一份内核数据结构。
+
+因为一个OS可以管理很多Process/Thread，所以需要有一个地方存储每一个对象的信息，这样在切换执行的时候能找到对应的状态。
+
+## PCB (Process Control Block)
+
+PCB 是操作系统用来描述和管理一个进程的数据结构。
+
+一个进程被创建出来后，内核通常就会给它建立一个 PCB。只要进程还活着，PCB 通常就存在。进程结束后，PCB 才会被回收。
+
+一般而言PCB会保存下列内容：
+* 进程标识 &rarr; PID，父进程，进程名
+* 进程状态 &rarr; New / Ready / Running / Blocked / Terminated
+* 调度信息 &rarr; 优先级，时间片，调度策略
+* 内存信息 &rarr; 页表指针，虚拟地址空间，代码段等各种区域信息
+
+## TCB (Thread Control Block)
+
+TCB 是操作系统用来描述和管理一个线程的数据结构。
+
+如果一个进程管理多个线程，那么一个PCB会关联多个TCB。
+
+一般而言TCB会保存下列内容：
+* 线程标识 &rarr; TID，线程名
+* 线程状态 &rarr; Ready / Running / Blocked / Sleep / Terminated
+* CPU上下文
+    * [程序计数器 PC](./what-is-register.md#program-counter)
+    * [栈指针 SP](./what-is-register.md#stack-pointer)
+    * [通用寄存器](./what-is-register.md#通用寄存器general-purpose-registers)
+    * [状态寄存器/标志寄存器](./what-is-register.md#状态寄存器--标志寄存器status--flags-register)
+    * [浮点 / SIMD 寄存器](./what-is-register.md#浮点--simd--向量寄存器)
+* 调度信息 &rarr; 优先级，时间片，调度策略
+* Thread Local Storage
+* 线程栈信息 &rarr; 线程通常有自己的栈，所以 TCB 也要记录和线程栈有关的信息
