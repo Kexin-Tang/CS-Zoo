@@ -117,7 +117,7 @@ print(s); // 左值
 print("abc"); // 右值
 ```
 
-> [!NOTICE]
+> [!NOTE]
 > **有名字的右值引用变量，本身是左值**。
 >
 > ```cpp
@@ -405,7 +405,7 @@ std::string s1 = rvo_func();
 std::string s2 = nrvo_func();
 ```
 
-> [!NOTICE]
+> [!NOTE]
 > 通过下面例子可以看出，即使删掉了移动和拷贝构造函数，程序仍可编译。
 > ```cpp
 > struct A {

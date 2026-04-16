@@ -2,7 +2,7 @@
 
 Translation Unit（翻译单元）是C++编译的最基本单位。一个 `.cpp` 文件在 **预处理之后** 的完整代码，就是一个 Translation Unit。
 
-> [!NOTICE]
+> [!NOTE]
 > Translation Unit = .cpp + 所有include展开后的完整代码
 
 ```mermaid

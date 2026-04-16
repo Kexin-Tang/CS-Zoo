@@ -31,7 +31,7 @@ print(T value)
 }
 ```
 
-> [!NOTICE]
+> [!NOTE]
 > enable_if 本身就包含 "不正确就剔除，正确就返回一个类型"，因此**定义的时候不需要写返回类型**
 > ```cpp
 > template<typename T>

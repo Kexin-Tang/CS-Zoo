@@ -101,7 +101,7 @@ struct allocator {
 > 容器不用 `new[]` / `delete[]`的一个很重要的原因是：**容器经常需要“分配一块空间，但只构造其中一部分元素”**。而`new[N]`会直接分配N个对象大小的空间并构造N个对象。
 
 
-> [!NOTICE]
+> [!NOTE]
 > `new`包含空间分配和对象构造；`::operator new`只包含空间分配。通常来说可以认为`::operator new`是`allocate()`的底层实现。
 ---
 
@@ -175,7 +175,7 @@ struct rebind {
 using NodeAlloc = std::allocator_traits<Alloc>::template rebind_alloc<Node>;
 ```
 
-> [!NOTICE]
+> [!NOTE]
 > 此处使用`::template`是因为`rebind_alloc`是一个成员模版函数，且前面的部分并非一个已知类型，而是使用的模版类型。
 > ```cpp
 > using A = std::allocator_traits<int>;
@@ -332,7 +332,7 @@ C++ 17 新特性，详情参考[PMR](./what-is-PMR.md)。
 - 做越界检测
 - 检测双重释放
 
-> [!NOTICE]
+> [!NOTE]
 > 粗略统计容器占用的动态内存。
 >
 > ```cpp

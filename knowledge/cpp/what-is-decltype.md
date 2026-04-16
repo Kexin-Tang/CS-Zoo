@@ -104,5 +104,5 @@ auto print(T t) -> decltype(t.size(), void()) {
 
 `decltype(std::declval<T>().size())` 可以假装我们有一个T，并不会真的创建任何东西。
 
-> [!NOTICE]
+> [!NOTE]
 > 注意 `std::declval` 并没有具体实现，所以不能放在运行代码中，只能放在 `decltype`, `sizeof` 等表达式中。

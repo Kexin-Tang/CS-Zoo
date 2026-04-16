@@ -61,7 +61,7 @@ generated code
 
 其中SFINAE是substitution阶段的术语。
 
-> [!NOTICE]
+> [!NOTE]
 > 比如对于下面的例子，当我们使用`function<int>`的时候，只检查是否匹配`void function(T t)`以及其他也许存在的`decltype`，并不看具体实现，所以是没有出发SFINAE的。但是因为int没有type，所以会在 模版实例化 的阶段出错。
 > ```cpp
 > template<typename T>

@@ -65,7 +65,7 @@ int add(int a, int b);
 double add(double a, double b);
 ```
 
-> [!NOTICE]
+> [!NOTE]
 > `template` 的实现必须放在 header 文件中。假设 template 函数定义在 header 然后实现在 cpp，那么编译失败 `undefined reference`。
 > 
 > 普通函数只需要有声明即可，linker会在后续从 .o 文件中找到对应的 **“唯一”** 的实现。
@@ -90,7 +90,7 @@ double add(double a, double b);
 > 
 > 如果 template 写在 .cpp，那么编译器在 main.cpp 看不到 template 定义，因此无法实例化。因为当编译器看到 `add<int>(1, 2);` 就知道有需要根据手册生成一个支持 int 类型的函数 `int add(int,int);`，看到 `add<double>(1.0, 2.0);` 就知道需要生成支持 double 的`double add(double, double);`。但是 **template 可以支持任何类型，且不同类型的函数逻辑可能并不相同**，所以需要在读取声明(即访问 .h 文件)的时候就知道通用的函数逻辑或针对某种类型应该是什么样的逻辑。
 
-> [!NOTICE]
+> [!NOTE]
 > 对于普通函数，如果把函数定义在 header 中会违反ODR。
 >```cpp
 > // util.h

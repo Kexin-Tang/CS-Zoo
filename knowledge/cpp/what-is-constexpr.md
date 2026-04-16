@@ -99,7 +99,7 @@ constexpr double pi = 3.14;
 | `consteval` | ✔ 必须 | ❌ | 不一定 | 函数 |
 | `constinit` | ✔ 初始化 | ✔ 使用 | ❌ | 变量 |
 
-> [!NOTICE]
+> [!NOTE]
 > * `consteval`只能作用于函数，且函数的返回并不要求一定是const
 > * `constinit`只能作用于变量
 

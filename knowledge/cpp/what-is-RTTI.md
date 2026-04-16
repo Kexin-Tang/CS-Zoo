@@ -27,7 +27,7 @@ int main() {
 ```
 如果是多态类型(有virtual)，那么返回动态类型(运行时类型)；否则返回静态类型(编译期类型)。
 
-> [!NOTICE]
+> [!NOTE]
 > 1. 需要有virtual才有动态类型 &rarr; 如果Base没有使用virtual，那么`typeid(*b).name()`仍然是Base类型
 > 2. 可能会出现异常 &rarr; 假如`Base* b = nullptr`那么typeid可能会报错
 > 3. `.name()`返回的是编译器相关字符串，不是human-readable &rarr; 比如`int -> i`，所以返回的不能用于逻辑判断
