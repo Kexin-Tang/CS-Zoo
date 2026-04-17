@@ -217,6 +217,21 @@ cnt = Counter("aabccc") # {"a": 2, "b": 1, "c": 3}
 
 ---
 
+# sort & sorted
+
+* sort 是inplace排序，并不是所有类型都支持
+* sotred 是生成一个新的list，只要可迭代对象都可使用
+
+```py
+sorted(arr, key = lambda x: ...) # 根据每个元素的某个属性进行排序
+
+def cmp(lhs, rhs):
+    ...
+sorted(arr, key=cmp_to_key(cmp)) # 实现前后相邻两个元素间的复杂逻辑进行排序
+```
+
+---
+
 # 深拷贝和浅拷贝
 
 * 浅拷贝 &rarr; 只拷贝外层容器，内部对象仍共享
