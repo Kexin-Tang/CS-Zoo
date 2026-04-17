@@ -72,7 +72,7 @@ generated code
 
 # `decltype` 会触发SFINAE
 
-对于下面的模版函数，如果类型不含size()方法则会SFINAE。具体请参考 [decltype](./what-is-decltype.md)。
+对于下面的模版函数，如果类型不含size()方法则会SFINAE。具体请参考 [decltype](./decltype.md)。
 ```cpp
 template<typename T>
 auto function(T t) -> decltype(t.size(), void()) {...}
@@ -80,8 +80,8 @@ auto function(T t) -> decltype(t.size(), void()) {...}
 
 # `enable_if`
 
-请参考 [enable_if](./what-is-enable_if.md)。
+请参考 [enable_if](./enable-if.md)。
 
 # `concept`
 
-请参考 [concept](./what-is-concept.md)。
+请参考 [concept](./concepts-and-requires.md)。

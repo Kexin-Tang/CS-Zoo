@@ -293,7 +293,7 @@ struct MyAlloc {
 
 # Polymorphic Memory Resource (PMR)
 
-C++ 17 新特性，详情参考[PMR](./what-is-PMR.md)。
+C++ 17 新特性，详情参考[PMR](./pmr.md)。
 
 ---
 

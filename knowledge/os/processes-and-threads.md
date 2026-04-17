@@ -143,7 +143,7 @@ Process 切换时：
 - 往往更容易引发 TLB/cache 干扰
 - 代价通常更高
 
-详细信息请参考[Context Switch](./what-is-context-switch.md)。
+详细信息请参考[Context Switch](./context-switch.md)。
 
 ---
 
@@ -189,7 +189,7 @@ Process 切换时：
 - condition variable
 - atomic
 
-详情参考[Lock and Semaphor](./what-is-lock-and-semaphore.md)。
+详情参考[同步原语](./synchronization-primitives.md)。
 
 ---
 
@@ -304,11 +304,11 @@ TCB 是操作系统用来描述和管理一个线程的数据结构。
 * 线程标识 &rarr; TID，线程名
 * 线程状态 &rarr; Ready / Running / Blocked / Sleep / Terminated
 * CPU上下文
-    * [程序计数器 PC](./what-is-register.md#program-counter)
-    * [栈指针 SP](./what-is-register.md#stack-pointer)
-    * [通用寄存器](./what-is-register.md#通用寄存器general-purpose-registers)
-    * [状态寄存器/标志寄存器](./what-is-register.md#状态寄存器--标志寄存器status--flags-register)
-    * [浮点 / SIMD 寄存器](./what-is-register.md#浮点--simd--向量寄存器)
+    * [程序计数器 PC](./registers.md#program-counter)
+    * [栈指针 SP](./registers.md#stack-pointer)
+    * [通用寄存器](./registers.md#通用寄存器general-purpose-registers)
+    * [状态寄存器/标志寄存器](./registers.md#状态寄存器--标志寄存器status--flags-register)
+    * [浮点 / SIMD 寄存器](./registers.md#浮点--simd--向量寄存器)
 * 调度信息 &rarr; 优先级，时间片，调度策略
 * Thread Local Storage
 * 线程栈信息 &rarr; 线程通常有自己的栈，所以 TCB 也要记录和线程栈有关的信息

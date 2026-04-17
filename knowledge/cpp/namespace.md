@@ -84,7 +84,7 @@ int main() {
 * inline 允许多个定义
 * template 必须放在header &rarr; template 在编译期实例化<sup>[*]</sup>
 
-> [*] 详情参考[Template](./what-is-template.md)
+> [*] 详情参考[Template](./templates.md)
 
 ---
 

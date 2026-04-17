@@ -315,10 +315,9 @@ struct Engine {};
 
 # 高级功能
 
-* [SFINAE](./what-is-SFINAE.md)
-* [concept](./what-is-concept.md)
-* [CRTP](./what-is-polymorphism.md#CRTP)
-* [Compile-time Computation](./what-is-compile-time-computation.md)
-* [type traits](./what-is-type-traits.md)
-* [allocator model](./what-is-allocator.md)
-
+* [SFINAE](./sfinae.md)
+* [concept](./concepts-and-requires.md)
+* [CRTP](./polymorphism.md#CRTP)
+* [Compile-time Computation](./constexpr.md)
+* [type traits](./type-traits.md)
+* [allocator model](./allocator.md)

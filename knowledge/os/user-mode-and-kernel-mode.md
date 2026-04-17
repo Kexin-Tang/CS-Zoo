@@ -120,7 +120,7 @@
 
 ## 保存的内容和位置
 
-由于是调度线程，因此一般是保存到TCB中。详情参考[PCB & TCB](./what-is-thread-and-process.md#control-block)。
+由于是调度线程，因此一般是保存到TCB中。详情参考[PCB & TCB](./processes-and-threads.md#control-block)。
 
 ---
 

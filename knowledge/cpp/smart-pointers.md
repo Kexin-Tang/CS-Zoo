@@ -23,7 +23,7 @@ void function() {
 
 RAII (Resource Acquisition Is Initialization) 资源在对象构造时获得，在对象解构时释放。常见的RAII的资源有socket, mutex lock, database connection等。
 
-详情请参考[RAII](./what-is-RAII.md)。
+详情请参考[RAII](./raii.md)。
 
 ---
 

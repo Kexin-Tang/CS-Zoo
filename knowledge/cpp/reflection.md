@@ -91,7 +91,7 @@ struct Config {
 
 # RTTI
 
-详情参考[RTTI](./what-is-RTTI.md)。
+详情参考[RTTI](./rtti.md)。
 
 RTTI 不是完整 reflection
 * typeid
@@ -130,7 +130,7 @@ void foo(const T& value) {
 - 判断继承关系
 - 判断是否是 enum / class / reference / pointer
 
-详情参考[type traits](./what-is-type-traits.md)。
+详情参考[type traits](./type-traits.md)。
 
 ## detection idiom
 
@@ -151,7 +151,7 @@ inline constexpr bool has_begin_v = has_begin<T>::value;
 
 比如上述代码检测是否有某个方法。
 
-详情参考[concept](./what-is-concept.md)，[SFINAE](./what-is-SFINAE.md)等。
+详情参考[concept](./concepts-and-requires.md)，[SFINAE](./sfinae.md)等。
 
 ## marco
 

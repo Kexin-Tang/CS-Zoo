@@ -264,7 +264,7 @@ if (*addr == expected) {
 return false;
 ```
 
-更详细的请参考[Atomic](./what-is-atomic.md)。
+更详细的请参考[Atomic](./atomic.md)。
 
 ---
 

@@ -28,7 +28,7 @@ flowchart TD
 
 一个实体在整个程序中只能有一个定义。这也就是为什么对于普通函数而言，定义不能写在 header 文件中。当多个 cpp 文件 include 该 header，那么就会出现多个TU包含相同的函数定义。
 
-但是对于template，我们需要把函数定义实现在header中因为本质上template并不是定义，而是一个帮助生成定义的“手册”。详情参考[template](./what-is-template.md)。
+但是对于template，我们需要把函数定义实现在header中因为本质上template并不是定义，而是一个帮助生成定义的“手册”。详情参考[template](./templates.md)。
 
 | 类型 | 是否允许 | 原因 |
 | :---: | :---: | :---: |
@@ -106,4 +106,4 @@ inline void inline_func() {...} // ✅
 
 # constexpr
 
-详情[constexpr](./what-is-constexpr.md)。
+详情[constexpr](./constexpr.md)。

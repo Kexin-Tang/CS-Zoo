@@ -54,8 +54,8 @@
 
 # `enable_if` / `concept` / `requires`
 
-- [enable_if](./what-is-enable_if.md)
-- [concept / requires](./what-is-concept.md)
+- [enable_if](./enable-if.md)
+- [concept / requires](./concepts-and-requires.md)
 
 ---
 

@@ -67,15 +67,15 @@ C++中的`class`不只是提供API和成员变量，他还包括了：
 
 ## 封装 (Encapsulation)
 
-封装就是把数据和操作数据的方法放在一起，并且隐藏内部实现细节，只对外暴露必要接口。请参考[Encapsulation](./what-is-encapsulation.md)。
+封装就是把数据和操作数据的方法放在一起，并且隐藏内部实现细节，只对外暴露必要接口。请参考[Encapsulation](./encapsulation.md)。
 
 ## 继承 (Inheritance)
 
-继承就是让子类获得父类的接口或实现，从而建立层次关系。继承不只是代码复用，更重要的是表达 **is-a** 关系，如果只是为了复用代码，很多时候其实应该优先考虑 composition **has-a** 关系。请参考[Inheritance](./what-is-inheritance.md)。
+继承就是让子类获得父类的接口或实现，从而建立层次关系。继承不只是代码复用，更重要的是表达 **is-a** 关系，如果只是为了复用代码，很多时候其实应该优先考虑 composition **has-a** 关系。请参考[Inheritance](./inheritance.md)。
 
 ## 多态 (Polymorphism)
 
-同一个接口在不同对象上表现出不同的行为。请参考[Polymorphism](./what-is-polymorphism.md)。
+同一个接口在不同对象上表现出不同的行为。请参考[Polymorphism](./polymorphism.md)。
 
 ---
 
@@ -354,7 +354,7 @@ private:
 
 # `std::variant`
 
-请参考[std::variant](./what-is-variant-and-visit.md)。
+请参考[std::variant](./std-variant-and-visit.md)。
 
 ---
 

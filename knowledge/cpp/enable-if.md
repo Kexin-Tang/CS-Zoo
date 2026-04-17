@@ -10,7 +10,7 @@ struct enable_if<true, T> {
     using type = T;
 };
 ```
-其实现类似如上，当`expr` valid的时候就使用`T`作为类型，否则触发[SFINAE](./what-is-SFINAE.md)将把该模版剔除出substitution。
+其实现类似如上，当`expr` valid的时候就使用`T`作为类型，否则触发[SFINAE](./sfinae.md)将把该模版剔除出substitution。
 
 ```cpp
 #include <type_traits>

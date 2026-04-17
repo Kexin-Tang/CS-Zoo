@@ -20,7 +20,7 @@ Animal* obj = new Dog();
 obj.speak(); // Animal sound
 ```
 
-另一种编译器多态是[template](./what-is-template.md)。
+另一种编译器多态是[template](./templates.md)。
 
 ## 运行期多态 (Dynamic Polymorphism)
 
@@ -53,7 +53,7 @@ obj->speak(); // Woof
 | ✅ optimization<sup>[2]</sup> | ❌ no optimization |
 | ❌ code bloat<sup>[3]</sup> | ✅ code won't bloat |
 | less flexible<sup>[4]</sup> | more flexible |
-| 高性能库，泛型编程，数值计算 | 需要[ABI](./what-is-ABI.md)稳定 |
+| 高性能库，泛型编程，数值计算 | 需要[ABI](./abi.md)稳定 |
 
 > [1] inline 指的是编译器把函数调用替换成函数体本身，而不是进行一次真正的函数调用。
 
@@ -177,4 +177,4 @@ CRTP适合"要多态行为，但更在意性能和编译期约束"的地方。
 
 # `std::variant` vs 多态
 
-请参考[std::variant 和 std::visit](./what-is-variant-and-visit.md)。
+请参考[std::variant 和 std::visit](./std-variant-and-visit.md)。
