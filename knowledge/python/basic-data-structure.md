@@ -1,3 +1,40 @@
+# Python 变量到底是什么
+
+Python 变量更像“名字绑定到对象”，而不是一个固定盒子里直接装值。
+
+```python
+a = [1, 2, 3]
+b = a
+```
+
+这里不是复制了一份 list，而是：
+- `a` 绑定到一个 list 对象
+- `b` 也绑定到同一个 list 对象
+
+因此 Python 传递的是对象引用，或说 call by object reference / call by sharing。
+
+---
+
+# 对象、身份、类型、值
+
+对于一个 Python 对象，可以从三个角度看：
+
+- 身份：`id(obj)`，类似于地址，唯一标识
+- 类型：`type(obj)`
+- 值：对象内容本身
+
+## is vs ==
+- `is` 比较身份
+- `==` 比较值（通常调用 `__eq__`）
+
+```python
+a = [1, 2]
+b = [1, 2]
+
+print(a == b)  # True
+print(a is b)  # False
+```
+
 # Mutable vs Immutable
 
 * 不可变对象：对象创建后，内容不能原地修改
