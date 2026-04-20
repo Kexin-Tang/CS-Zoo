@@ -8,12 +8,12 @@
 
 1. **把“内存管理策略”从“数据结构逻辑”中分离出来**
 2. **允许用户自定义内存分配方式**，比如：
-   - 内存池
-   - 栈上 arena
-   - 共享内存
-   - NUMA-aware 分配
-   - 对齐分配
-   - 调试型分配器（统计、跟踪、检测泄漏）
+  - 内存池
+  - 栈上 arena
+  - 共享内存
+  - NUMA-aware 分配
+  - 对齐分配
+  - 调试型分配器（统计、跟踪、检测泄漏）
 
 ---
 
@@ -35,6 +35,183 @@ delete[] p;
 - 难以支持特殊场景（共享内存、固定地址池、无锁池等）
 
 Allocator 的出现，使 STL 容器具备了更强的可扩展性。
+
+---
+
+# `malloc` / `new` 是什么
+
+在进入 allocator 之前，先把几个很容易混在一起的概念分开：
+
+- `malloc` / `free`：C 风格的内存分配与释放
+- `new` / `delete`：C++ 的对象创建与销毁表达式
+
+## `malloc`
+
+`malloc` 来自 C 标准库：
+
+```cpp
+#include <cstdlib>
+
+int* p = (int*)std::malloc(sizeof(int) * 10);
+std::free(p);
+```
+
+它做的事情很简单：
+
+- 申请一块指定字节数的原始内存
+- 返回 `void*`
+- **不会调用构造函数**
+- 释放时用 `free`
+
+所以 `malloc` 更像是：
+
+> 给我一块字节区域，至于这块内存上面是不是对象、对象怎么构造，不归它管。
+
+## `new`
+
+`new` 是 C++ 里的表达式，例如：
+
+```cpp
+Person* p = new Person();
+delete p;
+```
+
+它比 `malloc` 多做了一步非常关键的事：
+
+1. 先分配足够大的原始内存
+2. 再在那块内存上调用构造函数
+
+`delete` 则反过来：
+
+1. 先调用析构函数
+2. 再释放底层内存
+
+## `malloc/free` 和 `new/delete` 的区别
+
+1. `malloc/free` 只处理内存
+2. `new/delete` 处理内存 + 构造对象
+
+常见对比：
+
+- `malloc` 返回 `void*`；`new` 返回正确类型指针
+- `malloc` 失败时返回 `nullptr`；`new` 默认失败时抛 `std::bad_alloc`
+- `malloc` 不调用构造 / 析构；`new/delete` 会调用
+- `malloc/free` 不能直接表达“创建一个对象”；`new/delete` 可以
+
+## `::operator new`
+
+这个名字很容易和 `new` 混淆，但它们不是一回事。
+
+```cpp
+void* raw = ::operator new(sizeof(Person));
+::operator delete(raw);
+```
+
+`::operator new` 只负责：
+
+- 分配一块足够大的原始内存
+
+它**不会自动调用构造函数**。  
+所以它更接近 `malloc`，只是它属于 C++ 的分配机制，失败时通常抛异常而不是返回空指针。
+
+如果你真的想“先拿原始内存，再手动构造对象”，通常会配合 placement new：
+
+```cpp
+void* raw = ::operator new(sizeof(Person));
+Person* p = new (raw) Person();  // placement new，在指定地址构造对象
+
+p->~Person();
+::operator delete(raw);
+```
+
+这个模式和 allocator 非常接近：
+
+- 先拿原始内存
+- 再显式构造对象
+- 销毁对象
+- 释放原始内存
+
+## `new` vs placement new
+
+这两个名字很像，但区别非常重要：
+
+- `new`：**分配内存 + 构造对象**
+- placement new：**在已有内存上构造对象**
+
+普通 `new`：
+
+```cpp
+Person* p = new Person();
+```
+
+它通常做两件事：
+
+1. 调用 `operator new` 分配内存
+2. 调用 `Person` 的构造函数
+
+而 placement new：
+
+```cpp
+void* raw = ::operator new(sizeof(Person));
+Person* p = new (raw) Person();
+```
+
+这里的 `new (raw) Person()` 不会再去申请内存。  
+它只是告诉编译器：
+
+> 请在 `raw` 指向的这块地址上构造一个 `Person` 对象。
+
+所以 placement new 更适合：
+
+- allocator
+- 内存池
+- arena
+- 手写容器
+- 需要把“分配内存”和“构造对象”分开的场景
+
+### 释放方式不同
+
+普通 `new`：
+
+```cpp
+Person* p = new Person();
+delete p;
+```
+
+placement new：
+
+```cpp
+void* raw = ::operator new(sizeof(Person));
+Person* p = new (raw) Person();
+
+p->~Person();
+::operator delete(raw);
+```
+
+因为 placement new 并没有负责分配那块内存，所以也不能简单理解成“配一个 `delete p` 就完事了”。  
+通常需要：
+
+1. 手动调用析构函数
+2. 再用对应方式释放原始内存
+
+## 为什么 STL 容器不直接依赖 `new[]`
+
+这是理解 allocator 的关键。
+
+例如 `vector` 扩容时，经常需要：
+
+- 先申请一块更大的原始内存
+- 只把已有元素搬过去并逐个构造
+- 未使用的位置暂时不构造对象
+
+但 `new T[n]` 会直接：
+
+- 分配 `n` 个 `T` 的空间
+- 顺便把这 `n` 个对象全部构造出来
+
+容器真正需要的往往是：**分配原始内存** 和 **控制对象何时构造/销毁** 这两件事分开。
+
+这也正是 allocator 设计的基础。
 
 ---
 
@@ -100,9 +277,9 @@ struct allocator {
 
 > 容器不用 `new[]` / `delete[]`的一个很重要的原因是：**容器经常需要“分配一块空间，但只构造其中一部分元素”**。而`new[N]`会直接分配N个对象大小的空间并构造N个对象。
 
-
 > [!NOTE]
 > `new`包含空间分配和对象构造；`::operator new`只包含空间分配。通常来说可以认为`::operator new`是`allocate()`的底层实现。
+
 ---
 
 # `std::allocator_traits`
@@ -114,6 +291,7 @@ std::allocator_traits<Alloc>
 ```
 
 它的作用主要是：
+
 - 给所有 allocator 提供统一接口
 - 如果 allocator 自己有特殊 construct/destroy，就用它
 - 如果没有，就退回标准默认行为（本质上就是 placement new / 显式析构）
@@ -150,6 +328,7 @@ MyAllocator(const MyAllocator<U>&) {}
 # `rebind`
 
 因为容器接受到的类型是 T，但是内部不一定给 T 分配内存。
+
 > 比如我有链表`LinkedListNode<int>`，那么T是int，但是初始化的是Node节点，其中他的value是int类型。
 
 在旧式 allocator 模型里，经常写：
@@ -177,6 +356,7 @@ using NodeAlloc = std::allocator_traits<Alloc>::template rebind_alloc<Node>;
 
 > [!NOTE]
 > 此处使用`::template`是因为`rebind_alloc`是一个成员模版函数，且前面的部分并非一个已知类型，而是使用的模版类型。
+>
 > ```cpp
 > using A = std::allocator_traits<int>;
 > using B = std::allocator_traits<A>::rebind_alloc<Node>;
@@ -217,6 +397,7 @@ MyAlloc<int> b;
 ## 状态型 allocator（stateful allocator）
 
 allocator 对象内部带着一些数据，这些数据会影响它怎么分配内存，例如：
+
 - 持有内存池指针
 - 持有 arena 指针
 - 持有共享内存句柄
@@ -265,6 +446,7 @@ PoolAlloc<int> b(&pool2);
 - `propagate_on_container_swap` &rarr; `swap(a, b)`
 
 它们通常是 `std::true_type` 或 `std::false_type`。
+
 - 如果 propagation 是 true，那么在对应操作里，a 的 allocator 可以被替换成 b 的 allocator，因此 a 就能用和 b 一样的内存管理上下文去管理那块内存
 - 如果 propagation 是 false，那么 a 保留自己的 allocator，这时它不一定能直接接管 b 的内存
 
@@ -279,6 +461,7 @@ a = std::move(b);
 - 如果 allocator 有状态，且`pool1 != pool2`，那么`a.allocator`理论上不知道如何管理pool2
 
 ## `is_always_equal`
+
 任意两个该 allocator 实例都可视为等价，可以互相释放对方分配的内存。这通常适用于无状态 allocator。
 
 ```cpp
@@ -340,29 +523,29 @@ C++ 17 新特性，详情参考[PMR](./pmr.md)。
 > #include <iostream>
 > #include <memory>
 > #include <vector>
-> 
+>
 > struct AllocStats {
 >     std::atomic<std::size_t> bytes{0};
 > };
-> 
+>
 > template<typename T>
 > struct CountingAllocator {
 >     using value_type = T;
-> 
+>
 >     AllocStats* stats = nullptr;
-> 
+>
 >     CountingAllocator() = default;
 >     explicit CountingAllocator(AllocStats* s) : stats(s) {}
-> 
+>
 >     template<typename U>
 >     CountingAllocator(const CountingAllocator<U>& other) : stats(other.stats) {}
-> 
+>
 >     T* allocate(std::size_t n) {
 >         std::size_t b = n * sizeof(T);
 >         if (stats) stats->bytes += b;
 >         return static_cast<T*>(::operator new(b));
 >     }
-> 
+>
 >     void deallocate(T* p, std::size_t n) {
 >         std::size_t b = n * sizeof(T);
 >         if (stats) stats->bytes -= b;
@@ -409,8 +592,8 @@ struct MyAlloc {
 1. allocate 新内存
 2. 逐个 move/copy 构造新元素
 3. 如果中途抛异常：
-   - 销毁已经构造的新元素
-   - deallocate 新内存
-   - 保留旧内存和旧元素不动
+  - 销毁已经构造的新元素
+  - deallocate 新内存
+  - 保留旧内存和旧元素不动
 
 这说明 allocator 必须和对象构造/销毁逻辑严密配合，它往往和RAII一起出现。
