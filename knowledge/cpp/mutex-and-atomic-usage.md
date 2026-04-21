@@ -86,11 +86,17 @@ done.store(true);
 int old = cnt.exchange(5); // 替换新值并返回旧值
 ```
 
-## CAS
+## CAS (Compare and Swap)
 ```cpp
 std::atomic<int> x{10};
 int expected = 10;
 
 // x = (x's old value == expected) ? 20 : x
 bool ok = x.compare_exchange_strong(expected, 20);
+```
+
+# RMW (Read-Modify-Write)
+```cpp
+std::atomic<int> x{10};
+int old_value = x.fetch_add(10); // old_value: 10, x: 20
 ```
