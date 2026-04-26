@@ -194,7 +194,26 @@ class Shape(ABC):
 
 # 属性控制 `@property`
 
-最大的优势是可以后续加校验逻辑而不改调用方接口。比如下面例子中在set的时候进行check，从而避免每一次设置都在用户代码中加验证逻辑。
+通过只给属性加 `@property` 而不加 `@setter` 即可实现真正的 `private` 属性控制。
+
+```python
+class Object:
+    __num = 10
+
+    @property
+    def num(self):
+        return self.__num
+
+obj = Object()
+obj.__num           # ❌，但是实际上可以通过obj._Object__obj_num_val访问
+obj._Object__num    # ✅
+obj._Object__num = 0# ✅
+
+obj.num             # ✅
+obj.num = 0         # ❌
+```
+
+除此之外，可以后续加校验逻辑而不改调用方接口。比如下面例子中在set的时候进行check，从而避免每一次设置都在用户代码中加验证逻辑。
 
 ```python
 class Person:
