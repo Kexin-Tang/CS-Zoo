@@ -15,6 +15,33 @@ del b   # count of list is 0, may be collected
 
 ---
 
+# 底层模型
+
+Python 的任何类型都是class，都是变量引用。
+
+所以实际上都是在堆上分配空间存储内容，然后栈上保存变量去引用该空间。
+
+在堆上，实际上保存的是一个类似**双向链表**的东西：
+```c
+typedef struct _object {
+    struct _object *_ob_next;   // 后向指针
+    struct _object *_ob_prev;   // 前向指针
+    Py_ssize_t ob_refcnt;       // ref count
+    PyTypeObject *ob_type;
+} PyObject;
+```
+
+比如下面的代码会产生如下的堆栈分配情况：
+```py
+a = 1
+b = "hello"
+c = 3.14
+d = c
+```
+![Python Memory](../static/python_memory.png)
+
+---
+
 # Garbage Collector
 
 引用计数有个经典问题：**循环引用**：
