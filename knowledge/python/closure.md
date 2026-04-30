@@ -157,6 +157,44 @@ def hi():
 * 中间层 &rarr; 被装饰的函数
 * 最内层 &rarr; 函数的参数
 
+## 执行顺序
+
+```python
+def deco(func):
+    print("A") # ⚠️ 第一个输出
+    def wrapper(*args, **kwargs):
+        print("C")
+        func(*args, **kwargs) # ⚠️ 此处返回一个生成器，但是不调用就不会执行内部
+        # 如果想打印func内部
+        # g = func(*args, **kwargs)
+        # next(g)
+        # next(g)
+    return wrapper
+
+@deco
+def func():
+    print("never print")
+    yield
+    print("never print")
+
+print("B")
+func()
+print("D")
+```
+> [!IMPORTANT]
+> 上述代码中`@deco`相当于是`deco_func = deco(func)`，所以 A 无论如何都会被输出，该行为发生在 **函数定义** 阶段，并不需要call就会执行。因此理论上任何函数使用`@deco`都会执行一次。
+> 
+> 可以利用这个特性将被装饰的内容注册到global。这样无论是否调用，在定义阶段就会都执行。
+> ```python
+> REGISTER_TABLE = {}
+> 
+> def register_decorator(func):
+>    REGISTER_TABLE[func.__name__] = func
+>    def wrapper(*args, **kwargs):
+>        ...
+>    return wrapper
+> ```
+
 ## `functools.wraps`
 
 写装饰器时最好保留原函数元信息，否则被装饰函数的一些信息会被 wrapper 覆盖。
