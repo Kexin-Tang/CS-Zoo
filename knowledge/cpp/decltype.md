@@ -10,6 +10,14 @@
   * 如果 expr 是一个 xvalue，那么 decltype 将返回 T&&
   * 如果 expr 是一个 prvalue，那么 decltype 将返回 T
 
+> [!NOTE]
+> ```cpp
+> decltype(name)      // 拿声明类型
+> decltype(lvalue)    // T&
+> decltype(xvalue)    // T&&
+> decltype(prvalue)   // T
+> ```
+
 ---
 
 # 基本用法
@@ -66,13 +74,19 @@ decltype(b) yb = b; // const int
 
 ---
 
-# `decltype((var))` 是引用类型
+# `decltype((var))` != `decltype(var)`
 
 ```cpp
 int a = 10;
-decltype(a) b;   // int
-decltype((a)) c; // int&
+decltype(a)               // int
+decltype((a))             // int&
+decltype(a + 10)          // int
+decltype((a + 10))        // int
+decltype(std::move(a))    // int&&
+decltype((std::move(a)))  // int&&
 ```
+
+decltype 对于id-expression和表达式是有不同的判断标准的，请参考[介绍](#decltype-介绍)中的总结。
 
 ---
 

@@ -1,8 +1,11 @@
 # 左值与右值是什么
 
 可以先用一句话记：
+
 - **左值**：有身份，能定位，通常能取地址的表达式
 - **右值**：临时值，即将消失，可移动，通常不该被长期引用的临时表达式
+  - pvalue：纯右值，临时值，比`1+1`, `x + y` 
+  - xvalue：将亡值(expring value)，有对象身份但是可以被移动
 
 ## 左值 lvalue
 
@@ -125,6 +128,7 @@ print("abc"); // 右值
 > ```
 >
 > 虽然 `r` 的类型是 `int&&`，但是**表达式 `r` 本身是左值**，因为它有名字，有稳定身份。
+>
 > ```cpp
 > void f(int&)  { std::cout << "lvalue\n"; }
 > void f(int&&) { std::cout << "rvalue\n"; }
@@ -163,8 +167,8 @@ constexpr std::remove_reference_t<T>&& move(T&& t) noexcept {
 std::string ss = std::move(s);
 ```
 
-> * `std::remove_reference_t<T>` 用于去掉引用，比如`int& -> int`, `int&& -> int`
-> * `std::remove_reference_t<T>&&` 表示把T的引用去掉再加上右值引用，即`int& -> int&&`, `int -> int&&`。
+> - `std::remove_reference_t<T>` 用于去掉引用，比如`int& -> int`, `int&& -> int`
+> - `std::remove_reference_t<T>&&` 表示把T的引用去掉再加上右值引用，即`int& -> int&&`, `int -> int&&`。
 
 ## 移动语义
 
@@ -223,6 +227,7 @@ std::string t = std::move(s);
 - 但不能假设它还保留原内容 `"hello"`
 
 ---
+
 # `std::forward`
 
 在模板里，把参数"按它原本的值类别"转发出去，传进来左值就传出左值，传进来右值就传出右值。
@@ -245,9 +250,11 @@ int x = 10;
 wrapper(x); // lvalue
 wrapper(10); // lvalue
 ```
+
 两个函数都是调用的lvalue版本。因为在 wrapper 里面，arg 是一个有名字的变量。任何有名字的变量，表达式上都是左值。
 
 如果使用`std::move`，则不论传递的左值还是右值，都会调用rvalue版本。
+
 ```cpp
 template<typename T>
 void wrapper(T arg) {
@@ -260,9 +267,10 @@ void wrapper(T arg) {
 在一个模板函数中，接收任意类型和任意值类别的参数，再把它原封不动地传给另一个函数。
 
 > 原封不动一般包括：
-> * 类型不变
-> * const 不变
-> * 左值右值不变
+>
+> - 类型不变
+> - const 不变
+> - 左值右值不变
 
 ```cpp
 template<typename T>
@@ -300,19 +308,24 @@ void func(T&& x) {
 #### ❌ 右值就是不能取地址
 
 某些右值在语言规则下也可能有地址或能被编译器物化处理。更稳妥的说法是：
+
 - 左值强调身份
 - 右值强调临时性和可移动性
 
 #### ❌ `std::move` 会自动移动
+
 `std::move` 只是转换。真正是否移动，要看后续是否调用了移动构造/移动赋值。
 
 #### ❌ `T&&` 一定是右值引用
+
 在模板推导场景下，它可能是转发引用。
 
 #### ❌ 有名字的 `T&&` 变量是右值
+
 有名字就是左值表达式。
 
 #### ❌ 被 `std::move` 之后对象就不能用了
+
 它仍然有效，只是值未指定。
 
 #### ✅ 移动构造通常要标 `noexcept`？
@@ -320,6 +333,7 @@ void func(T&& x) {
 因为标准容器（尤其是 `std::vector`）在扩容搬迁元素时，更倾向于使用 `noexcept` 的移动构造。如果移动可能抛异常，容器为了保证强异常安全，可能改用拷贝。
 
 #### 🔍 函数返回值是左值还是右值？
+
 - 返回 `T`：得到的是一个临时值，通常视作右值
 - 返回 `T&`：得到左值
 - 返回 `T&&`：得到将亡值/xvalue
@@ -337,19 +351,21 @@ auto&& b = 20;  // b 是 int&&
 ```
 
 比如循环的时候使用`auto&&`而非`auto`可以保证引用和cv属性，同时避免元素拷贝。
+
 ```cpp
 for (auto&& x : vec_x) {...}
 ```
 
-但是根据引用折叠，**`auto&&`代表的一定是引用类型，一定不会指向基本类型**。
+但是根据引用折叠，`**auto&&`代表的一定是引用类型，一定不会指向基本类型**。
 
 ---
 
 # decltype(auto)
 
 和普通 auto 最大区别是：
-* auto 会丢掉一些引用和 cv 信息
-* decltype(auto) 可以保留表达式的精确类型
+
+- auto 会丢掉一些引用和 cv 信息
+- decltype(auto) 可以保留表达式的精确类型
 
 ```cpp
 int x = 1;
@@ -369,6 +385,7 @@ decltype(auto) call(F&& f, Args&&... args) {
 ```
 
 ---
+
 # Copy Elision 和 RVO/NRVO
 
 这是优化"返回对象时别乱拷贝/移动"的机制。
@@ -384,8 +401,9 @@ decltype(auto) call(F&& f, Args&&... args) {
 直接在目标对象所在内存上构造
 ```
 
-* RVO (Return Value Optimization) &rarr; 当函数返回一个临时对象时，直接构造到接收者位置。
-* NRVO (Named Return Value Optimization) &rarr; 当返回一个有名字的局部变量时做优化。
+- RVO (Return Value Optimization) &rarr; 当函数返回一个临时对象时，直接构造到接收者位置。
+- NRVO (Named Return Value Optimization) &rarr; 当返回一个有名字的局部变量时做优化。
+
 ```cpp
 std::string rvo_func() {
     return "Hello World";
@@ -407,13 +425,14 @@ std::string s2 = nrvo_func();
 
 > [!NOTE]
 > 通过下面例子可以看出，即使删掉了移动和拷贝构造函数，程序仍可编译。
+>
 > ```cpp
 > struct A {
 >     A() = default;
 >     A(const A&) = delete;
 >     A(A&&) = delete;
 > };
-> 
+>
 > A make() {
 >     return A{};
 > }
@@ -425,12 +444,14 @@ std::string s2 = nrvo_func();
 
 生命周期延长机制主要针对“本来很快就销毁的**临时对象/右值**临时量”。左值通常本来就有独立生命周期（由其定义位置决定），一般不需要“延长”。
 
-* `const T&`
+- `const T&`
+
 ```cpp
 const std::string& s = std::string("abc");
 ```
 
 ⚠️ 函数返回引用的时候不能返回临时变量，即临时变量的生命周期不能通过如下方式延长
+
 ```cpp
 const std::string& func() {
     return std::string("abc");
@@ -439,7 +460,9 @@ const std::string& func() {
 const std::string& ref = func(); // ref 引用的是已经被销毁的内容！
 ```
 
-* `T&&`
+- `T&&`
+
 ```cpp
 std::string&& ref = std:;string("abc");
 ```
+
