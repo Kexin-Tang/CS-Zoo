@@ -274,6 +274,8 @@ Unix/Linux 中创建进程常见方式是 `fork()`。`fork()` 后，子进程初
 - semaphore
 - signal
 
+详情参考[IPC](./ipc.md)。
+
 ---
 
 # Control Block
