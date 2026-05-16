@@ -89,6 +89,12 @@ obj->speak(); // Woof
 
 虚函数通过vtable虚函数表实现。每个对象内部包含一个vptr虚指针指向vtable。
 
+> [!NOTE]
+> * vtable是class-level的，即每个class只有一个vtable
+> * vptr是instance-level的，即每个实例有一个vptr指向该vtable
+>
+> vtable是放在 .rodata 只读程序段，并非堆栈区！
+
 ```cpp
 class Base {
     char name[40];
