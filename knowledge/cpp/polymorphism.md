@@ -125,6 +125,25 @@ ptr->show_all();
 ptr --> (2096) --> show_all --> (6820) --> 函数定义
 ```
 
+## Object Slicing
+
+virtual一定是搭配pointer/reference实现的，不能按值，因为会直接Object Slicing。可以直接认为按值的时候只保留 “声明类型” 的部分，其余 “衍生类型” 的部分被切除(slicing)。
+```cpp
+class Base {
+public:
+    virtual void func() {}
+};
+
+class Derived : public Base {
+public:
+    void func() override {}
+};
+
+Derived d;
+Base b = d;
+b.func();   // 此时调用的是Base的function
+```
+
 ---
 
 # pure virtual
