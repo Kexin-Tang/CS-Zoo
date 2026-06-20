@@ -1,5 +1,5 @@
 # TL;DR
-* `unique_ptr` 表示独占所有权，不能拷贝但可以移动，开销小，通常是默认首选
+* `unique_ptr` 表示独占所有权，**不能拷贝但可以移动**，开销小，通常是默认首选
 * `shared_ptr` 表示共享所有权，通过引用计数管理生命周期，适合多个 owner，但有额外成本且可能出现循环引用
 * `weak_ptr` 是对 shared_ptr 管理对象的非拥有观察者，不增加引用计数，常用于打破循环引用。
 
@@ -56,6 +56,17 @@ std::unique_ptr<int> p2 = p1; // ❌
 std::unique_ptr<int> p1 = std::make_unique<int>(42);
 std::unique_ptr<int> p2 = std::move(p1); // 此时p1是nullptr
 ```
+
+> [!NOTE]
+> ```cpp
+> unique_ptr<int> p1 = make_unique<int>(10);
+> unique_ptr<int> p2;
+> unique_ptr<int> p3；
+>
+> // p2 = p1; ❌ 这个是copy，只能move
+> p2 = move(p1); // ✅ move 
+> p3 = make_unique<int>(*p2); // ✅ make_unique相当于打包了valid的操作
+> ```
 
 ### 作为函数参数/返回值
 #### 按值传递 &rarr; 接管所有权
