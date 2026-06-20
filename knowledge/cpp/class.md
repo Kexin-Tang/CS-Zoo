@@ -160,7 +160,156 @@ private:
 
 ## Rule of Five
 
-如果类直接管理原始资源，例如裸指针、文件句柄、socket 等，那通常就必须认真定义这五个特殊成员函数。
+**如果类直接管理原始资源，例如裸指针、文件句柄、socket 等，那通常就必须认真定义这五个特殊成员函数。**
+
+对于默认拷贝构造/默认拷贝赋值：
+* 值类型 &rarr; 赋值
+* 对象类型 &rarr; 对象自己的拷贝构造/拷贝赋值
+* 裸指针 &rarr; ⚠️ 浅拷贝，只复制指针地址
+
+```cpp
+struct Item {
+    int x;
+    string s;
+    int* p;
+}
+
+int* p = new int{10};
+Item i1 = {10, "hello", p};
+Item i2 = i1;
+```
+
+此时对于i2，使用默认拷贝构造，相当于：
+```cpp
+// i2.p = i1.p
+Item::Item(const Item& i1) : x(i1.x), s(i1.s), p(i1.p) {}
+```
+此时i2的p和i1的p指向同一地址，会有double free的危险。
+
+### 自定义
+```cpp
+struct Item {
+    int x;
+    string s;
+    int* p;
+
+    Item(int x, const string& s, int val): x(x), s(s), p(new int{val}) {}
+    ~Item() {
+        delete p;
+    }
+
+    Item(const Item& other): x(other.x), s(other.x), p(nullptr) {
+        if (other.p) {
+            p = new int{*(other.p)};
+        }
+    }
+
+    Item& operator=(const Item& other) {
+        if (this == &other) {
+            return *this;
+        }
+
+        int* new_p = nullptr;
+        if (other.p) {
+            new_p = new char{*(other.p)};
+        }
+
+        x = other.x;
+        s = other.s;
+        delete p;
+        p = new_p;
+
+        return *this;
+    }
+
+    Item(Item&& other) noexcept: x(other.x), s(move(other.s)), p(other.p) {
+        other.p = nullptr;
+    }
+
+    Item& operator=(Item&& other) noexcept {
+        if (this == &other) {
+            return *this;
+        }
+
+        delete p;
+        x = other.x;
+        s = move(other.s);
+        p = other.p;
+        
+        other.p = nullptr;
+
+        return *this;
+    }
+}
+```
+
+### Copy-and-Swap
+```cpp
+struct Item {
+    int x;
+    string s;
+    int* p;
+
+    Item(int x, const string& s, int val): x(x), s(s), p(new int{val}) {}
+    ~Item() {
+        delete p;
+    }
+
+    Item(const Item& other): x(other.x), s(other.x), p(nullptr) {
+        if (other.p) {
+            p = new int{*(other.p)};
+        }
+    }
+
+    Item(Item&& other) noexcept: x(other.x), s(move(other.s)), p(other.p) {
+        other.p = nullptr;
+    }
+
+    // ⚠️ 此处先按值传递，可以同时支持copy/move
+    // 当传入左值，则使用已经定义的copy constructor深拷贝临时量然后swap
+    // 当传入右值，则使用已经定义的move constructor创建临时量然后swap
+    Item& operator=(Item other) {
+        swap(other);
+        return *this;
+    }
+
+    void swap(Item& other) {
+        using std::swap;
+        swap(x, other.x);
+        swap(s, other.s);
+        swap(p, other.p);
+    }
+}
+```
+
+### 使用Smart Pointer
+```cpp
+struct Item {
+    int x;
+    string s;
+    unique_ptr<int> p;
+
+    Item(int x, const string& s, int val) : x(x), s(s), p(make_unique<int>(val)) {}
+    ~Item() = default;
+
+    Item(const Item& other): x(other.x), s(other.s), p(other.p ? make_unique<int>(*other.p) : nullptr) {}
+
+    Item& operator=(const Item& other) {
+        if (this == &other) {
+            return *this;
+        }
+
+        x = other.x;
+        s = other.s;
+        p = other.p ? make_unique<int>(*other.p) : nullptr;
+
+        return *this;
+    }
+
+    Item(Item&&) noexcept = default;
+    Item& operator=(Item&&) noexcept = default;
+}
+```
 
 ---
 
